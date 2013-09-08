@@ -64,7 +64,7 @@ class AssessmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assessment
-      @assessment = Assessment.find(params[:id])
+      @assessment = Assessment.find_by_title(params[:id].gsub('-', ' '))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

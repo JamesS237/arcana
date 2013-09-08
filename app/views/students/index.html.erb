@@ -3,26 +3,16 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Name</th> 
       <th>House</th>
-      <th>Admin</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @students.each do |student| %>
       <tr>
-        <td><%= student.house %></td>
-        <td><%= student.admin %></td>
-        <td><%= student.first_name %></td>
-        <td><%= student.last_name %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><%= link_to student.full_name, student %>
+        <td><%= student.house_name %></td>
       </tr>
     <% end %>
   </tbody>

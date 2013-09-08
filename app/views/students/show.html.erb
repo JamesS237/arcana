@@ -20,5 +20,7 @@
   <%= @student.last_name %>
 </p>
 
+<p<%= @student.average(1).to_s%>
+
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

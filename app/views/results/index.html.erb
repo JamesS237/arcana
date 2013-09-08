@@ -1,31 +1,25 @@
-<h1>Listing results</h1>
+<h1>Results</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Student</th>
       <th>Assessment</th>
       <th>Mark</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @results.each do |result| %>
-      <tr>
-        <td><%= result.student_id %></td>
-        <td><%= result.assessment_id %></td>
-        <td><%= result.mark %></td>
-        <td><%= link_to 'Show', result %></td>
-        <td><%= link_to 'Edit', edit_result_path(result) %></td>
-        <td><%= link_to 'Destroy', result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    
+<%= form_for(Result.new) do |f| %>
+	<tr>	
+		<td><%= current_user.full_name %></td>
+  		<td><%= f.collection_select :assessment_id, Assessment.all, :id, :title %></td>
+		<td><%= f.text_field :mark, :placeholder => "Mark" %></td>
+		<td><a class="btn result-submit">Add</a></td>
+  	</tr>
+<% end %>
+<div id="results-special"></div>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Result', new_result_path %>

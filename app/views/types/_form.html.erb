@@ -10,16 +10,11 @@
       </ul>
     </div>
   <% end %>
+  
+    <fieldset>
+	<%= f.text_field :name, :placeholder => "Type" %><br><br>
+	<%= f.number_field :weight, :placeholder => "Weight" %><br><br>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br>
-    <%= f.number_field :weight %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+ 	 <%= f.submit "Add Type", class: "btn" %>
+  </fieldset>
 <% end %>

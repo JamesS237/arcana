@@ -9,7 +9,15 @@ class Student < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   
   def self.houses
-    houses = {1 => "Aherne", 2 => "Frew", 3 => "Jenkin", 4 => "Jones", 5 => "Millward", 6 => "Riley"}
+    houses = {0 => "Please Select a House", 1 => "Aherne", 2 => "Frew", 3 => "Jenkin", 4 => "Jones", 5 => "Millward", 6 => "Riley"}
+  end
+  
+  def full_name
+    self.first_name + " " + self.last_name
+  end
+  
+  def house_name
+    Student.houses[house]
   end
   
   def Student.new_remember_token
@@ -21,7 +29,22 @@ class Student < ActiveRecord::Base
   end
   
   def to_param
-    normalized_name = first_name + "-" + last_name
+    normalized_name = full_name.gsub(' ', '-')
+  end
+  
+  def average(subject)
+    marks = Array.new
+    self.results.select{ |result| result.assessment.subject.id == subject.id }.each do |result|
+      marks << result.mark 
+      if(result.assessment.type.weight != 1)
+        weight = result.assessment.type.weight
+        while weight > 1
+          marks << result.mark 
+          weight -= 1
+        end
+      end
+    end
+    marks.inject{ |sum, el| sum + el }.to_f / marks.size
   end
 
   private
