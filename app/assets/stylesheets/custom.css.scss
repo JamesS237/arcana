@@ -7,6 +7,7 @@ $linkLight: #ff857a;
 $bgDark: #470500;
 $bgLight: #b8eeae;
 $grayMediumLight: #eaeaea;
+$serifFont: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
 strong {
     color: $accentLight;
@@ -32,6 +33,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
   color: $accentLight;
+  font-family: $serifFont !important;
 }
 
 h1 {
@@ -63,7 +65,7 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;
+  font-family: $serifFont !important;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
@@ -203,6 +205,7 @@ a {
 
 a:hover {
   color: $linkLight !important;
+  text-decoration: none !important;
 }
 
 label {
@@ -247,5 +250,15 @@ thead {
 
 tbody {
   color:white;
+}
+
+.hero-unit h1
+{
+  float:left;
+}
+
+.hero-unit {
+  color: #333333 !important;
+  background-color: $accentLight;
 }
 

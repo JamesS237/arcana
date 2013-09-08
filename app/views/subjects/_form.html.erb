@@ -10,16 +10,15 @@
       </ul>
     </div>
   <% end %>
+  <fieldset>
+	<%= f.text_field :name, :placeholder => "Subject Name" %><br>
+	
+	<label class="checkbox">
+      <%= f.check_box :elective %> <%= f.label :elective %>
+    </label>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :elective %><br>
-    <%= f.check_box :elective %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <%= f.submit "Add Subject", class: "btn" %>
+  </fieldset>
+
 <% end %>

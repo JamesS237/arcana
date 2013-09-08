@@ -30,9 +30,9 @@
                            <li><%= link_to "Profile", current_user %></li>
                            <li><%= link_to "Settings", edit_student_path(current_user) %></li>
                            <li class="divider"></li>
-                          <li><%= link_to "Results", new_result_path %></li>
+                          <li><%= link_to "Results", student_results_path(:name => current_user.to_param) %></li>
                            <li class="divider"></li>
-                           <li><%= link_to "Sign out", 'signout_path', method: "delete" %></li>
+                           <li><%= link_to "Sign out", '/signout', method: "delete" %></li>
                         </ul>
                      </li>
                      <% else %>
@@ -57,7 +57,7 @@
               </small>
               <nav>
                  <ul>
-                    <li><%= link_to "About",    '#' %></li>
+                    <li><%= link_to "About", '/about' %></li>
                     <li> | </li>
                     <li><%= link_to "Legal Information",  '#' %></li>
                  </ul>

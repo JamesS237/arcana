@@ -1,12 +1,11 @@
-<h1>Listing subjects</h1>
+<h1>All Subjects</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Elective</th>
-      <th></th>
-      <th></th>
+      <th>Leader</th>
+      <th>Average</th>
       <th></th>
     </tr>
   </thead>
@@ -14,11 +13,10 @@
   <tbody>
     <% @subjects.each do |subject| %>
       <tr>
-        <td><%= subject.name %></td>
-        <td><%= subject.elective %></td>
-        <td><%= link_to 'Show', subject %></td>
-        <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
-        <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to subject.name, subject %></td>
+        <td><%= link_to subject.leader.full_name, subject.leader %></td>
+        <td><%= subject.leader.average(subject) %></td>
+        <td><%= link_to "Assessment Tasks", assessments_path %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +24,6 @@
 
 <br>
 
-<%= link_to 'New Subject', new_subject_path %>
+<% if current_user && current_user.admin %>
+	<%= link_to 'New Subject', new_subject_path %>
+<% end %>

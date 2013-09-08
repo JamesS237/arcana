@@ -5,11 +5,22 @@ class ResultsController < ApplicationController
   # GET /results.json
   def index
     @results = Result.all
+    Result.find_all_by_assessment_id(nil).each do |res|
+      res.destroy
+    end
+      Result.find_all_by_mark(nil).each do |res|
+      res.destroy
+    end
   end
 
   # GET /results/1
   # GET /results/1.json
   def show
+  end
+  
+  def user
+    @results = Result.find_all_by_student_id(Student.find_by_last_name(params[:name].split('-')[1]).id)
+    render 'index'
   end
 
   # GET /results/new
@@ -25,6 +36,7 @@ class ResultsController < ApplicationController
   # POST /results.json
   def create
     @result = Result.new(result_params)
+    @result.student_id = current_user.id
 
     respond_to do |format|
       if @result.save
@@ -69,6 +81,11 @@ class ResultsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def result_params
-      params.require(:result).permit(:student_id, :assessment_id, :mark)
+      params.require(:result).permit(:assessment_id, :mark)
     end
+    
+          def current_user
+    remember_token = Student.encrypt(cookies[:remember_token])
+    @current_user ||= Student.find_by(remember_token: remember_token)
+  end
 end

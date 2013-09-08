@@ -1,24 +1,16 @@
 <h1>Listing types</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Weight</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @types.each do |type| %>
       <tr>
-        <td><%= type.name %></td>
-        <td><%= type.weight %></td>
-        <td><%= link_to 'Show', type %></td>
-        <td><%= link_to 'Edit', edit_type_path(type) %></td>
-        <td><%= link_to 'Destroy', type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to type.name, type %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +18,6 @@
 
 <br>
 
-<%= link_to 'New Type', new_type_path %>
+<% if current_user && current_user.admin %>
+	<%= link_to 'New Type', new_type_path %>
+<% end %>
