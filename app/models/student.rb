@@ -44,7 +44,8 @@ class Student < ActiveRecord::Base
         end
       end
     end
-    marks.inject{ |sum, el| sum + el }.to_f / marks.size
+    avg = marks.inject{ |sum, el| sum + el }.to_f / marks.size
+    avg.round(2)
   end
 
   private

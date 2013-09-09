@@ -11,7 +11,7 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
-		<td><%= link_to student.full_name, student %>
+		<td><%= link_to student.full_name, results_path %>
         <td><%= student.house_name %></td>
       </tr>
     <% end %>

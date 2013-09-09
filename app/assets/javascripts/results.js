@@ -80,11 +80,11 @@ Arcana.IndexView = Backbone.View.extend({
   },
 
   renderResult: function( item ) {
-
+	console.log(item);
     var resultView = new Arcana.ResultView({
       model: item
     });
-    $('tbody').prepend( resultView.render().el );
+    $('.res-table').append( resultView.render().el );
   }
 });
 
