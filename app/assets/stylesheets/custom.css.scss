@@ -36,6 +36,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $serifFont !important;
 }
 
+.btn:hover {
+  color: $accentLight !important;
+}
+
 h1 {
   font-size: 3em;
   letter-spacing: -2px;

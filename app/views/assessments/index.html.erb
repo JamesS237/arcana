@@ -12,9 +12,9 @@
   <tbody>
     <% @assessments.each do |assessment| %>
       <tr>
-        <td><%= link_to assessment.subject.name, assessment.subject %></td>
-        <td><%= link_to assessment.type.name, assessment.type %></td>
-        <td><%= link_to assessment.title, assessment %></td>
+        <td><%= link_to assessment.subject.name, results_path %></td>
+        <td><%= link_to assessment.type.name, results_path %></td>
+        <td><%= link_to assessment.title, results_path %></td>
       </tr>
     <% end %>
   </tbody>
