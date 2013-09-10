@@ -1,6 +1,11 @@
 <style type="text/css">
 html {
+	<% if Rails.env.production? %>
+	  background: url(assets/arcana-bkg-red-v1-4978bc004abe5fc2abf6b7449a9e164a.jpg) no-repeat center center fixed; 
+
+  <% else %>
   background: url(assets/arcana-bkg-red-v1.jpg) no-repeat center center fixed; 
+  <% end %>
 }
 
 body {
