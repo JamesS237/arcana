@@ -4,7 +4,7 @@
       <title><%= yield(:title) %></title>
       <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
      <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-      <%= favicon_link_tag 'cereal-readers-favicon1.png' %>
+      <%= favicon_link_tag 'favicon.png' %>
       <%= csrf_meta_tags %>
    </head>
    <body>
@@ -12,6 +12,7 @@
          <div class="navbar-inner">
             <div  style="width: auto;">
                <%= link_to "Arcana", root_path, id: "logo" %>
+                 <% if signed_in? %>
                <div class="nav-collapse">
                   <form id="custom-search-form" action="/series" class="form-search form-horizontal pull-right">
                      <div class="input-append span3 offset3">
@@ -23,7 +24,7 @@
                      <li><%= link_to "Students", students_path  %></li>
                      <li><%= link_to "Subjects", subjects_path  %></li>
 
-                     <% if signed_in? %>
+   
                   	<li id="fat-menu" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -35,9 +36,6 @@
                            <li><%= link_to "Sign out", '/signout', method: "delete" %></li>
                         </ul>
                      </li>
-                     <% else %>
-                                          <li><%= link_to "Sign In",  "/signin" %></li>
-                     <li><%= link_to "Sign Up",  "/signup" %></li>
                      <% end %>
                   </ul>
                </div>
@@ -59,7 +57,7 @@
                  <ul>
                     <li><%= link_to "About", '/about' %></li>
                     <li> | </li>
-                    <li><%= link_to "Legal Information",  '#' %></li>
+                    <li><%= link_to "Legal Information",  '/legal' %></li>
                  </ul>
               </nav>
             </footer>
