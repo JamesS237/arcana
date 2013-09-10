@@ -18,7 +18,16 @@ Arcana.Result = Backbone.Model.extend({
 
 Arcana.ResultsCollection = Backbone.Collection.extend({
   model: Arcana.Result,
-  url: '/results'
+  url: '/results',
+  
+	search : function(letters){
+		if(letters == "") return this;
+	 
+			var pattern = new RegExp(letters,"gi");
+		return _(this.filter(function(data) {
+		  	return pattern.test(data.get("assessment_name"));
+		}));
+	}
 });
 
 Arcana.ResultView = Backbone.View.extend({
@@ -53,9 +62,13 @@ Arcana.IndexView = Backbone.View.extend({
   initialize: function() {
     this.collection = new Arcana.ResultsCollection();
     var that = this;
+    this.childViews = [];
     this.collection.fetch({success: function(){
    		that.render();
    	}});
+   	
+   	
+
  
 
     //this.listenTo( this.collection, 'add', this.renderResult );
@@ -65,6 +78,22 @@ Arcana.IndexView = Backbone.View.extend({
   events: {
     //'click .result-submit': 'addResult'
   },
+  
+  	search: function(e){
+		var letters = $('.search-results').val();
+		this.renderList(this.collection.search(letters));
+	},
+	
+	renderList : function(results){
+		_.each(this.childViews, function(childView){ 
+		childView.remove();	
+		});
+ 		var that = this;
+		results.each(function(result){
+			that.renderResult(result);
+		});
+		return this;
+	},
 
   addResult: function( e ) {
 	newResult =  new Arcana.Result();
@@ -84,16 +113,59 @@ Arcana.IndexView = Backbone.View.extend({
     var resultView = new Arcana.ResultView({
       model: item
     });
+    
     $('.res-table').append( resultView.render().el );
+  	this.childViews.push(resultView);
   }
 });
 
+var indView;
+
 $(function (){
-  var indView = new Arcana.IndexView();
+	$(document).ready(function () {
+  indView = new Arcana.IndexView();
   $('.result-submit').click(indView.addResult);
+  $('#mark-sort').click(function () {
+  	indView.collection.comparator = function(model) {
+    	return -model.get('mark');
+	};
+	
+	_.each(indView.childViews, function(childView){ 
+		childView.remove();	
+	});
+	indView.collection.sort();
+	indView.render();
+  });
+	$('#student-sort').click(function () {
+  	indView.collection.comparator = function(model) {
+    	return model.get('student_name');
+	};
+	
+	_.each(indView.childViews, function(childView){ 
+		childView.remove();	
+	});
+	indView.collection.sort();
+	indView.render();
+  });
+  
+$('#assessment-sort').click(function () {
+  	indView.collection.comparator = function(model) {
+    	return model.get('assessment_name');
+	};
+	
+	_.each(indView.childViews, function(childView){ 
+		childView.remove();	
+	});
+	indView.collection.sort();
+	indView.render();
+  });
 });
 
+$('.search-results').keydown(function () {
+	indView.search();
+});
+});
 function refreshView () {
-	var indView = new Arcana.IndexView();
+	 indView = new Arcana.IndexView();
 }
 

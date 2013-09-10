@@ -1,6 +1,35 @@
+<style type="text/css">
+html {
+  background: url(assets/arcana-bkg-red-v1.jpg) no-repeat center center fixed; 
+}
+
+body {
+	background-color: transparent !important;
+}
+</style>
 
 <div class="hero-unit">
-	<h1>Welcome to Arcana!</h1><br><br><br>
-	<p>Arcana is a simple application for tracking and comparing academic results. Join Arcana, compete with your friends, track your favourite subjects and have fun succeeding! </p>
-	<p><a href="/signup" class="btn btn-large">Sign Up »</a></p>
+	<div class="home-text">
+		<strong>Welcome to Arcana!</strong>
+		<p>Add some excitement and meaning to your school life.</p>
+	</div>
+	<div class="home-form">
+		<div class="front-signin">
+			<%= form_for(:session, url: sessions_path) do |f| %>
+				<%= f.text_field :email, :placeholder => "Email" %>
+				<%= f.password_field :password, :placeholder => "Password" %>
+				<%= f.submit "Sign in", class: "btn submit btn-primary" %>
+			<% end %>
+		</div>
+		<div class="front-signup">
+			<h2><strong>New to Arcana?</strong> Sign up</h2>
+			
+			<%= form_for(@student) do |f| %>
+				<%= f.text_field :full_name, :placeholder => "Full name", class: "input-name", value: """" %>
+				<%= f.text_field :email, :placeholder => "Email", class: "input-email" %>
+				<%= f.password_field :password, :placeholder => "Password", class: "input-password" %>
+				<%= f.submit "Sign up", class: "btn submit btn-primary input-submit" %>
+			<% end %>
+		</div>
+	</div>
 </div>
