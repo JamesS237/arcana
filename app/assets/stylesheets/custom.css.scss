@@ -409,3 +409,15 @@ tbody {
   }
 }
 
+.nav-selected {
+  background-color: #e6e6e6;
+  
+  a {
+    color: #555555 !important;
+    
+    &:hover {
+      color: $accentLight !important;
+    }
+  }
+}
+

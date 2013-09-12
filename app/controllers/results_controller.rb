@@ -1,5 +1,5 @@
 class ResultsController < ApplicationController
-  before_action :set_result, only: [:show, :edit, :update, :destroy]
+  before_action :set_result, only: [:show, :edit, :destroy]
 
   # GET /results
   # GET /results.json
@@ -53,6 +53,7 @@ class ResultsController < ApplicationController
   # PATCH/PUT /results/1.json
   def update
     respond_to do |format|
+      @result = Result.find(params[:result][:id]);
       if @result.update(result_params)
         format.html { redirect_to results_path, notice: 'Result was successfully updated.' }
         format.json { head :no_content }
@@ -83,9 +84,4 @@ class ResultsController < ApplicationController
     def result_params
       params.require(:result).permit(:assessment_id, :mark)
     end
-    
-          def current_user
-    remember_token = Student.encrypt(cookies[:remember_token])
-    @current_user ||= Student.find_by(remember_token: remember_token)
-  end
 end

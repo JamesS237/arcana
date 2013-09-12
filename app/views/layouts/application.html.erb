@@ -21,8 +21,24 @@
                      </div>
                   </form>
                     <ul class="nav header-menu pull-left">
-                     <li><%= link_to "Students", students_path  %></li>
-                     <li><%= link_to "Subjects", subjects_path  %></li>
+ 
+                 	<% if params[:controller] == 'subjects' %>
+                     	<li class="nav-selected"><%= link_to "Subjects", subjects_path %></li>
+                 	<% else %>
+ 	                     <li><%= link_to "Subjects", subjects_path %></li>
+                 	<% end %>
+                 	
+                 	<% if params[:controller] == 'students' %>
+                     	<li class="nav-selected"><%= link_to "Students", students_path %></li>
+                 	<% else %>
+ 	                     <li><%= link_to "Students", students_path %></li>
+                 	<% end %>
+                 	
+                 	<% if params[:controller] == 'results' %>
+                     	<li class="nav-selected"><%= link_to "Results", results_path %></li>
+                 	<% else %>
+ 	                     <li><%= link_to "Results", results_path %></li>
+                 	<% end %>
 
    
                   	<li id="fat-menu" class="dropdown">
