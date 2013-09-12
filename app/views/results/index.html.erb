@@ -1,13 +1,14 @@
 <h1>Results</h1>
-<input type="text" class="search-results" name="search" placeholder="Search">
 
+<%= provide(:title, 'Arcana | Results')%>
 <table class="table">
   <thead>
     <tr>
       <th id="student-sort">Student</th>
+      <th id="subject-sort">Subject</th>
       <th id="assessment-sort">Assessment</th>
       <th id="mark-sort" >Mark</th>
-      <th></th>
+      <th><input type="text" class="search-results" name="search" placeholder="Search"></th>
     </tr>
   </thead>
 
@@ -16,6 +17,7 @@
 <%= form_for(Result.new) do |f| %>
 	<tr>	
 		<td><%= current_user.full_name %></td>
+		<td></td>
   		<td><%= f.collection_select :assessment_id, Assessment.all, :id, :title %></td>
 		<td><%= f.text_field :mark, :placeholder => "Mark" %></td>
 		<td><a class="btn result-submit">Add</a></td>

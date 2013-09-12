@@ -1,3 +1,4 @@
+<%= provide(:title, 'Arcana | Subjects')%>
 <h1>All Subjects</h1>
 
 <table class="table">
@@ -14,8 +15,6 @@
     <% @subjects.each do |subject| %>
       <tr>
         <td><%= link_to subject.name, results_path %></td>
-        <td><%= link_to subject.leader.full_name, results_path %></td>
-        <td><%= subject.leader.average(subject) %></td>
         <td><%= link_to "Assessment Tasks", assessments_path %></td>
       </tr>
     <% end %>

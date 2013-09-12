@@ -1,6 +1,7 @@
 Arcana::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/about"
+  match '/results', to: 'results#update', via: 'put'
   match '/results', to: 'results#create', via: 'post'
   match '/signup',     to: 'students#new',            via: 'get'
   match '/about',     to: 'static_pages#about',            via: 'get'
