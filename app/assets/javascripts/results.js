@@ -1,6 +1,10 @@
+
 function ready() {
   $(document).ready(function () {
+
 		var Arcana = Arcana || {};
+		
+
 		
 		Arcana.Result = Backbone.Model.extend({
 			url: '/results',
@@ -20,6 +24,10 @@ function ready() {
 		
 		  idAttribute: 'id'
 		});
+		
+		Arcana.refreshView = function () {
+	 		indView = new Arcana.IndexView();
+		};	
 		
 		Arcana.ResultsCollection = Backbone.Collection.extend({
 		  model: Arcana.Result,
@@ -104,7 +112,7 @@ function ready() {
 		  addResult: function( e ) {
 			newResult =  new Arcana.Result();
 			newResult.set( { mark: $('input[name="result[mark]"]').val(), assessment_id: $('#result_assessment_id').val()} );
-			newResult.save(null, {success: refreshView});
+			newResult.save(null, {success: Arcana.refreshView});
 			$('option[value="' + $('#result_assessment_id').val() + '"]').remove();
 			return false;
 		  },
@@ -190,15 +198,14 @@ function ready() {
 		});
 	});
 
+
 		
 	});
 }
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
-function refreshView () {
-	 indView = new Arcana.IndexView();
-}
+
 
 
 
