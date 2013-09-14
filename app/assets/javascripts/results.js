@@ -26,7 +26,13 @@ function ready() {
 		});
 		
 		Arcana.refreshView = function () {
+			_.each(indView.childViews, function(childView){ 
+				childView.remove();	
+			});
 	 		indView = new Arcana.IndexView();
+			indView.collection.sort();
+			indView.render();
+			indView.search();
 		};	
 		
 		Arcana.ResultsCollection = Backbone.Collection.extend({
