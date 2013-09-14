@@ -5,6 +5,11 @@ class Student < ActiveRecord::Base
   before_create :create_remember_token
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :house, presence: true
+
+
   
   #validates :password, length: { minimum: 6 }
   
@@ -52,6 +57,11 @@ class Student < ActiveRecord::Base
     end
     avg = marks.inject{ |sum, el| sum + el }.to_f / marks.size
     avg.round(2)
+    if(avg.nan?)
+     return avg = 0.00.to_f.round(2)
+    else 
+      return avg.round(2)
+    end
   end
 
   private

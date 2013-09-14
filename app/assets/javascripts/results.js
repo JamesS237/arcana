@@ -12,7 +12,9 @@ function ready() {
 		    assessment_name: null,
 		    assessment_id: null,
 		    student_id: null,
-		    subject_name: null
+		    subject_name: null,
+		    house_name: null,
+		    type_name: null
 		    
 		  },
 		
@@ -28,14 +30,14 @@ function ready() {
 			 
 					var pattern = new RegExp(letters,"gi");
 				return _(this.filter(function(data) {
-				  	return pattern.test(data.get("assessment_name")) || pattern.test(data.get("student_name")) || pattern.test(data.get("subject_name"));
+				  	return pattern.test(data.get("assessment_name")) || pattern.test(data.get("student_name")) || pattern.test(data.get("subject_name")) || pattern.test(data.get("type_name")) || pattern.test(data.get("house_name") );
 				}));
 			}
 		});
 		
 		Arcana.ResultView = Backbone.View.extend({
 		  tagName: 'tr',
-		  template: '<td><%= student_name %></td><td><%= subject_name %></td><td><%= assessment_name %></td><td id="edit-mark-<%= id %>"><%= mark %></td><td></td>',
+		  template: '<td><%= student_name %></td><td><%= house_name %></td><td><%= subject_name %></td><td><%= type_name %></td><td><%= assessment_name %></td><td id="edit-mark-<%= id %>"><%= mark %></td><td></td>',
 		
 		  events: {
 		    //'dblclick tr': 'editResult'
@@ -103,6 +105,7 @@ function ready() {
 			newResult =  new Arcana.Result();
 			newResult.set( { mark: $('input[name="result[mark]"]').val(), assessment_id: $('#result_assessment_id').val()} );
 			newResult.save(null, {success: refreshView});
+			$('option[value="' + $('#result_assessment_id').val() + '"]').remove();
 			return false;
 		  },
 		
@@ -139,67 +142,48 @@ function ready() {
 		  }
 		});
 		
+		Arcana.ResultsRouter = Backbone.Router.extend({
+			routes: {
+				"sort/:field" : "sortResults",
+				"filter/:value" : "filterResults"
+			}
+		});
+		
+
+		
 		var indView;
 		
 		$(function (){
-		  indView = new Arcana.IndexView();
+		  	indView = new Arcana.IndexView();
+			var router = new Arcana.ResultsRouter;
+			
+			router.on('route:sortResults', function(field){
+		  		indView.collection.comparator = function(model) {
+		  			if(field == 'mark') {
+		  				return -model.get(field);
+		  			}
+		  			
+		  			else {
+		  				return model.get(field + '_name');
+		  			}
+				};
+				
+				_.each(indView.childViews, function(childView){ 
+					childView.remove();	
+				});
+				
+				indView.collection.sort();
+				indView.render();
+				indView.search();
+			});
+			
+			router.on('route:filterResults', function(value) {
+				value = value.replace('-', ' ');
+				$('.search-results').val(value);
+				window.setTimeout(function () {indView.renderList(indView.collection.search(value));}, 200);
+			});
+			Backbone.history.start();
 		  $('.result-submit').click(indView.addResult);
-		  $('#mark-sort').click(function () {
-		  	indView.collection.comparator = function(model) {
-		    	return -model.get('mark');
-			};
-			
-			_.each(indView.childViews, function(childView){ 
-				childView.remove();	
-			});
-			indView.collection.sort();
-			indView.render();
-				indView.search();
-		
-		  });
-			$('#student-sort').click(function () {
-		  	indView.collection.comparator = function(model) {
-		    	return model.get('student_name');
-			};
-			
-			_.each(indView.childViews, function(childView){ 
-				childView.remove();	
-			});
-			indView.collection.sort();
-			indView.render();
-			indView.search();
-		  });
-		  
-		$('#assessment-sort').click(function () {
-		  	indView.collection.comparator = function(model) {
-		    	return model.get('assessment_name');
-			};
-			
-			_.each(indView.childViews, function(childView){ 
-				childView.remove();	
-			});
-			indView.collection.sort();
-			
-			indView.render();
-				indView.search();
-		
-		  });
-		  
-		  $('#subject-sort').click(function () {
-		  	indView.collection.comparator = function(model) {
-		    	return model.get('subject_name');
-			};
-			
-			_.each(indView.childViews, function(childView){ 
-				childView.remove();	
-			});
-			indView.collection.sort();
-			
-			indView.render();
-				indView.search();
-		
-		  });
-		});	
 		
 		$('.search-results').keydown(function () {
 			indView.search();
@@ -208,6 +192,9 @@ function ready() {
 		function refreshView () {
 			 indView = new Arcana.IndexView();
 		}
+	});
+
+		
 	});
 }
 

@@ -7,4 +7,6 @@ json.array!(@results) do |result|
 	json.student_name result.student.full_name
 	json.subject_name result.assessment.subject.name
 	json.current_user result.student.id == current_user.id
+	json.type_name result.assessment.type.name
+	json.house_name result.student.house_name
 end
