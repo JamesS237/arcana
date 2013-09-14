@@ -5,7 +5,6 @@ class Assessment < ActiveRecord::Base
   validates :title, presence: true
   validates :subject_id, presence: true
   validates :type_id, presence: true
-  validates :exam, presence: true
   
   def to_param 
     title.gsub(' ', '-')
