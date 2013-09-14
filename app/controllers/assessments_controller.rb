@@ -1,6 +1,6 @@
 class AssessmentsController < ApplicationController
   before_action :set_assessment, only: [:show, :edit, :update, :destroy]
-  before_action :admin, only: [:create, :new, :edit, :update, :destroy]
+  before_action :is_admin, only: [:create, :new, :edit, :update, :destroy]
   before_action :logged_in
   
 
