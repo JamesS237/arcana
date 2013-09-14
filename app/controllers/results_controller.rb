@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
   before_action :set_result, only: [:show, :edit, :destroy]
+  before_action :logged_in
 
   # GET /results
   # GET /results.json
@@ -36,7 +37,7 @@ class ResultsController < ApplicationController
   # POST /results.json
   def create
     @result = Result.new(result_params)
-    @result.student_id = current_user.id
+    @result.student_id = view_context.current_user.id
 
     respond_to do |format|
       if @result.save
@@ -83,5 +84,13 @@ class ResultsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def result_params
       params.require(:result).permit(:assessment_id, :mark)
+    end
+    
+    def is_admin
+      redirect_to root_path unless view_context.current_user.admin
+    end
+    
+    def logged_in
+      redirect_to root_path unless view_context.current_user
     end
 end

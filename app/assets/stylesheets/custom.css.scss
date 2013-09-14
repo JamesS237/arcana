@@ -13,21 +13,14 @@ strong {
     color: $accentLight;
 }
 
-
-html { 
-  /*background: url(arcana-bkg-red-v1.jpg) no-repeat center center fixed; */
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-/* universal */
-
 html {
   overflow-y: scroll;
   height: 100%;
   margin-bottom: 1%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 body {
@@ -76,8 +69,12 @@ p {
 
 #logo {
   float: left;
+  margin-left: 10px;
+  width: 15%;
   margin-right: 10px;
   font-size: 1.7em;
+  color: $accentLight;
+  text-transform: none;
   font-family: $serifFont !important;
   letter-spacing: -1px;
   padding-top: 9px;
@@ -88,6 +85,7 @@ p {
     text-decoration: none;
   }
 }
+
 footer {
   margin-top: 45px;
   padding-top: 5px;
@@ -148,11 +146,6 @@ input {
     text-align:center;
 }
 
-#logo {
-  margin-left: 10px;
-  width: 15%;
-}
-
 .navbar .nav > li > a {
   color: white;
   text-shadow: none;
@@ -204,17 +197,10 @@ select
 .search-query:focus + button {
   z-index: 3;   
 }
- 
-#logo {
-  color: $accentLight;
-  text-transform: none;
-}
 
 a {
   color: white;
 }
-
-
 
 a:hover {
   color: $linkLight !important;
@@ -258,16 +244,14 @@ hr {
 }
 
 thead {
-  color: $linkLight;
+  a {
+      color: $accentLight !important;
+  }
+  color: $accentLight !important;
 }
 
 tbody {
   color:white;
-}
-
-.hero-unit h1
-{
-  float:left;
 }
 
 .hero-unit {
@@ -275,6 +259,10 @@ tbody {
   background-color: transparent;
   float:left;
   margin-top:5%;
+  
+  h1 {
+    float:left;
+  }
 }
 
 .front-signin {
@@ -357,6 +345,14 @@ tbody {
     width: 258px;
   }
   
+  select {
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 273px;
+  }
+  
   .input-password {
     margin-right: 12px;
     margin-left: 12px;
@@ -421,3 +417,18 @@ tbody {
   }
 }
 
+tbody {
+  input {
+    width: 50px;
+  }
+}
+
+fieldset {
+  input[type="text"], input[type="password"] {
+    width: 382px;
+  }
+  
+  select {
+    width: 397px;
+  }
+}

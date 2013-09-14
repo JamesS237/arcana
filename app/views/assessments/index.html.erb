@@ -1,5 +1,5 @@
 <%= provide(:title, 'Arcana | Assessments')%>
-<h1>Listing assessments</h1>
+<h1>All Assessments</h1>
 
 <table class="table">
   <thead>
@@ -13,9 +13,9 @@
   <tbody>
     <% @assessments.each do |assessment| %>
       <tr>
-        <td><%= link_to assessment.subject.name, results_path %></td>
-        <td><%= link_to assessment.type.name, results_path %></td>
-        <td><%= link_to assessment.title, results_path %></td>
+        <td><%= link_to assessment.subject.name, '/results#filter/' << assessment.subject.name.gsub(' ', '-') %></td>
+        <td><%= link_to assessment.type.name, '/results#filter/' << assessment.type.name.gsub(' ', '-')  %></td>
+        <td><%= link_to assessment.title, '/results#filter/' << assessment.type.name.gsub(' ', '-')  %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,13 +1,14 @@
 <h1>Results</h1>
-
 <%= provide(:title, 'Arcana | Results')%>
 <table class="table">
   <thead>
     <tr>
-      <th id="student-sort">Student</th>
-      <th id="subject-sort">Subject</th>
-      <th id="assessment-sort">Assessment</th>
-      <th id="mark-sort" >Mark</th>
+      <th id="student-sort"><a href="/results#/sort/student">Student</a></th>
+      <th id="house-sort"><a href="/results#/sort/house">House</a></th>
+      <th id="subject-sort"><a href="/results#/sort/subject">Subject</a></th>
+      <th id="type-sort"><a href="/results#/sort/type">Type</a></th>
+      <th id="assessment-sort"><a href="/results#/sort/assessment">Assessment</a></th>
+      <th id="mark-sort"><a href="/results#/sort/mark">Mark</a></th>
       <th><input type="text" class="search-results" name="search" placeholder="Search"></th>
     </tr>
   </thead>
@@ -18,7 +19,9 @@
 	<tr>	
 		<td><%= current_user.full_name %></td>
 		<td></td>
-  		<td><%= f.collection_select :assessment_id, Assessment.all, :id, :title %></td>
+		<td></td>
+		<td></td>
+  		<td><%= f.collection_select :assessment_id, Assessment.uncomplete(current_user), :id, :title %></td>
 		<td><%= f.text_field :mark, :placeholder => "Mark" %></td>
 		<td><a class="btn result-submit">Add</a></td>
   	</tr>

@@ -1,5 +1,7 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :logged_in
 
   # GET /subjects
   # GET /subjects.json
@@ -70,5 +72,13 @@ class SubjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def subject_params
       params.require(:subject).permit(:name, :elective)
+    end
+    
+    def is_admin
+      redirect_to root_path unless view_context.current_user.admin
+    end
+    
+    def logged_in
+      redirect_to root_path unless view_context.current_user
     end
 end

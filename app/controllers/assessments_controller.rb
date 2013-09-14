@@ -1,5 +1,8 @@
 class AssessmentsController < ApplicationController
   before_action :set_assessment, only: [:show, :edit, :update, :destroy]
+  before_action :admin, only: [:create, :new, :edit, :update, :destroy]
+  before_action :logged_in
+  
 
   # GET /assessments
   # GET /assessments.json
@@ -70,5 +73,13 @@ class AssessmentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def assessment_params
       params.require(:assessment).permit(:subject_id, :type_id, :title, :exam)
+    end
+    
+    def is_admin
+      redirect_to root_path unless view_context.current_user.admin
+    end
+    
+    def logged_in
+      redirect_to root_path unless view_context.current_user
     end
 end

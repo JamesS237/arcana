@@ -1,5 +1,7 @@
 class TypesController < ApplicationController
   before_action :set_type, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :logged_in
 
   # GET /types
   # GET /types.json
@@ -70,5 +72,13 @@ class TypesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def type_params
       params.require(:type).permit(:name, :weight)
+    end
+    
+    def is_admin
+      redirect_to root_path unless view_context.current_user.admin
+    end
+    
+    def logged_in
+      redirect_to root_path unless view_context.current_user
     end
 end

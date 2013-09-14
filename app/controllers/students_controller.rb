@@ -1,5 +1,8 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin, only: :destroy
+  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in, only: [:show, :edit, :update, :destroy, :index]
 
   # GET /students
   # GET /students.json
@@ -29,7 +32,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        sign_in @student
+        view_context.sign_in @student
         format.html { redirect_to results_path, notice: 'Student was successfully created.' }
         format.json { render action: 'show', status: :created, location: @student }
       else
@@ -72,5 +75,17 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:house, :full_name, :email, :password)
+    end
+    
+    def is_admin
+      redirect_to root_path unless view_context.current_user.admin
+    end
+    
+    def logged_in
+      redirect_to root_path unless view_context.current_user
+    end
+    
+    def correct_user
+      redirect_to root_path unless view_context.current_user.id = @student.id
     end
 end

@@ -1,4 +1,5 @@
 <%= provide(:title, 'Arcana')%>
+<% if !current_user %>
 <style type="text/css">
 html {
 	<% if Rails.env.production? %>
@@ -33,9 +34,13 @@ body {
 			<%= form_for(@student) do |f| %>
 				<%= f.text_field :full_name, :placeholder => "Full name", class: "input-name", value: """" %>
 				<%= f.text_field :email, :placeholder => "Email", class: "input-email" %>
+				<%= f.collection_select :house, Student.houses, :first, :last %>
 				<%= f.password_field :password, :placeholder => "Password", class: "input-password" %>
 				<%= f.submit "Sign up", class: "btn submit btn-primary input-submit" %>
 			<% end %>
 		</div>
 	</div>
 </div>
+<% else %>
+<script>window.location = '/results#filter/' + '<%= current_user.full_name.gsub(' ', '-') %>';</script>
+<% end %>
