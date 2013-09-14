@@ -188,10 +188,6 @@ function ready() {
 		$('.search-results').keydown(function () {
 			indView.search();
 		});
-
-		function refreshView () {
-			 indView = new Arcana.IndexView();
-		}
 	});
 
 		
@@ -200,6 +196,9 @@ function ready() {
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
+function refreshView () {
+	 indView = new Arcana.IndexView();
+}
 
 
 
