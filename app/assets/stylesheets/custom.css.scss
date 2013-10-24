@@ -13,6 +13,8 @@ strong {
     color: $accentLight;
 }
 
+
+
 html {
   overflow-y: scroll;
   height: 100%;
@@ -167,7 +169,7 @@ select
   margin-top: 5px;
   padding: 0;
   margin-right: 20%;
-  width: 20%;
+  width: 10%;
 }
  
 #custom-search-form .search-query {
@@ -217,6 +219,13 @@ ul {
 
 .header-menu {
   width: 35%;
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+/* Styles */
 }
 
 .dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a{

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
    <head>
+   	<script type="text/javascript">
+ 
+	  if (screen.width <= 800) {
+	    window.location = "http://m-arcana-leaderboard.herokuapp.com";
+	  }
+
+	</script>
       <title><%= yield(:title) %></title>
       <%= stylesheet_link_tag    "application", media: "all" %>
      <%= javascript_include_tag "application" %>
