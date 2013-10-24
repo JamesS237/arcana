@@ -13,8 +13,11 @@ strong {
     color: $accentLight;
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 325fe93d3fdeb841328b0a9c4dfa022a264b0a05
 html {
   overflow-y: scroll;
   height: 100%;
@@ -169,7 +172,11 @@ select
   margin-top: 5px;
   padding: 0;
   margin-right: 20%;
+<<<<<<< HEAD
   width: 10%;
+=======
+  width: 20%;
+>>>>>>> 325fe93d3fdeb841328b0a9c4dfa022a264b0a05
 }
  
 #custom-search-form .search-query {
@@ -221,6 +228,7 @@ ul {
   width: 35%;
 }
 
+<<<<<<< HEAD
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) 
@@ -228,6 +236,8 @@ and (orientation : landscape) {
 /* Styles */
 }
 
+=======
+>>>>>>> 325fe93d3fdeb841328b0a9c4dfa022a264b0a05
 .dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a{
     background-image: none !important;
     background-color: $bgDark !important;

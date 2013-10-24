@@ -79,6 +79,10 @@ class SubjectsController < ApplicationController
     end
     
     def logged_in
+<<<<<<< HEAD
       #redirect_to root_path unless view_context.current_user
+=======
+      redirect_to root_path unless view_context.current_user
+>>>>>>> 325fe93d3fdeb841328b0a9c4dfa022a264b0a05
     end
 end
