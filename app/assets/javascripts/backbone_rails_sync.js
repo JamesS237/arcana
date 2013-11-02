@@ -38,7 +38,7 @@
     if (!params.data && model && (method == 'create' || method == 'update')) {
       params.contentType = 'application/json';
 
-      var data = {}
+      var data = {};
 
       if(model.paramRoot) {
         data[model.paramRoot] = model.toJSON();
@@ -46,7 +46,7 @@
         data = model.toJSON();
       }
 
-      params.data = JSON.stringify(data)
+      params.data = JSON.stringify(data);
     }
 
     // Don't process data on a non-GET request.
@@ -63,6 +63,6 @@
     
     // Make the request.
     return $.ajax(params);
-  }
+  };
   
 }).call(this);
