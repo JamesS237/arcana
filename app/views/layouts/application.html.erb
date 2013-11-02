@@ -5,7 +5,7 @@
 	</script>
       <title><%= yield(:title) %></title>
       <%= stylesheet_link_tag    "application", media: "all" %>
-     <%= javascript_include_tag "application" %>
+      <%= javascript_include_tag "application" %>
       <%= favicon_link_tag 'favicon.png' %>
       <%= csrf_meta_tags %>
    </head>
@@ -15,7 +15,7 @@
             <div  style="width: auto;">
                <%= link_to "Arcana", root_path, id: "logo" %>
                  <% if signed_in? %>
-               <div class="nav-collapse">
+               <div class="nav">
                   <form id="custom-search-form" action="/series" class="form-search form-horizontal pull-right">
                      <div class="input-append span3 offset3">
                         <input type="text" id="search-main" class="search-query" name="search" placeholder="Search">

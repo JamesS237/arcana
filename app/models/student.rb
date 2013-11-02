@@ -44,24 +44,7 @@ class Student < ActiveRecord::Base
   end
   
   def average(subject)
-    marks = Array.new
-    self.results.select{ |result| result.assessment.subject.id == subject.id }.each do |result|
-      marks << result.mark 
-      if(result.assessment.type.weight != 1)
-        weight = result.assessment.type.weight
-        while weight > 1
-          marks << result.mark 
-          weight -= 1
-        end
-      end
-    end
-    avg = marks.inject{ |sum, el| sum + el }.to_f / marks.size
-    avg.round(2)
-    if(avg.nan?)
-     return avg = 0.00.to_f.round(2)
-    else 
-      return avg.round(2)
-    end
+    self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
   end
 
   private

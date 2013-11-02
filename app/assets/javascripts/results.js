@@ -1,11 +1,7 @@
-
 function ready() {
   $(document).ready(function () {
-
 		var Arcana = Arcana || {};
-		
 
-		
 		Arcana.Result = Backbone.Model.extend({
 			url: '/results',
 			paramRoot: 'result',
@@ -18,10 +14,8 @@ function ready() {
 		    student_id: null,
 		    subject_name: null,
 		    house_name: null,
-		    type_name: null
-		    
+		    type_name: null	    
 		  },
-		
 		  idAttribute: 'id'
 		});
 		
@@ -40,8 +34,7 @@ function ready() {
 		  url: '/results',
 		  
 			search : function(letters){
-				if(letters == "") return this;
-			 
+				if(letters == "") return this;		 
 					var pattern = new RegExp(letters,"gi");
 				return _(this.filter(function(data) {
 				  	return pattern.test(data.get("assessment_name")) || pattern.test(data.get("student_name")) || pattern.test(data.get("subject_name")) || pattern.test(data.get("type_name")) || pattern.test(data.get("house_name") );
@@ -53,24 +46,14 @@ function ready() {
 		  tagName: 'tr',
 		  template: '<td><%= student_name %></td><td><%= house_name %></td><td><%= subject_name %></td><td><%= type_name %></td><td><%= assessment_name %></td><td id="edit-mark-<%= id %>"><%= mark %></td><td></td>',
 		
-		  events: {
-		    //'dblclick tr': 'editResult'
-		  },
-		
 		  deleteResult: function() {
-		    this.model.destroy();
-		
+		    this.model.destroy();		
 		    this.remove();
 		  },
 		
-		  render: function() {
-		  	
-		    
+		  render: function() {	  			    
 		    var tmpl = _.template( this.template );
-		    
-		
 		    this.$el.html( tmpl( this.model.toJSON() ) );
-		
 		    return this;
 		  }
 		});
@@ -86,20 +69,10 @@ function ready() {
 		   		that.render();
 		   	}});
 		   	this.search();
-		   	
-		   	
-		
 		 
-		
-		    //this.listenTo( this.collection, 'add', this.renderResult );
-		    //this.listenTo( this.collection, 'reset', this.render );
-		  },
-		
-		  events: {
-		    //'click .result-submit': 'addResult'
 		  },
 		  
-		  	search: function(e){
+	  	search: function(e) {
 				var letters = $('.search-results').val();
 				this.renderList(this.collection.search(letters));
 			},
@@ -163,8 +136,6 @@ function ready() {
 			}
 		});
 		
-
-		
 		var indView;
 		
 		$(function (){
@@ -199,19 +170,12 @@ function ready() {
 			Backbone.history.start();
 		  $('.result-submit').click(indView.addResult);
 		
-		$('.search-results').keydown(function () {
+		$('.search-results').keyup(function () {
 			indView.search();
 		});
 	});
-
-
-		
 	});
 }
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
-
-
-
-

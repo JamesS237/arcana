@@ -3,11 +3,12 @@ class Subject < ActiveRecord::Base
   
   validates :name, presence: true
 
-  
   def leader 
     avgs = []
     Student.all.each do |s|
-      avgs.push({"id" => s.id, "average" => s.average(self)});
+      if(s.average(self) != nil)
+        avgs.push({"id" => s.id, "average" => s.average(self)})
+      end
     end
     leader_id = avgs.sort_by!{|avg| avg["average"] }.last["id"]
     Student.find(leader_id);
