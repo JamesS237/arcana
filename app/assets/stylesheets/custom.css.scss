@@ -65,6 +65,15 @@ p {
   color: white;
 }
 
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+    border-color: $linkLight !important;
+    box-shadow: 0 1px 1px $linkLight inset, 0 0 8px $linkLight !important;
+    outline: 0 none !important;
+}
+
+
+.btn-primary {@include buttonBackground($accentLight, $bgDark); } 
+
 /* iPads (landscape) ----------- */
 @media only screen 
 and (min-device-width : 768px) 

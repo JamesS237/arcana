@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130907024523) do
+ActiveRecord::Schema.define(version: 20131102053347) do
 
   create_table "assessments", force: true do |t|
     t.integer  "subject_id"
     t.string   "type_id"
     t.string   "title"
-    t.boolean  "exam"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

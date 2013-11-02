@@ -15,9 +15,6 @@
   		<%= f.collection_select :subject_id, Subject.all, :id, :name %><br><br>
   		<%= f.collection_select :type_id, Type.all, :id, :name %><br><br>
 		<%= f.text_field :title, :placeholder => "Title" %><br><br>
-		<label class="checkbox">
-	      <%= f.check_box :exam %> <%= f.label :exam %>
-	   </label><br><br>
 	  	<%= f.submit "Add assessment", class: "btn" %>
   	</fieldset>
 <% end %>
