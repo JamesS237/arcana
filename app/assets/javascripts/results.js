@@ -111,11 +111,13 @@ function ready() {
 			var that = this;
 		    
 		    $('.res-table').append( resultView.render().el );
+		    
 		    if(item.get('current_user')) {
 			    $('#edit-mark-' + item.id).on('dblclick', function () {
 			    	var mark = $( this ).text();
 					$( this ).html('<input type="text" value="' + mark + '" />'); 
 					$( this ).attr('id', 'editing-mark-' + item.id);
+					$( this ).children('input').focus();
 					
 					$('#editing-mark-' + item.id + ' > input').one('blur', function () {
 						item.set('mark', $( this ).val());
