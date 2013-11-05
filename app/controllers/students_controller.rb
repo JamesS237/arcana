@@ -29,7 +29,8 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.password_confirmation = @student.password
-
+    @student.first_name = @student.first_name.strip
+    @student.last_name = @student.last_name.strip
     respond_to do |format|
       if @student.save
         view_context.sign_in @student
