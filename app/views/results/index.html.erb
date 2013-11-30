@@ -1,6 +1,55 @@
-<h1>Results</h1>
 <%= provide(:title, 'Arcana | Results')%>
-<table class="table">
+
+
+<div class="btn-group btn-group-justified">
+  <div class="btn btn-group">  <!-- button and dropdown group in one -->
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      House <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li id="green"><a href="#">Aherne</a></li>
+      <li id="red"><a href="#">Frew</a></li>
+      <li id="orange"><a href="#">Jenkin</a></li>
+      <li id="gray"><a href="#">Jones</a></li>
+      <li id="purple"> <a href="#">Millward</a></li>
+      <li id="blue"><a href="#">Riley</a></li>            
+    </ul>
+  </div>
+  <div class="btn btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      Subject <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <% Subject.all.each do |subject| %>
+        <li><a href="#"><%= subject.name %></a></li>
+      <% end %>          
+    </ul>
+  </div>
+  <div class="btn btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      Type <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <% Type.all.each do |type| %>
+        <li><a href="#"><%= type.name %></a></li>
+      <% end %>            
+    </ul>
+  </div>
+  <input type="text" class="mark-search" name="low-mark-search" placeholder="Low" />
+  <input type="text" class="mark-search" name="high-mark-search" placeholder="High" />
+  <input type="text" class="grouped-input search-results" style="border-radius: 0px" name="search" placeholder="Search Students" />
+  <input type="text" class="grouped-input search-results" name="search" placeholder="Search Tasks" />
+</div>
+<div class="subnav">
+    <ul class="nav nav-pills">
+    <li><a href="#">Filters</a></li>
+    
+    <li><a href="/14/players/"><i class="icon-remove"></i> English</a></li>
+    
+    <li class="pull-right"><a href="/14/players/"><i class="icon-remove"></i> Clear All</a></li>
+    </ul>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
       <th id="student-sort"><a href="/results#/sort/student">Student</a></th>
@@ -9,7 +58,6 @@
       <th id="type-sort"><a href="/results#/sort/type">Type</a></th>
       <th id="assessment-sort"><a href="/results#/sort/assessment">Assessment</a></th>
       <th id="mark-sort"><a href="/results#/sort/mark">Mark</a></th>
-      <th><input type="text" class="search-results" name="search" placeholder="Search"></th>
     </tr>
   </thead>
 

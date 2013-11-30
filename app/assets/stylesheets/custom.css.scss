@@ -13,6 +13,24 @@ strong {
     color: $accentLight;
 }
 
+.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
+    background-color: #700700;
+}
+
+.btn-group.btn {   border: 0;   padding: 0; }
+.btn-group.btn > .btn { border-radius: 0 }
+.btn-group.btn > .dropdown-menu {  text-align: left; }
+.btn-group.btn:first-child > .btn {
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+
+.btn-group.btn:last-child > .btn {
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
 
 html {
   overflow-y: scroll;
@@ -30,6 +48,86 @@ body {
   margin-bottom: 1%;
   background-color: $bgDark;
 }
+
+input.grouped-input {
+  margin-top: 11px;
+  width: 276px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+ul.subjects-menu {
+  margin-left: 1000px;
+}
+
+button.grouped-button {
+  border-bottom-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+input.mark-search {
+  border-radius: 0px !important;
+  width: 50px;
+    margin-top: 11px;
+
+}
+
+  li#green:hover {
+      background-color: #5cb85c !important;
+      color: #4cae4c !important;
+}
+
+.dropdown-menu li#green > a:hover, .dropdown-menu li#green > a:focus {
+  background-color: #5cb85c !important;
+  color: #204a20 !important;
+}
+
+.dropdown-menu li#red > a:hover, .dropdown-menu li#red > a:focus {
+  background-color: #d9534f !important;
+  color: #601715 !important;
+}
+
+.dropdown-menu li#orange > a:hover, .dropdown-menu li#orange > a:focus {
+  background-color: #f0ad4e !important; 
+  color: #88540b !important;
+}
+
+.dropdown-menu li#gray > a:hover, .dropdown-menu li#gray > a:focus {
+  background-color: #606060 !important; 
+  color: white !important;
+}
+
+.dropdown-menu li#purple > a:hover, .dropdown-menu li#purple > a:focus {
+  background-color: #6d4d9d !important;
+  color: #463265 !important;
+}
+
+.dropdown-menu li#blue > a:hover, .dropdown-menu li#blue > a:focus {
+  background-color: #428bca !important;
+  color: #245783 !important;
+}
+
+.subnav {
+  a {
+  color:black !important;
+}
+  width: 100%;
+height: 36px;
+margin: 0 0 15px 0;
+background-color: #eeeeee;
+background-repeat: repeat-x;
+background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#eeeeee));
+background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
+background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
+background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 );
+background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
+border: 1px solid #e5e5e5;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px
+}
+
 
 /* typography */
 
