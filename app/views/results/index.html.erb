@@ -6,7 +6,7 @@
     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
       House <span class="caret"></span>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu house-filter-menu">
       <li id="green"><a href="#">Aherne</a></li>
       <li id="red"><a href="#">Frew</a></li>
       <li id="orange"><a href="#">Jenkin</a></li>
@@ -19,7 +19,7 @@
     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
       Subject <span class="caret"></span>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu subject-filter-menu">
       <% Subject.all.each do |subject| %>
         <li><a href="#"><%= subject.name %></a></li>
       <% end %>          
@@ -29,7 +29,7 @@
     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
       Type <span class="caret"></span>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu type-filter-menu">
       <% Type.all.each do |type| %>
         <li><a href="#"><%= type.name %></a></li>
       <% end %>            
@@ -42,11 +42,11 @@
 </div>
 <div class="subnav">
     <ul class="nav nav-pills">
-    <li><a href="#">Filters</a></li>
-    
-    <li><a href="/14/players/"><i class="icon-remove"></i> English</a></li>
-    
-    <li class="pull-right"><a href="/14/players/"><i class="icon-remove"></i> Clear All</a></li>
+      <li><a href="#">Filters</a></li>
+      <div class="filter-contatiner">
+        <li><a><i class="icon-remove"></i> English</a></li>
+      <div>
+      <li class="pull-right"><a><i class="icon-remove"></i> Clear All</a></li>
     </ul>
 </div>
 <table class="table table-striped">

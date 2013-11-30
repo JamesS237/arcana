@@ -49,6 +49,10 @@ body {
   background-color: $bgDark;
 }
 
+a {
+  cursor: pointer;
+}
+
 input.grouped-input {
   margin-top: 11px;
   width: 276px;

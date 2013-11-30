@@ -175,6 +175,20 @@ function ready() {
 		$('.search-results').keyup(function () {
 			indView.search();
 		});
+		$('ul.*-filter-menu > li > a').on('click', function () {
+			filterText = $(this).text()
+			filterType = $(this).parents()
+							.eq(1)
+							.attr('class')
+							.replace('dropdow-menu', '',)
+							.replace('-filter-menu', '');
+			indView.filter(filterType, filterText);
+			$('div.filter-container').append('<li><a class="filter-icon"><i class="icon-remove"></i>' + filterText + '</a></li>');
+		});
+		$('a.filter-icon').on('click') {
+			$(this).remove();
+			indView.removeFilter($(this).text());
+		}
 	});
 	});
 }
