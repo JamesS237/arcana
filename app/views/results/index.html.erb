@@ -1,79 +1,76 @@
 <%= provide(:title, 'Arcana | Results')%>
 
+<div id="angular-app-container" ng-app="arcana">
+  <div id="angular-controller-container" ng-controller="ResultsCtrl">
+    <div class="btn-group btn-group-justified">
+      <div class="btn btn-group">  <!-- button and dropdown group in one -->
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          House <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu house-filter-menu">
+          <li id="green"><a href="#">Aherne</a></li>
+          <li id="red"><a href="#">Frew</a></li>
+          <li id="orange"><a href="#">Jenkin</a></li>
+          <li id="gray"><a href="#">Jones</a></li>
+          <li id="purple"> <a href="#">Millward</a></li>
+          <li id="blue"><a href="#">Riley</a></li>            
+        </ul>
+      </div>
+      <div class="btn btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          Subject <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu subject-filter-menu">
+          <% Subject.all.each do |subject| %>
+            <li><a href="#"><%= subject.name %></a></li>
+          <% end %>          
+        </ul>
+      </div>
+      <div class="btn btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          Type <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu type-filter-menu">
+          <% Type.all.each do |type| %>
+            <li><a href="#"><%= type.name %></a></li>
+          <% end %>            
+        </ul>
+      </div>
+      <input type="text" class="mark-search" name="low-mark-search" placeholder="Low" />
+      <input type="text" class="mark-search" name="high-mark-search" placeholder="High" />
+      <input type="text" class="grouped-input search-results" style="border-radius: 0px" name="search" placeholder="Search Students" />
+      <input type="text" class="grouped-input search-results" name="search" placeholder="Search Tasks" />
+    </div>
+    <div class="subnav">
+        <ul class="nav nav-pills">
+          <li><a href="#">Filters</a></li>
+          <div class="filter-contatiner">
+            <li><a><i class="icon-remove"></i> English</a></li>
+          <div>
+          <li class="pull-right"><a><i class="icon-remove"></i> Clear All</a></li>
+        </ul>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th id="student-sort"><a href="/results#/sort/student">Student</a></th>
+          <th id="house-sort"><a href="/results#/sort/house">House</a></th>
+          <th id="subject-sort"><a href="/results#/sort/subject">Subject</a></th>
+          <th id="type-sort"><a href="/results#/sort/type">Type</a></th>
+          <th id="assessment-sort"><a href="/results#/sort/assessment">Assessment</a></th>
+          <th id="mark-sort"><a href="/results#/sort/mark">Mark</a></th>
+        </tr>
+      </thead>
 
-<div class="btn-group btn-group-justified">
-  <div class="btn btn-group">  <!-- button and dropdown group in one -->
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-      House <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu house-filter-menu">
-      <li id="green"><a href="#">Aherne</a></li>
-      <li id="red"><a href="#">Frew</a></li>
-      <li id="orange"><a href="#">Jenkin</a></li>
-      <li id="gray"><a href="#">Jones</a></li>
-      <li id="purple"> <a href="#">Millward</a></li>
-      <li id="blue"><a href="#">Riley</a></li>            
-    </ul>
+      <tbody class="res-table">
+      <tr ng-repeat="result in results">
+        <td>{{result.student.fullName}}</td>
+        <td>{{result.student.house}}</td>
+        <td>{{result.assessment.subject.name}}</td>
+        <td>{{result.assessment.type.name}}</td>
+        <td>{{result.mark}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="btn btn-group">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-      Subject <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu subject-filter-menu">
-      <% Subject.all.each do |subject| %>
-        <li><a href="#"><%= subject.name %></a></li>
-      <% end %>          
-    </ul>
-  </div>
-  <div class="btn btn-group">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-      Type <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu type-filter-menu">
-      <% Type.all.each do |type| %>
-        <li><a href="#"><%= type.name %></a></li>
-      <% end %>            
-    </ul>
-  </div>
-  <input type="text" class="mark-search" name="low-mark-search" placeholder="Low" />
-  <input type="text" class="mark-search" name="high-mark-search" placeholder="High" />
-  <input type="text" class="grouped-input search-results" style="border-radius: 0px" name="search" placeholder="Search Students" />
-  <input type="text" class="grouped-input search-results" name="search" placeholder="Search Tasks" />
 </div>
-<div class="subnav">
-    <ul class="nav nav-pills">
-      <li><a href="#">Filters</a></li>
-      <div class="filter-contatiner">
-        <li><a><i class="icon-remove"></i> English</a></li>
-      <div>
-      <li class="pull-right"><a><i class="icon-remove"></i> Clear All</a></li>
-    </ul>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th id="student-sort"><a href="/results#/sort/student">Student</a></th>
-      <th id="house-sort"><a href="/results#/sort/house">House</a></th>
-      <th id="subject-sort"><a href="/results#/sort/subject">Subject</a></th>
-      <th id="type-sort"><a href="/results#/sort/type">Type</a></th>
-      <th id="assessment-sort"><a href="/results#/sort/assessment">Assessment</a></th>
-      <th id="mark-sort"><a href="/results#/sort/mark">Mark</a></th>
-    </tr>
-  </thead>
-
-  <tbody class="res-table">
-    
-<%= form_for(Result.new) do |f| %>
-	<tr>	
-		<td><%= current_user.full_name %></td>
-		<td></td>
-		<td></td>
-		<td></td>
-  		<td><%= f.collection_select :assessment_id, Assessment.uncomplete(current_user), :id, :title %></td>
-		<td><%= f.text_field :mark, :placeholder => "Mark" %></td>
-		<td><a class="btn result-submit">Add</a></td>
-  	</tr>
-<% end %>
-<div id="results-special"></div>
-  </tbody>
-</table>

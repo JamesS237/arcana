@@ -11,10 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require underscore
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require_tree .
 //= require bootstrap
+//= require_tree ./angular
+//= require_tree .
+
