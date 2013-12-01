@@ -13,6 +13,10 @@ strong {
     color: $accentLight;
 }
 
+table.table-striped th {
+  cursor: pointer;
+}
+
 .table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
     background-color: #700700;
 }
@@ -64,15 +68,20 @@ ul.subjects-menu {
   margin-left: 1000px;
 }
 
-button.grouped-button {
-  border-bottom-right-radius: 0px !important;
-  border-top-right-radius: 0px !important;
+input.left-input {
+  border-bottom-left-radius: 3px !important;
+  border-top-left-radius: 3px !important;
 }
 
-input.mark-search {
-  border-radius: 0px !important;
-  width: 50px;
-    margin-top: 11px;
+input.right-input {
+  border-bottom-right-radius: 3px !important;
+  border-top-right-radius: 3px !important;
+}
+
+input.result-search {
+  border-radius: 0px;
+  width: 120.6px;
+  margin-top: 11px;
 
 }
 

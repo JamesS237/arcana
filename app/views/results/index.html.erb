@@ -3,71 +3,33 @@
 <div id="angular-app-container" ng-app="arcana">
   <div id="angular-controller-container" ng-controller="ResultsCtrl">
     <div class="btn-group btn-group-justified">
-      <div class="btn btn-group">  <!-- button and dropdown group in one -->
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-          House <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu house-filter-menu">
-          <li id="green"><a href="#">Aherne</a></li>
-          <li id="red"><a href="#">Frew</a></li>
-          <li id="orange"><a href="#">Jenkin</a></li>
-          <li id="gray"><a href="#">Jones</a></li>
-          <li id="purple"> <a href="#">Millward</a></li>
-          <li id="blue"><a href="#">Riley</a></li>            
-        </ul>
-      </div>
-      <div class="btn btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-          Subject <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu subject-filter-menu">
-          <% Subject.all.each do |subject| %>
-            <li><a href="#"><%= subject.name %></a></li>
-          <% end %>          
-        </ul>
-      </div>
-      <div class="btn btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-          Type <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu type-filter-menu">
-          <% Type.all.each do |type| %>
-            <li><a href="#"><%= type.name %></a></li>
-          <% end %>            
-        </ul>
-      </div>
-      <input type="text" class="mark-search" name="low-mark-search" placeholder="Low" />
-      <input type="text" class="mark-search" name="high-mark-search" placeholder="High" />
-      <input type="text" class="grouped-input search-results" style="border-radius: 0px" name="search" placeholder="Search Students" />
-      <input type="text" class="grouped-input search-results" name="search" placeholder="Search Tasks" />
-    </div>
-    <div class="subnav">
-        <ul class="nav nav-pills">
-          <li><a href="#">Filters</a></li>
-          <div class="filter-contatiner">
-            <li><a><i class="icon-remove"></i> English</a></li>
-          <div>
-          <li class="pull-right"><a><i class="icon-remove"></i> Clear All</a></li>
-        </ul>
+      <input type="text" class="result-search left-input" name="low-mark-search" placeholder="House" />
+      <input type="text" class="result-search" name="low-mark-search" placeholder="Type" />
+      <input type="text" class="result-search" name="low-mark-search" placeholder="Subject" />
+      <input type="text" class="result-search" name="low-mark-search" placeholder="Lowest Mark" />
+      <input type="text" class="result-search" name="high-mark-search" placeholder="Highest Mark" />
+      <input type="text" class="result-search" style="border-radius: 0px" name="search" placeholder="Student" />
+      <input type="text" class="result-search right-input" name="search" placeholder="Tasks" ng-model="taskSearch"/>
     </div>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th id="student-sort"><a href="/results#/sort/student">Student</a></th>
-          <th id="house-sort"><a href="/results#/sort/house">House</a></th>
-          <th id="subject-sort"><a href="/results#/sort/subject">Subject</a></th>
-          <th id="type-sort"><a href="/results#/sort/type">Type</a></th>
-          <th id="assessment-sort"><a href="/results#/sort/assessment">Assessment</a></th>
-          <th id="mark-sort"><a href="/results#/sort/mark">Mark</a></th>
+          <th id="student-sort" ng-click="predicate = 'student.lastName';reverse=!reverse">Student</th>
+          <th id="house-sort" ng-click="predicate = 'student.house'; reverse=!reverse">House</th>
+          <th id="subject-sort" ng-click="predicate = 'assessment.subject.name'; reverse=!reverse">Subject</th>
+          <th id="type-sort" ng-click="predicate = 'assessment.type.name'; reverse=!reverse">Type</th>
+          <th id="assessment-sort" ng-click="predicate = 'assessment.name'; reverse=!reverse">Assessment</th>
+          <th id="mark-sort" ng-click="predicate = 'mark'; reverse=!reverse">Mark</th>
         </tr>
       </thead>
 
       <tbody class="res-table">
-      <tr ng-repeat="result in results">
+      <tr ng-repeat="result in results | filter:{assessment.name: taskSearch} | orderBy:predicate:reverse">
         <td>{{result.student.fullName}}</td>
         <td>{{result.student.house}}</td>
         <td>{{result.assessment.subject.name}}</td>
         <td>{{result.assessment.type.name}}</td>
+        <td>{{result.assessment.name}}</td>
         <td>{{result.mark}}</td>
       </tr>
       </tbody>
