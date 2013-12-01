@@ -582,14 +582,22 @@ tbody {
 }
 
 .nav-selected {
-  background-color: #e6e6e6;
+  background-color: $accentLight;
   
   a {
-    color: #555555 !important;
+    color: $bgDark !important;
     
     &:hover {
-      color: $accentLight !important;
+      color: #555555 !important;
     }
+  }
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: $accentLight;
+  color: $bgDark;
+  &:hover {
+    color: #555555 !important;
   }
 }
 
