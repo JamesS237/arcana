@@ -64,6 +64,10 @@ input.grouped-input {
   border-top-left-radius: 0px;
 }
 
+::selection {
+  background: white;
+}
+
 ul.subjects-menu {
   margin-left: 1000px;
 }

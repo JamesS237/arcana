@@ -3,13 +3,13 @@
 <div id="angular-app-container" ng-app="arcana">
   <div id="angular-controller-container" ng-controller="ResultsCtrl">
     <div class="btn-group btn-group-justified">
-      <input type="text" class="result-search left-input" name="low-mark-search" placeholder="House" />
-      <input type="text" class="result-search" name="low-mark-search" placeholder="Type" />
-      <input type="text" class="result-search" name="low-mark-search" placeholder="Subject" />
-      <input type="text" class="result-search" name="low-mark-search" placeholder="Lowest Mark" />
-      <input type="text" class="result-search" name="high-mark-search" placeholder="Highest Mark" />
-      <input type="text" class="result-search" style="border-radius: 0px" name="search" placeholder="Student" />
-      <input type="text" class="result-search right-input" name="search" placeholder="Tasks" ng-model="taskSearch"/>
+      <input type="text" class="result-search left-input" ng-model="nameSearch" name="search" placeholder="Student" />
+      <input type="text" class="result-search" ng-model="houseSearch"name="low-mark-search" placeholder="House" />
+      <input type="text" class="result-search" ng-model="subjectSearch" name="low-mark-search" placeholder="Subject" />
+      <input type="text" class="result-search" ng-model="typeSearch" name="low-mark-search" placeholder="Type" />
+      <input type="text" class="result-search" name="search" placeholder="Task" ng-model="taskSearch"/>
+      <input type="text" class="result-search" name="low-mark-search" ng-model="minMark" placeholder="Lowest Mark" />
+      <input type="text" class="result-search right-input" name="high-mark-search" ng-model="maxMark" placeholder="Highest Mark" />
     </div>
     <table class="table table-striped">
       <thead>
@@ -18,13 +18,13 @@
           <th id="house-sort" ng-click="predicate = 'student.house'; reverse=!reverse">House</th>
           <th id="subject-sort" ng-click="predicate = 'assessment.subject.name'; reverse=!reverse">Subject</th>
           <th id="type-sort" ng-click="predicate = 'assessment.type.name'; reverse=!reverse">Type</th>
-          <th id="assessment-sort" ng-click="predicate = 'assessment.name'; reverse=!reverse">Assessment</th>
+          <th id="assessment-sort" ng-click="predicate = 'assessment.name'; reverse=!reverse">Task</th>
           <th id="mark-sort" ng-click="predicate = 'mark'; reverse=!reverse">Mark</th>
         </tr>
       </thead>
 
       <tbody class="res-table">
-      <tr ng-repeat="result in results | filter:{assessment.name: taskSearch} | orderBy:predicate:reverse">
+      <tr ng-repeat="result in results | filter:markBetween | filter:{assessment.name: taskSearch, assessment.subject.name: subjectSearch, assessment.type.name: typeSearch, student.house: houseSearch, student.fullName: nameSearch } | orderBy:predicate:reverse">
         <td>{{result.student.fullName}}</td>
         <td>{{result.student.house}}</td>
         <td>{{result.assessment.subject.name}}</td>

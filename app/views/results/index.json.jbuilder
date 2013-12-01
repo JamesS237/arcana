@@ -1,5 +1,5 @@
 json.array!(@results) do |result|
-	json.mark result.mark
+	json.mark result.mark.to_i
 	json.id result.id
 
 	json.student do
