@@ -27,8 +27,10 @@ arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($sco
 		}, 1000);
 	};
 	$scope.showEditor = function (clickedResult) {
-		$scope.results[$scope.results.indexOf(clickedResult)].editMode = true;
-    	focus('focusMe');
+		if(clickedResult.student.id === $scope.userId) {
+			$scope.results[$scope.results.indexOf(clickedResult)].editMode = true;
+    		focus('focusMe');
+		}
 	};
 	$scope.hideEditor = function (clickedResult) {
 		$scope.results[$scope.results.indexOf(clickedResult)].editMode = false;
