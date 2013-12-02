@@ -1,6 +1,6 @@
 var arcana = angular.module('arcana', ['ngRoute', 'ngResource']);
 
-arcana.controller('ResultsCtrl', function ($scope, $resource, focus) {
+arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($scope, $resource, focus) {
 	var Result = $resource('/results/:resultId.json', {resultId:'@id'});
 	var Assessment = $resource('/assessments/:assessmentId.json', {assessmentId:'@id'});
 	$scope.results = Result.query();
@@ -34,7 +34,7 @@ arcana.controller('ResultsCtrl', function ($scope, $resource, focus) {
 		$scope.results[$scope.results.indexOf(clickedResult)].editMode = false;
 		$scope.results[$scope.results.indexOf(clickedResult)].$save();
 	};
-}).directive('ngBlur', function() {
+}]).directive('ngBlur', function() {
   return function( scope, elem, attrs ) {
     elem.bind('blur', function() {
       scope.$apply(attrs.ngBlur);
@@ -48,10 +48,10 @@ arcana.controller('ResultsCtrl', function ($scope, $resource, focus) {
         }
       });
    };
-}).factory('focus', function ($rootScope, $timeout) {
+}).factory('focus', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
   return function(name) {
     $timeout(function (){
       $rootScope.$broadcast('focusOn', name);
     });
   }
-});
+}]);
