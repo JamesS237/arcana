@@ -20,10 +20,22 @@
           <th id="type-sort" ng-click="predicate = 'assessment.type.name'; reverse=!reverse">Type</th>
           <th id="assessment-sort" ng-click="predicate = 'assessment.name'; reverse=!reverse">Task</th>
           <th id="mark-sort" ng-click="predicate = 'mark'; reverse=!reverse">Mark</th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody class="res-table">
+<%= form_for(Result.new) do |f| %>
+        <tr>        
+                <td><%= current_user.full_name %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                  <td><%= f.collection_select :assessment_id, Assessment.uncomplete(current_user), :id, :title %></td>
+                <td><%= f.text_field :mark, :placeholder => "Mark" %></td>
+                <td><a class="btn result-submit">Add</a></td>
+          </tr>
+<% end %>
       <tr ng-repeat="result in results | filter:markBetween | filter:{assessment.name: taskSearch, assessment.subject.name: subjectSearch, assessment.type.name: typeSearch, student.house: houseSearch, student.fullName: nameSearch } | orderBy:predicate:reverse">
         <td>{{result.student.fullName}}</td>
         <td>{{result.student.house}}</td>
@@ -31,6 +43,7 @@
         <td>{{result.assessment.type.name}}</td>
         <td>{{result.assessment.name}}</td>
         <td>{{result.mark}}</td>
+        <td></td>
       </tr>
       </tbody>
     </table>
