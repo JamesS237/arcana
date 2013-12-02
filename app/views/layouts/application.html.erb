@@ -5,6 +5,10 @@
 	</script>
       <title><%= yield(:title) %></title>
       <%= stylesheet_link_tag    "application", media: "all" %>
+      <%= javascript_tag "const AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+      <% if current_user %>
+        <%= javascript_tag "const CURRENT_USER_ID = #{current_user.id.to_s};" if protect_against_forgery? %>
+      <% end %>
       <%= javascript_include_tag "application" %>
       <%= favicon_link_tag 'favicon.png' %>
       <%= csrf_meta_tags %>

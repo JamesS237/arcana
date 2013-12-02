@@ -36,9 +36,10 @@ class ResultsController < ApplicationController
   # POST /results
   # POST /results.json
   def create
-    @result = Result.new(result_params)
+    @result = Result.new()
     @result.student_id = view_context.current_user.id
-
+    @result.assessment_id = params[:assessment][:id]
+    @result.mark = params[:mark]
     respond_to do |format|
       if @result.save
         format.html { redirect_to results_path, notice: 'Result was successfully created.' }
