@@ -42,7 +42,10 @@
         <td>{{result.assessment.subject.name}}</td>
         <td>{{result.assessment.type.name}}</td>
         <td>{{result.assessment.name}}</td>
-        <td>{{result.mark}}</td>
+        <td>
+          <span ng-click="showEditor(result)" ng-hide="result.editMode">{{result.mark}}</span>
+          <input type="text" placeholder="Mark" focus-on="focusMe" ng-blur="hideEditor(result)" ng-model="result.mark" ng-show="result.editMode" />
+        </td>
         <td></td>
       </tr>
       </tbody>

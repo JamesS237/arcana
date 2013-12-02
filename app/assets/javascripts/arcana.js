@@ -1,6 +1,6 @@
 var arcana = angular.module('arcana', ['ngRoute', 'ngResource']);
 
-arcana.controller('ResultsCtrl', function ($scope, $resource) {
+arcana.controller('ResultsCtrl', function ($scope, $resource, focus) {
 	var Result = $resource('/results/:resultId.json', {resultId:'@id'});
 	var Assessment = $resource('/assessments/:assessmentId.json', {assessmentId:'@id'});
 	$scope.results = Result.query();
@@ -25,5 +25,33 @@ arcana.controller('ResultsCtrl', function ($scope, $resource) {
 			$scope.result.mark = '';
 			$scope.result.assessmentId = 0;
 		}, 1000);
-	}
+	};
+	$scope.showEditor = function (clickedResult) {
+		$scope.results[$scope.results.indexOf(clickedResult)].editMode = true;
+    	focus('focusMe');
+	};
+	$scope.hideEditor = function (clickedResult) {
+		$scope.results[$scope.results.indexOf(clickedResult)].editMode = false;
+		$scope.results[$scope.results.indexOf(clickedResult)].$save();
+	};
+}).directive('ngBlur', function() {
+  return function( scope, elem, attrs ) {
+    elem.bind('blur', function() {
+      scope.$apply(attrs.ngBlur);
+    });
+  };
+}).directive('focusOn', function() {
+   return function(scope, elem, attr) {
+      scope.$on('focusOn', function(e, name) {
+        if(name === attr.focusOn) {
+          elem[0].focus();
+        }
+      });
+   };
+}).factory('focus', function ($rootScope, $timeout) {
+  return function(name) {
+    $timeout(function (){
+      $rootScope.$broadcast('focusOn', name);
+    });
+  }
 });
