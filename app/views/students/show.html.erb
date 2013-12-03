@@ -1,26 +1,16 @@
 <%= provide(:title, 'Arcana | Students')%>
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>House:</strong>
-  <%= @student.house %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @student.admin %>
-</p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @student.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @student.last_name %>
-</p>
-
-
+<h1><%= current_user.full_name %></h1>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Metric</td>
+			<td>Average</td>
+			<td>Rank</td>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

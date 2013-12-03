@@ -1,5 +1,4 @@
 <%= provide(:title, 'Arcana')%>
-<% if !current_user %>
 <style type="text/css">
 html {
 	<% if Rails.env.production? %>
@@ -41,6 +40,4 @@ body {
 		</div>
 	</div>
 </div>
-<% else %>
-<script>window.location = '/results#filter/' + '<%= current_user.full_name.gsub(' ', '-') %>';</script>
-<% end %>
+

@@ -57,6 +57,11 @@ a {
   cursor: pointer;
 }
 
+td.mark-col {
+  text-align: right;
+  width: 10px;
+}
+
 input.grouped-input {
   margin-top: 11px;
   width: 276px;
