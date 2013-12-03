@@ -44,7 +44,41 @@ class Student < ActiveRecord::Base
   end
   
   def average(subject)
+    
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
+  end
+
+  def averages
+    subjects = Hash.new
+    Subject.each do |subject| 
+     average = {
+        :s1 => { :t1, :t2, :exam, :assessment, :overall }, 
+        :s2 => { :t3, :t4, :exam, :assessment, :overall }, 
+        :year => { :assessment, :exam, :overall } 
+      }
+      average[:s1][:t1] = self.t1.results.where(:subject_id => subject.id)
+      average[:s1][:t2] = self.t2.results.where(:subject_id => subject.id)
+      average[:s2][:t3] = self.t3.results.where(:subject_id => subject.id)
+      average[:s2][:t4] = self.t4.results.where(:subject_id => subject.id)
+      exam_query = 'results.assessment_id 
+                    IN(SELECT assessments.id 
+                    FROM assessments 
+                    WHERE assessments.type_in 
+                    IN(SELECT types.id FROM types WHERE types.name = "Exam"))'
+      average[:s2][:exam] =  self.t2.results.where(:subject_id => subject.id).where(exam_query)
+
+      subjects[subject.name.downcase.to_sym] = average
+    end
+    averages = {
+                :total => 
+                {
+                  :s1 => { :t1, :t2, :exam, :assessment, :overall }, 
+                  :s2 => { :t3, :t4, :exam, :assessment, :overall }, 
+                  :year => { :assessment, :exam, :overall }, 
+                }
+
+                :subjects => subjects
+              }
   end
 
   private
