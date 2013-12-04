@@ -5,6 +5,4 @@ class Result < ActiveRecord::Base
   validates :student_id, presence: true
   validates :mark, presence: true
   validates :assessment_id, presence: true
-
-
 end
