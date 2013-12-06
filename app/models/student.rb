@@ -46,7 +46,6 @@ class Student < ActiveRecord::Base
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
   end
 
-  
   def get_term_results(term)
     result_ids = []
     Result.where(:student_id => self.id).each do |r|
@@ -64,25 +63,25 @@ class Student < ActiveRecord::Base
   def t2
     return { 
       :results => get_term_results(2), 
-      :exams =>  get_term_results(2).where('assessment_id IN 
+      :exams =>  get_term_results(2).where("assessment_id IN 
                                             (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
-                                            (SELECT types.id FROM types WHERE types.name = "Exam" '))}
+                                            (SELECT types.id FROM types WHERE types.name = 'Exam'))")}
   end
 
   def t3
     return { 
       :results => get_term_results(2), 
-      :exams =>  get_term_results(3).where('assessment_id IN 
+      :exams =>  get_term_results(3).where("assessment_id IN 
                                             (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
-                                            (SELECT types.id FROM types WHERE types.name = "Exam" '))}
+                                            (SELECT types.id FROM types WHERE types.name = 'Exam'))")}
   end
 
   def t4
     return { 
       :results => get_term_results(4), 
-      :exams =>  get_term_results(4).where('assessment_id IN 
+      :exams =>  get_term_results(4).where("assessment_id IN 
                                             (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
-                                            (SELECT types.id FROM types WHERE types.name = "Exam" '))}
+                                            (SELECT types.id FROM types WHERE types.name = 'Exam'))") }
   end
   
   def averages
@@ -91,36 +90,36 @@ class Student < ActiveRecord::Base
       :total => 
       {
         :s1 => { 
-                  :t1, 
-                  :t2, 
-                  :exam, 
-                  :assessment, 
-                  :overall 
+                  :t1 => 0, 
+                  :t2 => 0, 
+                  :exam => 0, 
+                  :assessment => 0, 
+                  :overall => 0
                 }, 
         :s2 => { 
-                  :t3, 
-                  :t4, 
-                  :exam, 
-                  :assessment, 
-                  :overall 
+                  :t1 => 0, 
+                  :t2 => 0, 
+                  :exam => 0, 
+                  :assessment => 0, 
+                  :overall => 0
                 }, 
         :year => { 
-                  :assessment, 
-                  :exam, 
-                  :overall 
+                  :exam => 0, 
+                  :assessment => 0, 
+                  :overall => 0
                   }, 
       },
 
-      :subjects 
+      :subjects => {}
     }
 
-    average[:s1][:t1]           = self.t1.[:results].average('mark')
-    average[:s1][:t2]           = self.t2.[:results].average('mark')
-    average[:s2][:t3]           = self.t3.[:results].average('mark')
-    average[:s2][:t4]           = self.t4.[:results].average('mark')
+    average[:s1][:t1]           = self.t1[:results].average('mark')
+    average[:s1][:t2]           = self.t2[:results].average('mark')
+    average[:s2][:t3]           = self.t3[:results].average('mark')
+    average[:s2][:t4]           = self.t4[:results].average('mark')
 
-    average[:s1][:exam]         =  self.t2.[:exams].where(:subject_id => subject.id).average('mark')
-    average[:s2][:exam]         =  self.t4.[:exams].where(:subject_id => subject.id).average('mark')
+    average[:s1][:exam]         =  self.t2[:exams].where(:subject_id => subject.id).average('mark')
+    average[:s2][:exam]         =  self.t4[:exams].where(:subject_id => subject.id).average('mark')
 
     average[:s1][:assessment]   =  ((average[:s1][:t1] + average[:s1][:t2]) / 2).round(2)
     average[:s2][:assessment]   =  ((average[:s2][:t3] + average[:s2][:t4]) / 2).round(2)
@@ -138,23 +137,23 @@ class Student < ActiveRecord::Base
       average = 
       {
         :s1 => { 
-                  :t1, 
-                  :t2, 
-                  :exam, 
-                  :assessment, 
-                  :overall 
+                  :t1 => 0, 
+                  :t2 => 0, 
+                  :exam => 0, 
+                  :assessment => 0, 
+                  :overall => 0
                 }, 
         :s2 => { 
-                  :t3, 
-                  :t4, 
-                  :exam, 
-                  :assessment, 
-                  :overall 
+                  :t1 => 0, 
+                  :t2 => 0, 
+                  :exam => 0, 
+                  :assessment => 0, 
+                  :overall => 0
                 }, 
         :year => { 
-                  :assessment, 
-                  :exam, 
-                  :overall 
+                  :exam => 0, 
+                  :assessment => 0, 
+                  :overall => 0
                   }, 
       }
 

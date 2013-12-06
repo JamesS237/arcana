@@ -23,7 +23,7 @@ class Assessment < ActiveRecord::Base
       #0: C, 1: D, 2: H, 3: M, 4: V, 5: W
       #History/Geogrpahy
       #Drama/RE
-      if(student.class in [0, 1, 2]) #History: V, H (c?), Geography: 
+      if(student.class_group in [0, 1, 2]) #History: V, H (c?), Geography: 
         if self.term == 1 or self.term == 2
           return self.term + 2
         else

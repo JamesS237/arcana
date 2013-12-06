@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206025532) do
+ActiveRecord::Schema.define(version: 20131206030502) do
 
   create_table "assessments", force: true do |t|
     t.integer  "subject_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20131206025532) do
     t.string   "remember_token"
     t.string   "password_digest"
     t.string   "email"
+    t.integer  "class_group"
   end
 
   create_table "subjects", force: true do |t|

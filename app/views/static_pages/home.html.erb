@@ -30,8 +30,8 @@ body {
 		<div class="front-signup">
 			<h2><strong>New to Arcana?</strong> Sign up</h2>
 			
-			<%= form_for(@student) do |f| %>
-				<%= f.text_field :full_name, :placeholder => "Full name", class: "input-name", value: """" %>
+			<%= form_for(Student.new) do |f| %>
+				<%= f.text_field :full_name, :placeholder => "Full name", class: "input-name"  %>
 				<%= f.text_field :email, :placeholder => "Email", class: "input-email" %>
 				<%= f.collection_select :house, Student.houses, :first, :last %>
 				<%= f.password_field :password, :placeholder => "Password", class: "input-password" %>
