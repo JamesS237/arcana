@@ -19,11 +19,11 @@ class Assessment < ActiveRecord::Base
   end
 
   def real_term(student)
-    if(self.subject.name in ["History", "Geogrpahy", "RE", "Drama"])
-      #0: C, 1: D, 2: H, 3: M, 4: V, 5: W
+    if(["History", "Geogrpahy", "RE", "Drama"].include? self.subject.name)
+      #1: C, 2: D, 3: H, 4: M, 5: V, 6: W
       #History/Geogrpahy
       #Drama/RE
-      if(student.class_group in [0, 1, 2]) #History: V, H (c?), Geography: 
+      if([1, 2, 3].include? student.class_group) #History: V, H (c?), Geography: 
         if self.term == 1 or self.term == 2
           return self.term + 2
         else

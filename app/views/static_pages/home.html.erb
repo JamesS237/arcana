@@ -31,9 +31,10 @@ body {
 			<h2><strong>New to Arcana?</strong> Sign up</h2>
 			
 			<%= form_for(Student.new) do |f| %>
-				<%= f.text_field :full_name, :placeholder => "Full name", class: "input-name"  %>
+				<%= f.text_field :full_name, :placeholder => "Full Name", class: "input-name", value: ""  %>
 				<%= f.text_field :email, :placeholder => "Email", class: "input-email" %>
 				<%= f.collection_select :house, Student.houses, :first, :last %>
+				<%= f.collection_select :class_group, Student.class_groups, :first, :last %>
 				<%= f.password_field :password, :placeholder => "Password", class: "input-password" %>
 				<%= f.submit "Sign up", class: "btn submit btn-primary input-submit" %>
 			<% end %>
