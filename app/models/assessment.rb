@@ -17,4 +17,21 @@ class Assessment < ActiveRecord::Base
     end
     Assessment.find(:all, :conditions => ['id not in (?)', complete.map(&:assessment_id)])
   end
+
+  def real_term(student)
+    if(self.subject.name in ["History", "Geogrpahy", "RE", "Drama"])
+      #0: C, 1: D, 2: H, 3: M, 4: V, 5: W
+      #History/Geogrpahy
+      #Drama/RE
+      if(student.class in [0, 1, 2]) #History: V, H (c?), Geography: 
+        if self.term == 1 or self.term == 2
+          return self.term + 2
+        else
+          return self.term
+        end
+      end
+    else
+      return self.term
+    end
+  end
 end

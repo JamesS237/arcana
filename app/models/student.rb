@@ -8,14 +8,13 @@ class Student < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :house, presence: true
-
-
   
   #validates :password, length: { minimum: 6 }
-  
+
   def self.houses
     houses = {0 => "Please Select a House", 1 => "Aherne", 2 => "Frew", 3 => "Jenkin", 4 => "Jones", 5 => "Millward", 6 => "Riley"}
   end
+
   
   def full_name
     [first_name, last_name].join(' ')
@@ -44,10 +43,48 @@ class Student < ActiveRecord::Base
   end
   
   def average(subject)
-    
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
   end
 
+  
+  def get_term_results(term)
+    result_ids = []
+    Result.where(:student_id => self.id).each do |r|
+      if r.assessment.real_term == term
+        result_ids << r.id
+      end
+    end
+    return Result.where('id IN ?', result_ids)
+  end
+
+  def t1
+    return { :results => get_term_results(1) }
+  end
+
+  def t2
+    return { 
+      :results => get_term_results(2), 
+      :exams =>  get_term_results(2).where('assessment_id IN 
+                                            (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
+                                            (SELECT types.id FROM types WHERE types.name = "Exam" '))}
+  end
+
+  def t3
+    return { 
+      :results => get_term_results(2), 
+      :exams =>  get_term_results(3).where('assessment_id IN 
+                                            (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
+                                            (SELECT types.id FROM types WHERE types.name = "Exam" '))}
+  end
+
+  def t4
+    return { 
+      :results => get_term_results(4), 
+      :exams =>  get_term_results(4).where('assessment_id IN 
+                                            (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
+                                            (SELECT types.id FROM types WHERE types.name = "Exam" '))}
+  end
+  
   def averages
     averages = 
     {
@@ -77,13 +114,13 @@ class Student < ActiveRecord::Base
       :subjects 
     }
 
-    average[:s1][:t1]           = self.t1.results.average('mark')
-    average[:s1][:t2]           = self.t2.results.average('mark')
-    average[:s2][:t3]           = self.t3.results.average('mark')
-    average[:s2][:t4]           = self.t4.results.average('mark')
+    average[:s1][:t1]           = self.t1.[:results].average('mark')
+    average[:s1][:t2]           = self.t2.[:results].average('mark')
+    average[:s2][:t3]           = self.t3.[:results].average('mark')
+    average[:s2][:t4]           = self.t4.[:results].average('mark')
 
-    average[:s1][:exam]         =  self.t2.exams.where(:subject_id => subject.id).average('mark')
-    average[:s2][:exam]         =  self.t4.exams.where(:subject_id => subject.id).average('mark')
+    average[:s1][:exam]         =  self.t2.[:exams].where(:subject_id => subject.id).average('mark')
+    average[:s2][:exam]         =  self.t4.[:exams].where(:subject_id => subject.id).average('mark')
 
     average[:s1][:assessment]   =  ((average[:s1][:t1] + average[:s1][:t2]) / 2).round(2)
     average[:s2][:assessment]   =  ((average[:s2][:t3] + average[:s2][:t4]) / 2).round(2)
