@@ -135,7 +135,7 @@ class Student < ActiveRecord::Base
     subjects = Hash.new
 
     Subject.all.each do |subject|
-      average = 
+      subject_average = 
       {
         :s1 => { 
                   :t1 => 0, 
@@ -160,27 +160,28 @@ class Student < ActiveRecord::Base
 
       subject_query = 'assessment_id IN(SELECT assessments.id FROM assessments WHERE assessments.subject_id = ?)'
 
-      average[:s1][:t1]           = self.t1[:results].where(subject_query, subject.id).average('mark') || 1
-      average[:s1][:t2]           = self.t2[:results].where(subject_query, subject.id).average('mark') || 1
-      average[:s2][:t3]           = self.t3[:results].where(subject_query, subject.id).average('mark') || 1
-      average[:s2][:t4]           = self.t4[:results].where(subject_query, subject.id).average('mark') || 1
+      subject_average[:s1][:t1]           = self.t1[:results].where(subject_query, subject.id).average('mark') || 1
+      subject_average[:s1][:t2]           = self.t2[:results].where(subject_query, subject.id).average('mark') || 1
+      subject_average[:s2][:t3]           = self.t3[:results].where(subject_query, subject.id).average('mark') || 1
+      subject_average[:s2][:t4]           = self.t4[:results].where(subject_query, subject.id).average('mark') || 1
 
-      average[:s1][:exam]         =  self.t2[:exams].where(subject_query, subject.id).average('mark') || 1
-      average[:s2][:exam]         =  self.t4[:exams].where(subject_query, subject.id).average('mark') || 1
+      subject_average[:s1][:exam]         =  self.t2[:exams].where(subject_query, subject.id).average('mark') || 1
+      subject_average[:s2][:exam]         =  self.t4[:exams].where(subject_query, subject.id).average('mark') || 1
 
-      average[:s1][:assessment]   =  ((average[:s1][:t1] + average[:s1][:t2]) / 2).round(2)
-      average[:s2][:assessment]   =  ((average[:s2][:t3] + average[:s2][:t4]) / 2).round(2)
+      subject_average[:s1][:assessment]   =  ((subject_average[:s1][:t1] + subject_average[:s1][:t2]) / 2).round(2)
+      subject_average[:s2][:assessment]   =  ((subject_average[:s2][:t3] + subject_average[:s2][:t4]) / 2).round(2)
 
-      average[:s1][:overall]      =  ((average[:s1][:exam] + average[:s1][:assessment]) / 2).round(2)
-      average[:s2][:overall]      =  ((average[:s2][:exam] + average[:s2][:assessment]) / 2).round(2)
+      subject_average[:s1][:overall]      =  ((subject_average[:s1][:exam] + subject_average[:s1][:assessment]) / 2).round(2)
+      subject_average[:s2][:overall]      =  ((subject_average[:s2][:exam] + subject_average[:s2][:assessment]) / 2).round(2)
 
-      average[:year][:assessment] =  ((average[:s1][:assessment] + average[:s2][:assessment]) / 2).round(2)
-      average[:year][:exam]       =  ((average[:s1][:exam] + average[:s2][:exam]) / 2).round(2)
-      average[:year][:overall]    =  ((average[:s1][:overall] + average[:s2][:overall]) / 2).round(2)
+      subject_average[:year][:assessment] =  ((subject_average[:s1][:assessment] + subject_average[:s2][:assessment]) / 2).round(2)
+      subject_average[:year][:exam]       =  ((subject_average[:s1][:exam] + subject_average[:s2][:exam]) / 2).round(2)
+      subject_average[:year][:overall]    =  ((subject_average[:s1][:overall] + subject_average[:s2][:overall]) / 2).round(2)
 
-      subjects[subject.name.downcase.to_sym] = average
+      subjects[subject.name.downcase.to_sym] = subject_average
     end
-    return averages
+    average[:subjects] = subjects
+    return average
   end
 
   private

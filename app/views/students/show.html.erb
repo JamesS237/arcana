@@ -12,8 +12,7 @@
 	<tbody>
 		<tr>
 			<td>Overall</td>
-			<% test = current_user.averages %>
-			<td><%= test[:total][:year][:overall].to_s %></td>
+			<td><%= current_user.averages[:total][:year][:overall].to_s %></td>
 			<td>1</td>
 		</tr>
 	</tbody>
