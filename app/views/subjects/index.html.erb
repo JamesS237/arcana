@@ -15,8 +15,13 @@
     <% @subjects.each do |subject| %>
       <tr>
         <td><%= link_to subject.name, '/results#filter/' << subject.name %></td>
-        <td><%= link_to subject.leader.full_name, '/results#filter/' << subject.leader.full_name.gsub(' ', '-') %></td>
-        <td><%= subject.leader.subject_average(subject) %></td>
+        <% if subject.assessments.any? %>
+          <td><%= link_to subject.leader.full_name, '/results#filter/' << subject.leader.full_name.gsub(' ', '-') %></td>
+          <td><%= subject.leader.subject_average(subject) %></td>
+        <% else %>
+          <td>None</td>
+          <td>None</td>
+        <% end %>
         <td><%= link_to "Assessment Tasks", assessments_path %></td>
       </tr>
     <% end %>
