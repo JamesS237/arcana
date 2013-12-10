@@ -6,8 +6,8 @@ class Subject < ActiveRecord::Base
   def leader 
     avgs = []
     Student.all.each do |s|
-      if(s.average(self) != nil)
-        avgs.push({"id" => s.id, "average" => s.average(self)})
+      if(s.subject_average(self) != nil)
+        avgs.push({"id" => s.id, "average" => s.subject_average(self)})
       end
     end
     leader_id = avgs.sort_by!{|avg| avg["average"] }.last["id"]
