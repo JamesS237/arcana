@@ -16,7 +16,7 @@
   <tbody>
     <% @assessments.each do |assessment| %>
       <tr>
-        <td><%= link_to assessment.subject.name, '/results#filter/' << assessment.subject.name.gsub(' ', '-') %></td>
+        <td><%= link_to assessment.subject.name, subject_path(assessment.subject) %></td>
         <td><%= link_to assessment.type.name, '/results#filter/' << assessment.type.name.gsub(' ', '-')  %></td>
         <td><%= link_to assessment.title, assessment_path(assessment) %></td>
         <% if current_user && current_user.admin %>
