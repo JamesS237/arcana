@@ -18,7 +18,7 @@
 
 <p>
   <strong>Exam:</strong>
-  <%= @assessment.exam %>
+  <%= @assessment.term.to_s %>
 </p>
 
 <%= link_to 'Edit', edit_assessment_path(@assessment) %> |
