@@ -11,10 +11,28 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td>Overall</td>
+			<td>Overall Total</td>
 			<td><%= current_user.averages[:total][:year][:overall].to_s %></td>
+			<td>1st</td>
+		</tr>
+		<tr>
+			<td>Overall Exams</td>
+			<td><%= current_user.averages[:total][:year][:exam].to_s %></td>
 			<td>1</td>
 		</tr>
+		<tr>
+			<td>Overall Assessment</td>
+			<td><%= current_user.averages[:total][:year][:assessment].to_s %></td>
+			<td>1</td>
+		</tr>
+		<% Subject.all.each do |subj| %>
+			<tr>
+				<td><%= subj.name %></td>
+				<td><%= current_user.averages[:subjects][subj.name.downcase.to_sym][:year][:overall] %></td>
+				<td>1</td>
+			</tr>
+		<% end %>
+
 	</tbody>
 </table>
 
