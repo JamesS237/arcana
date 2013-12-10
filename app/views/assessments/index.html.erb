@@ -7,6 +7,9 @@
       <th>Subject</th>
       <th>Type</th>
       <th>Title</th>
+      <% if current_user && current_user.admin %>
+      <th>Actions</th>
+      <% end %>
     </tr>
   </thead>
 
@@ -16,6 +19,9 @@
         <td><%= link_to assessment.subject.name, '/results#filter/' << assessment.subject.name.gsub(' ', '-') %></td>
         <td><%= link_to assessment.type.name, '/results#filter/' << assessment.type.name.gsub(' ', '-')  %></td>
         <td><%= link_to assessment.title, '/results#filter/' << assessment.type.name.gsub(' ', '-')  %></td>
+        <% if current_user && current_user.admin %>
+          <td><%= link_to 'Edit', edit_assessment_path(assessment)  %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

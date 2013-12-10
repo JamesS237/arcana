@@ -34,6 +34,7 @@ class Assessment < ActiveRecord::Base
         return self.term
       when "Riley"
         return self.term + 2
+      end
     when "Geography"
       case student.house_name
       when "Aherne"
@@ -48,6 +49,7 @@ class Assessment < ActiveRecord::Base
         return self.term + 2
       when "Riley"
         return self.term 
+      end
     when "Music"
       case student.house_name
       when "Aherne"
@@ -62,6 +64,7 @@ class Assessment < ActiveRecord::Base
         return self.term 
       when "Riley"
         return self.term
+      end
     when "Art"
       case student.house_name
       when "Aherne"
@@ -76,6 +79,7 @@ class Assessment < ActiveRecord::Base
         return self.term + 2
       when "Riley"
         return self.term + 2
+      end
     when "Religious Education"
       case student.house_name
       when "Aherne"
@@ -90,6 +94,7 @@ class Assessment < ActiveRecord::Base
         return self.term
       when "Riley"
         return self.term 
+      end
     when "Personal Development"
       case student.house_name
       when "Aherne"
@@ -104,5 +109,9 @@ class Assessment < ActiveRecord::Base
         return self.term + 2
       when "Riley"
         return self.term + 2
+      end
+    else 
+      return self.term 
+    end
   end
 end
