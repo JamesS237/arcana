@@ -1,15 +1,32 @@
 <%= provide(:title, 'Arcana | New Subject')%>
 <p id="notice"><%= notice %></p>
+<h3><%= @subject.name %>:  &nbsp;&nbsp;&nbsp;<a href="/assessments">See all assessments >></a></h3> 
 
-<p>
-  <strong>Name:</strong>
-  <%= @subject.name %>
-</p>
 
-<p>
-  <strong>Elective:</strong>
-  <%= @subject.elective %>
-</p>
+<table class="table table-striped">
+	<tbody>
+		<tr>
+			<td>Number of Assessments</td>
+			<td><%= @subject.assessments.count.to_s %></td>
+		</tr>
+		<tr>
+			<td>Highest Average</td>
+			<td>99</td>
+		</tr>
+		<tr>
+			<td>Mean Average</td>
+			<td>99</td>
+		</tr>
+		<tr>
+			<td>Houses Studying</td>
+			<td>Millward, Riley, Jones</td>
+		</tr>
+		<tr>
+			<td>Elective</td>
+			<td>No</td>
+		</tr>
+	</tdody>
+</table>
 
 <%= link_to 'Edit', edit_subject_path(@subject) %> |
 <%= link_to 'Back', subjects_path %>
