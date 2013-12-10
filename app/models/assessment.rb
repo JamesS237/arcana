@@ -19,19 +19,90 @@ class Assessment < ActiveRecord::Base
   end
 
   def real_term(student)
-    if(["History", "Geogrpahy", "RE", "Drama"].include? self.subject.name)
-      #1: C, 2: D, 3: H, 4: M, 5: V, 6: W
-      #History/Geogrpahy
-      #Drama/RE
-      if([1, 2, 3].include? student.class_group) #History: V, H (c?), Geography: 
-        if self.term == 1 or self.term == 2
-          return self.term + 2
-        else
-          return self.term
-        end
-      end
-    else
-      return self.term
-    end
+    case self.subject.name
+    when "History"
+      case student.house_name
+      when "Aherne"
+        return self.term
+      when "Frew"
+        return self.term + 2
+      when "Jenkin"
+        return self.term
+      when "Jones"
+        return self.term + 2
+      when "Millward"
+        return self.term
+      when "Riley"
+        return self.term + 2
+    when "Geography"
+      case student.house_name
+      when "Aherne"
+        return self.term + 2
+      when "Frew"
+        return self.term 
+      when "Jenkin"
+        return self.term + 2 
+      when "Jones"
+        return self.term 
+      when "Millward"
+        return self.term + 2
+      when "Riley"
+        return self.term 
+    when "Music"
+      case student.house_name
+      when "Aherne"
+        return self.term + 2
+      when "Frew"
+        return self.term + 2
+      when "Jenkin"
+        return self.term + 2
+      when "Jones"
+        return self.term 
+      when "Millward"
+        return self.term 
+      when "Riley"
+        return self.term
+    when "Art"
+      case student.house_name
+      when "Aherne"
+        return self.term
+      when "Frew"
+        return self.term 
+      when "Jenkin"
+        return self.term
+      when "Jones"
+        return self.term + 2
+      when "Millward"
+        return self.term + 2
+      when "Riley"
+        return self.term + 2
+    when "Religious Education"
+      case student.house_name
+      when "Aherne"
+        return self.term + 2
+      when "Frew"
+        return self.term + 2
+      when "Jenkin"
+        return self.term + 2
+      when "Jones"
+        return self.term 
+      when "Millward"
+        return self.term
+      when "Riley"
+        return self.term 
+    when "Personal Development"
+      case student.house_name
+      when "Aherne"
+        return self.term
+      when "Frew"
+        return self.term 
+      when "Jenkin"
+        return self.term
+      when "Jones"
+        return self.term + 2
+      when "Millward"
+        return self.term + 2
+      when "Riley"
+        return self.term + 2
   end
 end
