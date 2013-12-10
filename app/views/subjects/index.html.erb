@@ -6,7 +6,8 @@
     <tr>
       <th>Name</th>
       <th>Leader</th>
-      <th>Average</th>
+      <th>Leader's Average</th>
+      <th>My Average</th>
       <th></th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
           <td>None</td>
           <td>None</td>
         <% end %>
+        <td><%= current_user.subject_average(subject) %></td>
         <td><%= link_to "Assessment Tasks", assessments_path %></td>
       </tr>
     <% end %>
