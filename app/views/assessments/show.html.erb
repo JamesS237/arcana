@@ -1,25 +1,33 @@
 <%= provide(:title, 'Arcana | Assessments')%>
 <p id="notice"><%= notice %></p>
+<h3><%= @assessment.title %>:  &nbsp;&nbsp;&nbsp;<a href="/results">See all results >></a></h3> 
+<table class="table table-striped">
+	<tbody>
+		<tr>
+			<td>Subject</td>
+			<td><%= @assessment.subject.name %></td>
+		</tr>
+		<tr>
+			<td>Assessment Type</td>
+			<td><%= @assessment.type.name %></td>
+		</tr>
+		<tr>
+			<td>Term</td>
+			<td><%= @assessment.real_term(current_user) %></td>
+		</tr>
+		<tr>
+			<td>Highest Mark</td>
+			<td><%= @assessment.results.order("mark DESC").first.mark.to_s %></td>
+		</tr>
+		<tr>
+			<td>Average Mark</td>
+			<td><%= @assessment.results.average("mark").to_s %></td>
+		</tr>
+	</tdody>
+</table>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @assessment.subject_id %>
-</p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @assessment.type_id %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @assessment.title %>
-</p>
-
-<p>
-  <strong>Exam:</strong>
-  <%= @assessment.term.to_s %>
-</p>
-
+<% if current_user && current_user.admin %>
 <%= link_to 'Edit', edit_assessment_path(@assessment) %> |
+<% end %>
 <%= link_to 'Back', assessments_path %>
