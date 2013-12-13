@@ -19,7 +19,6 @@ class Student < ActiveRecord::Base
     class_groups = {0 => "Select Class", 1 => "9C", 2 => "9D", 3 => "9H", 4 => "9M", 5 => "9V", 6 => "9W"}
   end
 
-  
   def full_name
     [first_name, last_name].join(' ')
   end
@@ -50,138 +49,54 @@ class Student < ActiveRecord::Base
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
   end
 
-  def get_term_results(term)
-    result_ids = []
-    Result.where(:student_id => self.id).each do |r|
-      if r.assessment.real_term(self) == term
-        result_ids << r.id
+  def update_average(subject_id, term, exam)
+    exam_query = "assessment_id IN (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
+                                   (SELECT types.id FROM types WHERE types.name = 'Exam'))"
+    if(self.averages.where(:subject_id => subject_id).empty?)
+      subject_average = Average.new
+      subject_average.student_id = self.id
+      subject_average.subject_id = subject_id
+    else
+      subject_average = self.averages.where(:subject_id => subject_id)
+    end
+
+    if(self.averages.where(:overall => true).empty?)
+      overall_average = Average.new
+      overall_average.student_id = self.id
+      overall_average.overall = true
+    else
+      overall_average = self.averages.where(:overall => true)
+    end
+
+    if(exam)
+      subj_raw_avg = self.results.where(:subject_id => subject_id).where(:term => term).where(exam_query).average("mark")
+      overall_raw_avg = self.results.where(:term => term).where(exam_query).average("mark")
+      if(term == 2)
+        overall_average = overall_raw_avg
+        subject_average.exam_s1 = subj_raw_avg
+      else
+        overall_average = overall_raw_avg
+        subject_average.exam_s2 = subj_raw_avg
+      end
+
+    else
+      subj_raw_avg = self.results.where(:subject_id => subject_id).where(:term => term).average("mark")
+      overall_raw_avg = self.results.where(:term => term).average("mark")
+      case term
+      when 1
+        overall_average.t1 = overall_raw_avg
+        subject_average.t1 = subj_raw_avg
+      when 2
+        overall_average.t2 = overall_raw_avg
+        subject_average.t2 = subj_raw_avg
+      when 3
+        overall_average.t3 = overall_raw_avg
+        subject_average.t3 = subj_raw_avg
+      when 4
+        overall_average.t4 = overall_raw_avg
+        subject_average.t4 = subj_raw_avg
       end
     end
-    return Result.where('id IN(?)', result_ids)
-  end
-
-  def t1
-    return { :results => get_term_results(1) }
-  end
-
-  def t2
-    return { 
-      :results => get_term_results(2), 
-      :exams =>  get_term_results(2).where("assessment_id IN 
-                                            (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
-                                            (SELECT types.id FROM types WHERE types.name = 'Exam'))")}
-  end
-
-  def t3
-    return { 
-      :results => get_term_results(2), 
-      :exams =>  get_term_results(3).where("assessment_id IN 
-                                            (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
-                                            (SELECT types.id FROM types WHERE types.name = 'Exam'))")}
-  end
-
-  def t4
-    return { 
-      :results => get_term_results(4), 
-      :exams =>  get_term_results(4).where("assessment_id IN 
-                                            (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
-                                            (SELECT types.id FROM types WHERE types.name = 'Exam'))") }
-  end
-  
-  def averages
-    average = 
-    {
-      :total => 
-      {
-        :s1 => { 
-                  :t1 => 0, 
-                  :t2 => 0, 
-                  :exam => 0, 
-                  :assessment => 0, 
-                  :overall => 0
-                }, 
-        :s2 => { 
-                  :t1 => 0, 
-                  :t2 => 0, 
-                  :exam => 0, 
-                  :assessment => 0, 
-                  :overall => 0
-                }, 
-        :year => { 
-                  :exam => 0, 
-                  :assessment => 0, 
-                  :overall => 0
-                  }, 
-      },
-
-      :subjects => {}
-    }
-
-    average[:total][:s1][:t1]           = self.t1[:results].average('mark') || 1
-    average[:total][:s1][:t2]           = self.t2[:results].average('mark') || 1
-    average[:total][:s2][:t3]           = self.t3[:results].average('mark') || 1
-    average[:total][:s2][:t4]           = self.t4[:results].average('mark') || 1
-    average[:total][:s1][:exam]         = self.t2[:exams].average('mark')   || 1
-    average[:total][:s2][:exam]         = self.t4[:exams].average('mark')   || 1
-
-    average[:total][:s1][:assessment]   =  ((average[:total][:s1][:t1] + average[:total][:s1][:t2]) / 2).round(2)
-    average[:total][:s2][:assessment]   =  ((average[:total][:s2][:t3] + average[:total][:s2][:t4]) / 2).round(2)
-    average[:total][:s1][:overall]      =  ((average[:total][:s1][:exam] + average[:total][:s1][:assessment]) / 2).round(2)
-    average[:total][:s2][:overall]      =  ((average[:total][:s2][:exam] + average[:total][:s2][:assessment]) / 2).round(2)
-    average[:total][:year][:assessment] =  ((average[:total][:s1][:assessment] + average[:total][:s2][:assessment]) / 2).round(2)
-    average[:total][:year][:exam]       =  ((average[:total][:s1][:exam] + average[:total][:s2][:exam]) / 2).round(2)
-    average[:total][:year][:overall]    =  ((average[:total][:s1][:overall] + average[:total][:s2][:overall]) / 2).round(2)
-
-    subjects = Hash.new
-
-    Subject.all.each do |subject|
-      subject_average = 
-      {
-        :s1 => { 
-                  :t1 => 0, 
-                  :t2 => 0, 
-                  :exam => 0, 
-                  :assessment => 0, 
-                  :overall => 0
-                }, 
-        :s2 => { 
-                  :t1 => 0, 
-                  :t2 => 0, 
-                  :exam => 0, 
-                  :assessment => 0, 
-                  :overall => 0
-                }, 
-        :year => { 
-                  :exam => 0, 
-                  :assessment => 0, 
-                  :overall => 0
-                  }, 
-      }
-
-      subject_query = 'assessment_id IN(SELECT assessments.id FROM assessments WHERE assessments.subject_id = ?)'
-
-      subject_average[:s1][:t1]           = self.t1[:results].where(subject_query, subject.id).average('mark') || 1
-      subject_average[:s1][:t2]           = self.t2[:results].where(subject_query, subject.id).average('mark') || 1
-      subject_average[:s2][:t3]           = self.t3[:results].where(subject_query, subject.id).average('mark') || 1
-      subject_average[:s2][:t4]           = self.t4[:results].where(subject_query, subject.id).average('mark') || 1
-
-      subject_average[:s1][:exam]         =  self.t2[:exams].where(subject_query, subject.id).average('mark') || 1
-      subject_average[:s2][:exam]         =  self.t4[:exams].where(subject_query, subject.id).average('mark') || 1
-
-      subject_average[:s1][:assessment]   =  ((subject_average[:s1][:t1] + subject_average[:s1][:t2]) / 2).round(2)
-      subject_average[:s2][:assessment]   =  ((subject_average[:s2][:t3] + subject_average[:s2][:t4]) / 2).round(2)
-
-      subject_average[:s1][:overall]      =  ((subject_average[:s1][:exam] + subject_average[:s1][:assessment]) / 2).round(2)
-      subject_average[:s2][:overall]      =  ((subject_average[:s2][:exam] + subject_average[:s2][:assessment]) / 2).round(2)
-
-      subject_average[:year][:assessment] =  ((subject_average[:s1][:assessment] + subject_average[:s2][:assessment]) / 2).round(2)
-      subject_average[:year][:exam]       =  ((subject_average[:s1][:exam] + subject_average[:s2][:exam]) / 2).round(2)
-      subject_average[:year][:overall]    =  ((subject_average[:s1][:overall] + subject_average[:s2][:overall]) / 2).round(2)
-
-      subjects[subject.name.downcase.to_sym] = subject_average
-    end
-    average[:subjects] = subjects
-    return average
   end
 
   private
