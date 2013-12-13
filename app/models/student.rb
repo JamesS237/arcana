@@ -49,7 +49,9 @@ class Student < ActiveRecord::Base
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
   end
 
-  def update_average(subject_id, term, exam)
+  def update_averages(subject_id, term, exam)
+    subject_query = 'assessment_id IN(SELECT assessments.id FROM assessments WHERE assessments.subject_id = ?)'
+
     exam_query = "assessment_id IN (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
                                    (SELECT types.id FROM types WHERE types.name = 'Exam'))"
     if(self.averages.where(:subject_id => subject_id).empty?)
@@ -57,7 +59,7 @@ class Student < ActiveRecord::Base
       subject_average.student_id = self.id
       subject_average.subject_id = subject_id
     else
-      subject_average = self.averages.where(:subject_id => subject_id)
+      subject_average = self.averages.where(subject_query, subject_id)
     end
 
     if(self.averages.where(:overall => true).empty?)
@@ -69,7 +71,7 @@ class Student < ActiveRecord::Base
     end
 
     if(exam)
-      subj_raw_avg = self.results.where(:subject_id => subject_id).where(:term => term).where(exam_query).average("mark")
+      subj_raw_avg = self.results.where(subject_query, subject_id).where(:term => term).where(exam_query).average("mark")
       overall_raw_avg = self.results.where(:term => term).where(exam_query).average("mark")
       if(term == 2)
         overall_average = overall_raw_avg
@@ -80,7 +82,7 @@ class Student < ActiveRecord::Base
       end
 
     else
-      subj_raw_avg = self.results.where(:subject_id => subject_id).where(:term => term).average("mark")
+      subj_raw_avg = self.results.where(subject_query, subject_id).where(:term => term).average("mark")
       overall_raw_avg = self.results.where(:term => term).average("mark")
       case term
       when 1

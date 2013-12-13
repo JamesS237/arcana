@@ -40,7 +40,8 @@ class ResultsController < ApplicationController
     @result.student_id = view_context.current_user.id
     @result.assessment_id = params[:assessment][:id]
     @result.mark = params[:mark]
-    view_context.current_user.update_averages(Result.assessment.subject_id)
+    @result.set_term
+    view_context.current_user.update_averages(@result.assessment.subject_id, @result.term, @result.assessment.type.name == 'Exam')
     respond_to do |format|
       if @result.save
         format.html { redirect_to results_path, notice: 'Result was successfully created.' }
@@ -57,7 +58,8 @@ class ResultsController < ApplicationController
   def update
     respond_to do |format|
       @result = Result.find(params[:result][:id])
-      view_context.current_user.update_averages(Result.assessment.subject_id)
+      @result.set_term
+      view_context.current_user.update_averages(@result.assessment.subject_id, @result.term, @result.assessment.type.name == 'Exam')      
       if @result.update(result_params)
         format.html { redirect_to results_path, notice: 'Result was successfully updated.' }
         format.json { head :no_content }

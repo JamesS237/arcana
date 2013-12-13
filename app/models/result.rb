@@ -7,7 +7,7 @@ class Result < ActiveRecord::Base
   validates :assessment_id, presence: true
 
   def set_term
-  	case self.subject.name
+  	case self.assessment.subject.name
     when "History"
       case self.student.house_name
       when "Aherne"
