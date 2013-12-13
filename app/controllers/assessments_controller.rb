@@ -45,7 +45,7 @@ class AssessmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assessment.update(assessment_params)
-        format.html { redirect_to request.referer, notice: 'Assessment was successfully updated.' }
+        format.html { redirect_to assessments_path, notice: 'Assessment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
