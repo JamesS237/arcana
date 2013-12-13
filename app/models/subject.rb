@@ -6,7 +6,7 @@ class Subject < ActiveRecord::Base
   def leader 
     avgs = []
     Average.where(:subject_id => self.id).each do |avg| 
-      avgs.push({"id" => .student_id, "average" => avg.overall})
+      avgs.push({"id" => avg.student_id, "average" => avg.overall})
     end
     leader_id = avgs.sort_by!{|avg| avg["average"] }.last["id"]
     Student.find(leader_id);
