@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213005451) do
+ActiveRecord::Schema.define(version: 20131213012202) do
 
   create_table "assessments", force: true do |t|
     t.integer  "subject_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20131213005451) do
     t.decimal  "mark"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "term"
   end
 
   create_table "students", force: true do |t|
