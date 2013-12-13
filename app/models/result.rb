@@ -15,13 +15,13 @@ class Result < ActiveRecord::Base
       when "Frew"
         self.term = self.assessment.term + 2
       when "Jenkin"
-        self.term =
+        self.term = self.assessment.term
       when "Jones"
         self.term = self.assessment.term + 2
       when "Millward"
         self.term = self.assessment.term
       when "Riley"
-        self.tevrm += 2
+       	self.term = self.assessment.term + 2
       end
     when "Geography"
       case self.student.house_name
@@ -101,6 +101,5 @@ class Result < ActiveRecord::Base
     else 
       self.term = self.assessment.term
     end
-  end
   end
 end
