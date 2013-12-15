@@ -41,9 +41,9 @@ class ResultsController < ApplicationController
     @result.assessment_id = params[:assessment][:id]
     @result.mark = params[:mark]
     @result.set_term
-    view_context.current_user.update_averages(@result.assessment.subject_id, @result.term, @result.assessment.type.name == 'Exam')
     respond_to do |format|
       if @result.save
+        view_context.current_user.update_averages(@result.assessment.subject_id, @result.term, @result.assessment.type.name == 'Exam')      
         format.html { redirect_to results_path, notice: 'Result was successfully created.' }
         format.json { render action: 'show', status: :created, location: @result }
       else
@@ -51,6 +51,7 @@ class ResultsController < ApplicationController
         format.json { render json: @result.errors, status: :unprocessable_entity }
       end
     end
+    view_context.current_user.update_averages(@result.assessment.subject_id, @result.term, @result.assessment.type.name == 'Exam')
   end
 
   # PATCH/PUT /results/1
@@ -59,8 +60,8 @@ class ResultsController < ApplicationController
     respond_to do |format|
       @result = Result.find(params[:result][:id])
       @result.set_term
-      view_context.current_user.update_averages(@result.assessment.subject_id, @result.term, @result.assessment.type.name == 'Exam')      
       if @result.update(result_params)
+        view_context.current_user.update_averages(@result.assessment.subject_id, @result.term, @result.assessment.type.name == 'Exam')      
         format.html { redirect_to results_path, notice: 'Result was successfully updated.' }
         format.json { head :no_content }
       else
