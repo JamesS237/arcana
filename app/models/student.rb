@@ -62,7 +62,7 @@ class Student < ActiveRecord::Base
     exam_query = "assessment_id IN (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
                                    (SELECT types.id FROM types WHERE types.name = 'Exam'))"
 
-    subject_average = self.averages.where(:subject_id, subject_id).first
+    subject_average = self.averages.where(:subject_id => subject_id).first
 
     if(subject_average == nil)
       subject_average = Average.new
@@ -112,7 +112,6 @@ class Student < ActiveRecord::Base
   end
 
   private
-
     def create_remember_token
       self.remember_token = Student.encrypt(Student.new_remember_token)
     end
