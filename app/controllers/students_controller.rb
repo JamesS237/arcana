@@ -13,6 +13,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    @overall_average = view_context.current_user.averages.where(:overall => true).take
   end
 
   # GET /students/new
