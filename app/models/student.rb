@@ -68,7 +68,7 @@ class Student < ActiveRecord::Base
       overall_average.student_id = self.id
       overall_average.overall = true
     else
-      overall_average = self.averages.where(:overall => true)
+      overall_average = self.averages.where(:overall => true).first
     end
 
     if(exam)
