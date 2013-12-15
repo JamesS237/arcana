@@ -54,12 +54,13 @@ class Student < ActiveRecord::Base
 
     exam_query = "assessment_id IN (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
                                    (SELECT types.id FROM types WHERE types.name = 'Exam'))"
-    if(self.averages.where(:subject_id => subject_id).empty?)
+
+    subject_average = self.averages.where(:subject_id, subject_id).first
+
+    if(subject_average == nil)
       subject_average = Average.new
       subject_average.student_id = self.id
       subject_average.subject_id = subject_id
-    else
-      subject_average = self.averages.where(subject_query, subject_id)
     end
 
     if(self.averages.where(:overall => true).empty?)
@@ -74,11 +75,11 @@ class Student < ActiveRecord::Base
       subj_raw_avg = self.results.where(subject_query, subject_id).where(:term => term).where(exam_query).average("mark")
       overall_raw_avg = self.results.where(:term => term).where(exam_query).average("mark")
       if(term == 2)
-        overall_average = overall_raw_avg
-        subject_average.exam_s1 = subj_raw_avg
+        overall_average.exams_s1 = overall_raw_avg
+        subject_average.exams_s1 = subj_raw_avg
       else
-        overall_average = overall_raw_avg
-        subject_average.exam_s2 = subj_raw_avg
+        overall_average.exams_s2 = overall_raw_avg
+        subject_average.exams_s2 = subj_raw_avg
       end
 
     else
@@ -99,6 +100,8 @@ class Student < ActiveRecord::Base
         subject_average.t4 = subj_raw_avg
       end
     end
+    subject_average.save
+    overall_average.save
   end
 
   private

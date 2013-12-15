@@ -7,7 +7,7 @@ class AssessmentsController < ApplicationController
   # GET /assessments
   # GET /assessments.json
   def index
-    @assessments = Assessment.all
+    @assessments = Assessment.all.order('subject_id')
   end
 
   # GET /assessments/1
