@@ -47,7 +47,14 @@ class Student < ActiveRecord::Base
   
   def subject_average(subject)
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
-  end
+  endr
+
+  def reset_update
+    self.results.each do |r|
+      self.update_averages(r.assessment.subject_id, r.term, r.assessment.type.name == 'Exam')
+    end
+  end 
+
 
   def update_averages(subject_id, term, exam)
     subject_query = 'assessment_id IN(SELECT assessments.id FROM assessments WHERE assessments.subject_id = ?)'
