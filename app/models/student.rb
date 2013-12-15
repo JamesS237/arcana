@@ -47,7 +47,7 @@ class Student < ActiveRecord::Base
   
   def subject_average(subject)
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
-  endr
+  end
 
   def reset_update
     self.results.each do |r|

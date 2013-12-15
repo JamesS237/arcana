@@ -17,12 +17,12 @@
 		</tr>
 		<tr>
 			<td>Overall Exams</td>
-			<td><%= @overall_average.overall_assessment.to_s %></td>
+			<td><%= @overall_average.overall_exam.to_s %></td>
 			<td>1</td>
 		</tr>
 		<tr>
 			<td>Overall Assessment</td>
-			<td><%= @overall_average.overall_exam.to_s %></td>
+			<td><%= @overall_average.overall_assessment.to_s %></td>
 			<td>1</td>
 		</tr>
 		<% Subject.all.each do |subj| %>
