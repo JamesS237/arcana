@@ -402,6 +402,7 @@ ul {
 }
 
 .dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a{
+    color: $accentLight !important;
     background-image: none !important;
     background-color: $bgDark !important;
 }
