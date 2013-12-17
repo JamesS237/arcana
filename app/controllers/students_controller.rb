@@ -30,15 +30,15 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.password_confirmation = @student.password
-    @student.first_name = @student.first_name.strip
-    @student.last_name = @student.last_name.strip
+    @student.first_name = @student.first_name.strip unless @student.first_name == nil 
+    @student.last_name = @student.last_name.strip unless @student.last_name == nil 
     respond_to do |format|
       if @student.save
         view_context.sign_in @student
         format.html { redirect_to results_path, notice: 'Student was successfully created.' }
         format.json { render action: 'show', status: :created, location: @student }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new_error' }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end

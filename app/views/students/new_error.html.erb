@@ -1,0 +1,24 @@
+<h1>Join Arcana</h1>
+<%= form_for(@student) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <strong><%= pluralize(@student.errors.count, "error") %> prevented you from signing up:</strong>
+
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+    <br>
+  <% end %>
+  
+    <fieldset>
+    <%= f.text_field :full_name, :placeholder => "Full Name" %><br>
+  	<%= f.collection_select :house, Student.houses, :first, :last %><br>
+		<%= f.text_field :email, :placeholder => "Email Address" %><br>
+		<%= f.password_field :password, :placeholder => "Password" %><br>
+		<%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %><br>
+    <%= f.submit "Join Arcana", class: "btn" %>
+  	</fieldset>
+<% end %>
