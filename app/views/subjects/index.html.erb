@@ -18,12 +18,16 @@
         <td><%= link_to subject.name, subject %></td>
         <% if subject.assessments.any? %>
           <td><%= link_to subject.leader.full_name, '/results#filter/' << subject.leader.full_name.gsub(' ', '-') %></td>
-          <td><%= subject.leader.subject_average(subject) %></td>
+          <td><%= subject.leader.averages.where(:subject_id => subject.id).take.overall %></td>
         <% else %>
           <td>None</td>
           <td>None</td>
         <% end %>
-        <td><%= current_user.subject_average(subject) %></td>
+        <% if current_user.averages.where(:subject_id => subject.id).take != nil %>
+        <td><%= current_user.averages.where(:subject_id => subject.id).take.overall %></td>
+        <% else %>
+        <td>N/A</td>
+        <% end %>
         <td><%= link_to "Assessment Tasks", assessments_path %></td>
       </tr>
     <% end %>
