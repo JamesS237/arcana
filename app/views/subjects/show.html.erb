@@ -11,7 +11,7 @@
 		</tr>
 		<tr>
 			<td>Highest Average</td>
-			<td>99</td>
+			<td><%= @subject.leader.averages.where(:subject_id => @subject.id).take.overall %></td>
 		</tr>
 		<tr>
 			<td>Mean Average</td>
@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td>My Average</td>
-			<td><%= current_user.subject_average(@subject) %></td>
+			<td><%= current_user.averages.where(:subject_id => @subject.id).take.overall %></td>
 		</tr>
 		<tr>
 			<td>Houses Studying</td>
