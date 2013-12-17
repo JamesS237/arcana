@@ -12,13 +12,13 @@
     </div>
     <br>
   <% end %>
-  
     <fieldset>
-    <%= f.text_field :full_name, :placeholder => "Full Name" %><br>
+    <%= f.text_field :first_name, :placeholder => "First Name" %><br>
+    <%= f.text_field :last_name, :placeholder => "Last Name" %><br>
   	<%= f.collection_select :house, Student.houses, :first, :last %><br>
 		<%= f.text_field :email, :placeholder => "Email Address" %><br>
 		<%= f.password_field :password, :placeholder => "Password" %><br>
 		<%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %><br>
-    <%= f.submit "Join Arcana", class: "btn" %>
+    <%= f.submit "Join Arcana!", class: "btn" %>
   	</fieldset>
 <% end %>
