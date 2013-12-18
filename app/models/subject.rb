@@ -15,9 +15,7 @@ class Subject < ActiveRecord::Base
 
   def mean_average
     overalls = []
-    puts Average.where(:subject_id => self.id).each.inspect
     Average.where(:subject_id => self.id).each do |a|
-      puts "AVERAGE: #{a.overall}"
       overalls << a.overall
     end
     total = 0
