@@ -14,6 +14,18 @@ class Average < ActiveRecord::Base
 		return (total / count).round(2)
 	end
 
+	def rank(type)
+		case(type)
+		when 'overall'
+			Average.where(:overall => true).each do |avg|
+				
+			end
+		when 'assessment'
+		when 'exam'
+		when 'subject'
+		end
+	end
+
 	def overall_assessment
 		total = 0
 		count = 0 
