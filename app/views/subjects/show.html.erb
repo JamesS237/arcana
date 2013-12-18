@@ -27,7 +27,11 @@
 		</tr>
 		<tr>
 			<td>Elective</td>
+			<% if @subject.elective %>
+			<td>Yes</td>
+			<% else %>
 			<td>No</td>
+			<% end %>
 		</tr>
 	</tdody>
 </table>
