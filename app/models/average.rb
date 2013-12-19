@@ -17,13 +17,51 @@ class Average < ActiveRecord::Base
 	def rank(type)
 		case(type)
 		when 'overall'
+			averages = []
 			Average.where(:overall => true).each do |avg|
-				
+				averages.push({:id => avg.student_id, :average => avg.overall})
+			end
+			averages = averages.sort{|a,b| b[:average] <=> a[:average]}
+			count = 1
+			averages.each do |a|
+				break if a[:id] = self.student.id
+				count += 1
 			end
 		when 'assessment'
+			averages = []
+			Average.where(:overall => true).each do |avg|
+				averages.push({:id => avg.student_id, :average => avg.overall_assessment})
+			end
+			averages = averages.sort{|a,b| b[:average] <=> a[:average]}
+			count = 1
+			averages.each do |a|
+				break if a[:id] = self.student.id
+				count += 1
+			end
 		when 'exam'
+			averages = []
+			Average.where(:overall => true).each do |avg|
+				averages.push({:id => avg.student_id, :average => avg.overall_exam})
+			end
+			averages = averages.sort{|a,b| b[:average] <=> a[:average]}
+			count = 1
+			averages.each do |a|
+				break if a[:id] = self.student.id
+				count += 1
+			end
 		when 'subject'
+			averages = []
+			Average.where(:subject_id => self.subject_id).each do |avg|
+				averages.push({:id => avg.student_id, :average => avg.overall})
+			end
+			averages = averages.sort{|a,b| b[:average] <=> a[:average]}
+			count = 1
+			averages.each do |a|
+				break if a[:id] = self.student.id
+				count += 1
+			end
 		end
+		return count.ordinalize
 	end
 
 	def overall_assessment

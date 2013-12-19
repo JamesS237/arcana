@@ -14,7 +14,7 @@
 			<td>Overall Total</td>
 			<% if @overall_average != nil %>
 			<td><%= @overall_average.overall.to_s %></td>
-			<td><%= @overall_average.rank('overall') %>/td>
+			<td><%= @overall_average.rank('overall') %></td>
 			<% else %>
 			<td>Unknown</td>
 			<td>N/A</td>
@@ -34,10 +34,10 @@
 			<td>Overall Assessment</td>
 			<% if @overall_average != nil %>
 			<td><%= @overall_average.overall_assessment.to_s %></td>
-			<td>1</td>
+			<td><%= @overall_average.rank('assessment') %></td>
 			<% else %>
 			<td>Unknown</td>
-			<td><%= @overall_average.rank('assessment') %></td>
+			<td>N/A</td>
 			<% end %>
 		</tr>
 		<% Subject.all.each do |subj| %>
