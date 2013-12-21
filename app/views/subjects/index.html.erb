@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to subject.name, subject %></td>
         <% if subject.assessments.any? %>
-          <td><%= link_to subject.leader.full_name, '/results#filter/' << subject.leader.full_name.gsub(' ', '-') %></td>
+          <td><%= link_to subject.leader.full_name, subject.leader %></td>
           <td><%= subject.leader.averages.where(:subject_id => subject.id).take.overall %></td>
         <% else %>
           <td>None</td>
@@ -28,7 +28,7 @@
         <% else %>
         <td>N/A</td>
         <% end %>
-        <td><%= link_to "Assessment Tasks", assessments_path %></td>
+        <td><%= link_to "Assessment Tasks", assessments_path(subject) %></td>
       </tr>
     <% end %>
   </tbody>
