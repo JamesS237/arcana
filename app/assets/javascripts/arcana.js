@@ -58,4 +58,17 @@ arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($sco
   }
 }]).controller('AssessmentsCtrl', ['$scope', '$resource', 'focus', function ($scope, $resource, focus) { 
 	var Assessment = $resource('/assessments/:assessmentId.json', {assessmentId:'@id'});
+	$scope.assessments = Assessment.query();
+	$scope.averageBetween = function (assessment) {
+		if($scope.maxAverage && $scope.minAverage) {
+			return assessment.average <= $scope.maxAverage && assessment.average >= $scope.minAverage;			
+		} else if ($scope.maxAverage) {
+			return assessment.average <= $scope.maxAverage;			
+		} else if ($scope.minAverage) {
+			return assessment.average >= $scope.minAverage;			
+		} else {
+			return true;
+		}
+	};
 }]);
+
