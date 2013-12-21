@@ -4,10 +4,10 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Subject</th>
-      <th>Type</th>
-      <th>Title</th>
-      <th>Average Mark</th>
+      <th id="subject-sort" ng-click="predicate = 'subject.name';reverse=!reverse">Subject</th>
+      <th id="type-sort" ng-click="predicate = 'type.name';reverse=!reverse">Type</th>
+      <th id="assessment-sort" ng-click="predicate = 'title';reverse=!reverse">Title</th>
+      <th id="average-sort" ng-click="predicate = 'average';reverse=!reverse">Average Mark</th>
       <% if current_user && current_user.admin %>
       <th>Actions</th>
       <% end %>
@@ -15,8 +15,7 @@
   </thead>
 
   <tbody>
-    <% @assessments.each do |assessment| %>
-      <tr>
+      <tr ng-repeat="result in results | filter:markBetween | filter:{assessment.name: taskSearch, assessment.subject.name: subjectSearch, assessment.type.name: typeSearch, student.house: houseSearch, student.fullName: nameSearch } | orderBy:predicate:reverse">
         <td><%= link_to assessment.subject.name, subject_path(assessment.subject) %></td>
         <td><%= link_to assessment.type.name, '/results#filter/' << assessment.type.name.gsub(' ', '-')  %></td>
         <td><%= link_to assessment.title, assessment_path(assessment) %></td>
@@ -25,7 +24,6 @@
           <td><%= link_to 'Edit', edit_assessment_path(assessment)  %></td>
         <% end %>
       </tr>
-    <% end %>
   </tbody>
 </table>
 
