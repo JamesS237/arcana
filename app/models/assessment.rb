@@ -9,6 +9,10 @@ class Assessment < ActiveRecord::Base
   def to_param 
     title.gsub(' ', '-')
   end
+
+  def average
+    self.results.average("mark")
+  end
   
   def self.uncomplete(student)
     complete = Result.find_all_by_student_id(student.id)
