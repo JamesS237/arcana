@@ -56,4 +56,6 @@ arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($sco
       $rootScope.$broadcast('focusOn', name);
     });
   }
+}]).controller('AssessmentsCtrl', ['$scope', '$resource', 'focus', function ($scope, $resource, focus) { 
+	var Assessment = $resource('/assessments/:assessmentId.json', {assessmentId:'@id'});
 }]);
