@@ -1,7 +1,7 @@
 json.array!(@assessments) do |assessment|
 	json.id assessment.id
 	json.title assessment.title
-	json.average assessment.average
+	json.average assessment.average.to_i
 
 	json.type do
 		json.id assessment.type.id
