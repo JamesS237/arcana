@@ -11,7 +11,7 @@ class Assessment < ActiveRecord::Base
   end
 
   def average
-    self.results.average("mark")
+    self.results.average("mark").round(2)
   end
   
   def self.uncomplete(student)
