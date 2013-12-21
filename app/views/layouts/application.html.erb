@@ -39,6 +39,12 @@
                  	<% else %>
  	                     <li><%= link_to "Students", students_path %></li>
                  	<% end %>
+
+                  <% if params[:controller] == 'assessments' %>
+                      <li class="nav-selected"><%= link_to "Assessments", assessments_path %></li>
+                  <% else %>
+                       <li><%= link_to "Assessments", assessments_path %></li>
+                  <% end %>
                  	
                  	<% if params[:controller] == 'results' %>
                      	<li class="nav-selected"><%= link_to "Results", results_path %></li>
