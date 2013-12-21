@@ -1,6 +1,6 @@
 <%= provide(:title, 'Arcana | New Subject')%>
 <p id="notice"><%= notice %></p>
-<h3><%= @subject.name %>:  &nbsp;&nbsp;&nbsp;<a href="/assessments">See all assessments >></a></h3> 
+<h3><%= @subject.name %>:  &nbsp;&nbsp;&nbsp;<a href="/assessments/subject/<%= @subject.to_param %>">See all assessments >></a></h3> 
 
 
 <table class="table table-striped">

@@ -10,6 +10,7 @@ Arcana::Application.routes.draw do
   match '/signout',    to: 'sessions#destroy',         via: 'get'
   match '/:name/results', to: 'results#user', via: 'get', as: :student_results
   match '/results/:id', to: 'results#update', via: 'post'
+  match '/assessments/subject/:name', to: 'assessments#index', via: 'get'
 
 
   resources :students

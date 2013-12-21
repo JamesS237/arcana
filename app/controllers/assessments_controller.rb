@@ -7,7 +7,12 @@ class AssessmentsController < ApplicationController
   # GET /assessments
   # GET /assessments.json
   def index
-    @assessments = Assessment.all.order('subject_id')
+    if(params[:name])
+      @assessments = Assessment.where("subject_id IN(SELECT subjects.id FROM subjects WHERE subjects.name = ?)", 
+                                      params[:name].gsub('-', ' '))
+    else
+      @assessments = Assessment.all.order('subject_id')
+    end
   end
 
   # GET /assessments/1

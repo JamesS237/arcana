@@ -28,7 +28,7 @@
         <% else %>
         <td>N/A</td>
         <% end %>
-        <td><%= link_to "Assessment Tasks", assessments_path(subject) %></td>
+        <td><%= link_to "Assessment Tasks", "/assessments/subject/" + subject.to_param %></td>
       </tr>
     <% end %>
   </tbody>
