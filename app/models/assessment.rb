@@ -13,6 +13,10 @@ class Assessment < ActiveRecord::Base
   def average
     self.results.average("mark")
   end
+
+  def self.search(query)
+    Assessment.all.where('title LIKE(?)', '%' + query + '%')
+  end
   
   def self.uncomplete(student)
     complete = Result.find_all_by_student_id(student.id)

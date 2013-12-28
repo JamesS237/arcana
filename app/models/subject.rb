@@ -13,6 +13,10 @@ class Subject < ActiveRecord::Base
     Student.find(leader_id);
   end
 
+  def self.search(query)
+    Subject.all.where('title LIKE(?)', '%' + query + '%')
+  end
+
   def mean_average
     overalls = []
     Average.where(:subject_id => self.id).each do |a|
