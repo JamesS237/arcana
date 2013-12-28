@@ -14,7 +14,7 @@ class Subject < ActiveRecord::Base
   end
 
   def self.search(query)
-    Subject.all.where('title LIKE(?)', '%' + query + '%')
+    Subject.all.where('name LIKE(?)', '%' + query + '%')
   end
 
   def mean_average
