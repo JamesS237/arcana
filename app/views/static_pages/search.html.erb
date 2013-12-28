@@ -1,22 +1,22 @@
 <% provide(:title, 'Arcana | Search') %>
-<a data-view-assessments="true">Assessments (<%= @assessments.length.to_s %>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-<a data-view-subjects="true">Subjects (<%= @subjects.length.to_s %>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-<a data-view-students="true">Students (<%= @students.length.to_s %>)</a>
+<a data-view-type="assessments">Assessments (<%= @assessments.length.to_s %>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a data-view-type="subjects">Subjects (<%= @subjects.length.to_s %>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a data-view-type="students">Students (<%= @students.length.to_s %>)</a>
 <br /><br />
 
-<ul class="assessments" data-assessments="true">
+<ul class="assessments" data-type="assessments">
   <% @assessments.each do |assessment| %>
     <li><%= link_to assessment.title, assessment %>
   <% end %>
 </ul>
 
-<ul class="subjects" data-subjects="true">
+<ul class="subjects" data-type="subjects">
   <% @subjects.each do |subject| %>
   	<li><%= link_to subject.name, subject %></li>
   <% end %>
 </ul>
 
-<ul class="students" data-students="true">
+<ul class="students" data-type="students">
   <% @students.each do |student| %>
     <li><%= link_to stundent.full_name, student %></li>
   <% end %>
