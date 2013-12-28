@@ -7,4 +7,10 @@ class StaticPagesController < ApplicationController
   
   def legal
   end
+
+  def search
+  	@assessments = Assessment.search(params[:q])
+  	@subjects = Subject.search(params[:q])
+   	@students = Student.search(params[:q])
+  end
 end
