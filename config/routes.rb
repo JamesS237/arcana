@@ -11,6 +11,7 @@ Arcana::Application.routes.draw do
   match '/:name/results', to: 'results#user', via: 'get', as: :student_results
   match '/results/:id', to: 'results#update', via: 'post'
   match '/assessments/subject/:name', to: 'assessments#index', via: 'get'
+  match '/search', to: 'static_pages#search', via: 'get'
 
 
   resources :students
