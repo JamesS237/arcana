@@ -18,6 +18,6 @@
 
 <ul class="students" data-type="students">
   <% @students.each do |student| %>
-    <li><%= link_to stundent.full_name, student %></li>
+    <li><%= link_to student.full_name, student %></li>
   <% end %>
 </ul>

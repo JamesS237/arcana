@@ -49,8 +49,8 @@ class Student < ActiveRecord::Base
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
   end
 
-  def self.search(query)
-    Student.all.where('first_name LIKE(?) OR last_name LIKE(?) OR CONCAT(first_name, ' ', last_name) LIKE(?)', '%' + query + '%', '%' + query + '%', '%' + query + '%')
+  def self.search(search)
+    Student.all.where("first_name LIKE ? OR last_name LIKE ? OR first_name + ' ' + last_name LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   def reset_update
