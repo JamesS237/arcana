@@ -59,12 +59,10 @@
    					<% end %>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                           <li><%= link_to "Profile", current_user %></li>
-                           <li><%= link_to "Settings", edit_student_path(current_user) %></li>
+                           <li><%= link_to "My Averages", current_user %></li>
+                           <li><%= link_to "My Account", edit_student_path(current_user) %></li>
                            <li class="divider"></li>
-                          <li><%= link_to 'My Results', '/results#filter/' << current_user.full_name.gsub(' ', '-') %></li>
-                           <li class="divider"></li>
-                           <li><%= link_to "Sign out", '/signout', method: "delete" %></li>
+                           <li><%= link_to "Sign Out", '/signout', method: "delete" %></li>
                         </ul>
                      </li>
                      <% end %>
