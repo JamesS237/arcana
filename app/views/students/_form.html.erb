@@ -15,6 +15,7 @@
     <fieldset>
     <%= f.text_field :full_name, :placeholder => "Full Name" %><br>
   	<%= f.collection_select :house, Student.houses, :first, :last %><br>
+    <%= f.collection_select :class_group, Student.class_groups, :first, :last %><br>
 		<%= f.text_field :email, :placeholder => "Email Address" %><br>
 		<%= f.password_field :password, :placeholder => "Password" %><br>
 		<%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %><br>
