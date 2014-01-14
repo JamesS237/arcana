@@ -1,10 +1,13 @@
 class StaticPagesController < ApplicationController
   def home
+    if view_context.current_user
+      redirect_to results_path
+    end
   end
 
   def about
   end
-  
+
   def legal
   end
 

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = Student.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       sign_in user
-      redirect_to root_path
+      redirect_to results_path
     else
       flash.now[:error] = 'Invalid email/password combination' # Not quite right!
       render 'new'
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
-  
+
   private
   def sign_out
     self.current_user = nil
@@ -34,11 +34,11 @@ class SessionsController < ApplicationController
       @user = Student.find_by_name(params[:id].gsub('-', ' '))
       redirect_to(root_url) unless current_user?(@user)
     end
-    
+
       def admin_user
       redirect_to(root_url) unless current_user.status == 3
     end
-    
+
       def sign_in(user)
     remember_token = Student.new_remember_token
     cookies.permanent[:remember_token] = remember_token
