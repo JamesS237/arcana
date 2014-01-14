@@ -6,7 +6,7 @@ class Student < ActiveRecord::Base
   before_create :create_remember_token
 
   has_secure_password
-  validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }
+  validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/ }, uniqueness: { case_sensitive: false }
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :house, presence: true
