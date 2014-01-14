@@ -27,13 +27,13 @@
                      </div>
                   </form>
                     <ul class="nav header-menu pull-left">
- 
+
                  	<% if params[:controller] == 'subjects' %>
                      	<li class="nav-selected"><%= link_to "Subjects", subjects_path %></li>
                  	<% else %>
  	                     <li><%= link_to "Subjects", subjects_path %></li>
                  	<% end %>
-                 	
+
                  	<% if params[:controller] == 'students' && (params[:action] != 'show' && params[:action] != 'edit') %>
                      	<li class="nav-selected"><%= link_to "Students", students_path %></li>
                  	<% else %>
@@ -45,7 +45,7 @@
                   <% else %>
                        <li><%= link_to "Assessments", assessments_path %></li>
                   <% end %>
-                 	
+
                  	<% if params[:controller] == 'results' %>
                      	<li class="nav-selected"><%= link_to "Results", results_path %></li>
                  	<% else %>
@@ -76,8 +76,7 @@
             <% flash.each do |key, value| %>
             <div class="alert alert-<%= key %>"><%= value %></div>
             <% end %>
-
-           <%= yield %>
+             <%= yield %>
             <footer class="footer">
               <small>
               Copyright 2013 Arcana
@@ -91,5 +90,8 @@
               </nav>
             </footer>
       </div>
+
    </body>
+
+
 </html>
