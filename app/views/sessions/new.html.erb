@@ -5,10 +5,9 @@
   <div class="span6">
     <%= form_for(:session, url: sessions_path) do |f| %>
     <fieldset>
-		<%= f.text_field :email, :placeholder => "Email" %><br><br>
-		<%= f.password_field :password, :placeholder => "Password" %><br><br>
-	
-      	<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>  	</fieldset>
+		<%= f.text_field :email, :placeholder => "Email", :class => "input" %>
+		<%= f.password_field :password, :placeholder => "Password", :class => "input" %><br>
+      	<%= f.submit "Sign In", class: "btn" %>  	</fieldset>
 
     <% end %>
 
