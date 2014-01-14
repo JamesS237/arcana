@@ -54,6 +54,7 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.0)
+    non-stupid-digest-assets (1.0.2)
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -119,6 +120,7 @@ DEPENDENCIES
   coffee-rails (= 4.0.0)
   jbuilder (= 1.0.2)
   jquery-rails (= 2.2.1)
+  non-stupid-digest-assets
   pg (= 0.15.1)
   rails (= 4.0.0.rc2)
   rails-backbone
