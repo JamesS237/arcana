@@ -9,6 +9,9 @@ class Subject < ActiveRecord::Base
     Average.where(:subject_id => self.id).each do |avg| 
       avgs.push({"id" => avg.student_id, "average" => avg.overall})
     end
+    if avgs == []
+      return nil 
+    end
     leader_id = avgs.sort_by!{|avg| avg["average"] }.last["id"]
     Student.find(leader_id);
   end
