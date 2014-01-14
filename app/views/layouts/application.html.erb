@@ -20,12 +20,7 @@
                <%= link_to "Arcana", root_path, id: "logo" %>
                  <% if signed_in? %>
                <div class="nav">
-                  <form id="custom-search-form" action="/search" class="form-search form-horizontal pull-right">
-                     <div class="input-append span3 offset3">
-                        <input type="text" id="search-main" class="search-query" name="search" placeholder="Click or press '/' to search">
-                        <button type="submit" class="btn"><i class="icon-search"></i></button>
-                     </div>
-                  </form>
+
                     <ul class="nav header-menu pull-left">
 
                  	<% if params[:controller] == 'subjects' %>
@@ -67,6 +62,12 @@
                      </li>
                      <% end %>
                   </ul>
+                                            <form id="custom-search-form" action="/search" class="form-search form-horizontal pull-right">
+                     <div class="input-append span3 offset3">
+                        <input type="text" id="search-main" class="search-query" name="search" placeholder="Click or press '/' to focus">
+                        <button type="submit" class="btn"><i class="icon-search"></i></button>
+                     </div>
+                  </form>
                </div>
             </div>
          </div>

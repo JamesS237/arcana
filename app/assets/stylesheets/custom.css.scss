@@ -200,6 +200,7 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
 }
 
 
+
 .btn-primary {@include buttonBackground($accentLight, $bgDark); }
 
 /* iPads (landscape) ----------- */
@@ -224,9 +225,6 @@ and (orientation : landscape) {
 
   #logo {
     float: left;
-   /*  margin-left: 10px;
-    width: 15%;
-    margin-right: 10px; */
     font-size: 1.7em;
     color: $accentLight;
     text-transform: none;
@@ -249,14 +247,20 @@ and (orientation : landscape) {
 }
 
 
+.navbar li {
+  line-height: 30px;
+}
+
+.navbar b {
+  margin-top: 14px !important;
+}
 
 /* header */
 
 #logo {
   float: left;
-  margin-left: 30px;
-  margin-right: 40px;
-  font-size: 1.7em;
+  margin-left: 70px;
+  font-size: 2.0em;
   color: $accentLight;
   text-transform: none;
   font-family: $serifFont !important;
@@ -334,6 +338,10 @@ input {
   text-shadow: none;
 }
 
+.nav {
+  margin-left: 20px !important;
+}
+
 select
 {
   padding: 0px !important;
@@ -345,8 +353,8 @@ select
   margin-right: auto;
 }
 
-div.nav {
-  width: 85%;
+.navbar-inner {
+  height: 50px;
 }
 
 #custom-search-form {
@@ -360,6 +368,7 @@ div.nav {
 
 #custom-search-form .search-query {
   padding-right: 3px;
+    margin-top: 4px;
   padding-right: 4px \9;
   padding-left: 3px;
   padding-left: 4px \9;
@@ -372,6 +381,11 @@ div.nav {
 
 #custom-search-form button {
   border: 0;
+  color: transparent;
+  background-image: none !important;
+  background-color: none !important;
+  box-shadow: none;
+  margin-top: 7.5px;
   background: none;
   padding: 2px 5px;
   margin-top: 2px;
@@ -381,6 +395,11 @@ div.nav {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+
+#custom-search-form i {
+    margin-top: 6px;
+
 }
 
 .search-query:focus + button {
