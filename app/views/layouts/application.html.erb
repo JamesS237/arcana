@@ -1,94 +1,82 @@
 <!DOCTYPE html>
 <html>
-   <head>
-   	<script type="text/javascript">
-	</script>
-      <title><%= yield(:title) %></title>
-      <%= stylesheet_link_tag    "application", media: "all" %>
-      <%= javascript_tag "const AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
-      <% if current_user %>
-        <%= javascript_tag "const CURRENT_USER_ID = #{current_user.id.to_s};" if protect_against_forgery? %>
-      <% end %>
-      <%= javascript_include_tag "application" %>
-      <%= favicon_link_tag 'favicon.png' %>
-      <%= csrf_meta_tags %>
-   </head>
-   <body>
-      <header class="navbar navbar-fixed-top active center">
-         <div class="navbar-inner">
-            <div  style="width: auto;">
-               <%= link_to "Arcana", root_path, id: "logo" %>
-                 <% if signed_in? %>
-               <div class="nav">
+<head>
+  <title><%= yield(:title) %></title>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_tag "const AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+  <% if current_user %>
+  <%= javascript_tag "const CURRENT_USER_ID = #{current_user.id.to_s};" if protect_against_forgery? %>
+  <% end %>
+  <%= javascript_include_tag "application" %>
+  <%= favicon_link_tag 'favicon.png' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header class="navbar navbar-fixed-top active center">
+    <div class="navbar-inner">
+      <%= link_to "Arcana", root_path, id: "logo" %>
+      <% if signed_in? %>
+      <div class="nav">
+        <ul class="nav header-menu pull-left">
+          <% if params[:controller] == 'subjects' %>
+          <li class="nav-selected"><%= link_to "Subjects", subjects_path %></li>
+          <% else %>
+          <li><%= link_to "Subjects", subjects_path %></li>
+          <% end %>
 
-                    <ul class="nav header-menu pull-left">
+          <% if params[:controller] == 'students' && (params[:action] != 'show' && params[:action] != 'edit') %>
+          <li class="nav-selected"><%= link_to "Students", students_path %></li>
+          <% else %>
+          <li><%= link_to "Students", students_path %></li>
+          <% end %>
 
-                 	<% if params[:controller] == 'subjects' %>
-                     	<li class="nav-selected"><%= link_to "Subjects", subjects_path %></li>
-                 	<% else %>
- 	                     <li><%= link_to "Subjects", subjects_path %></li>
-                 	<% end %>
+          <% if params[:controller] == 'assessments' %>
+          <li class="nav-selected"><%= link_to "Assessments", assessments_path %></li>
+          <% else %>
+          <li><%= link_to "Assessments", assessments_path %></li>
+          <% end %>
 
-                 	<% if params[:controller] == 'students' && (params[:action] != 'show' && params[:action] != 'edit') %>
-                     	<li class="nav-selected"><%= link_to "Students", students_path %></li>
-                 	<% else %>
- 	                     <li><%= link_to "Students", students_path %></li>
-                 	<% end %>
+          <% if params[:controller] == 'results' %>
+          <li class="nav-selected"><%= link_to "Results", results_path %></li>
+          <% else %>
+          <li><%= link_to "Results", results_path %></li>
+          <% end %>
 
-                  <% if params[:controller] == 'assessments' %>
-                      <li class="nav-selected"><%= link_to "Assessments", assessments_path %></li>
-                  <% else %>
-                       <li><%= link_to "Assessments", assessments_path %></li>
-                  <% end %>
-
-                 	<% if params[:controller] == 'results' %>
-                     	<li class="nav-selected"><%= link_to "Results", results_path %></li>
-                 	<% else %>
- 	                     <li><%= link_to "Results", results_path %></li>
-                 	<% end %>
-
-   					<% if params[:controller] == 'students' && (params[:action] == 'show' || params[:action] == 'edit') %>
-	                  	<li id="fat-menu" class="dropdown nav-selected">
-   					<% else %>
-   						<li id="fat-menu" class="dropdown">
-   					<% end %>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                           <li><%= link_to "My Averages", current_user %></li>
-                           <li><%= link_to "My Account", edit_student_path(current_user) %></li>
-                           <li class="divider"></li>
-                           <li><%= link_to "Sign Out", '/signout', method: "delete" %></li>
-                        </ul>
-                     </li>
-                     <% end %>
-                  </ul>
-                                            <form id="custom-search-form" action="/search" class="form-search form-horizontal pull-right">
-                     <div class="input-append span3 offset3">
-                        <input type="text" id="search-main" class="search-query" name="search" placeholder="Click or press '/' to focus">
-                        <button type="submit" class="btn"><i class="icon-search"></i></button>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </header>
-      <div class="container">
-         <div class="row-fluid col-wrap" id="main">
-            <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
-            <% end %>
-             <%= yield %>
-            <footer class="footer">
-Created By Alex Nielsen - Licensed Under <a href="http://creativecommons.org/licenses/by/4.0/">CC Share-Alike</a>
-                 <ul>
-                    <li><%= link_to "About", '/about' %></li>
-                    <li> | </li>
-                    <li><%= link_to "Legal Information",  '/legal' %></li>
-                 </ul>
-            </footer>
+          <li id="fat-menu" class="dropdown 
+          <% if params[:controller] == 'students' && ['show', 'edit'].include?(params[:action]) %> nav-selected <% end %>">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>                
+            <ul class="dropdown-menu">
+              <li><%= link_to "My Averages", current_user %></li>
+              <li><%= link_to "My Account", edit_student_path(current_user) %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Sign Out", '/signout', method: "delete" %></li>
+            </ul>
+          </li>
+        </ul>
+        <form id="custom-search-form" action="/search" class="form-search form-horizontal pull-right">
+          <div class="input-append span3 offset3">
+            <input type="text" id="search-main" class="search-query" name="search" placeholder="Click or press '/' to focus">
+            <button type="submit" class="btn"><i class="icon-search"></i></button>
+          </div>
+        </form>
       </div>
-
-   </body>
-
-
+    <% end %>
+    </div>
+  </header>
+<div class="container">
+ <div class="row-fluid col-wrap" id="main">
+  <% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <%= yield %>
+  <footer class="footer">
+    Created By Alex Nielsen - Licensed Under <a href="http://creativecommons.org/licenses/by/4.0/">CC Share-Alike</a>
+    <ul>
+      <li><%= link_to "About", '/about' %></li>
+      <li> | </li>
+      <li><%= link_to "Legal Information",  '/legal' %></li>
+    </ul>
+  </footer>
+</div>
+</body>
 </html>
