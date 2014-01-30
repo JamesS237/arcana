@@ -16,8 +16,9 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'will_paginate', '~> 3.0.0'
 gem 'rails-backbone'
 gem "non-stupid-digest-assets"
+gem "redis"
 
-group :production do 
+group :production do
     gem 'pg', '0.15.1'
     gem 'rails_12factor', '0.0.2'
 end
