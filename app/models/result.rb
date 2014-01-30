@@ -2,6 +2,8 @@ class Result < ActiveRecord::Base
   belongs_to :assessment
   belongs_to :student
 
+  after_save :update_average
+
   validates :student_id, presence: true
   validates :mark, presence: true
   validates :assessment_id, presence: true
@@ -72,6 +74,17 @@ class Result < ActiveRecord::Base
       end
     else
       self.term = self.assessment.term
+    end
+  end
+
+  def update_average
+    $redis.zadd("results:#{self.subject.redis_name}", self.mark, self.first_name.downcase)
+    if(self.exam && self.term <= 2)
+      $redis.zadd("results:exam:s1", self.mark, self.first_name.downcase)
+    elsif(self.exam && self.term > 2)
+      $redis.zadd("results:exam:s2", self.mark, self.first_name.downcase)
+    else
+      $redis.zadd("results:assessment", self.mark, self.first_name.downcase)
     end
   end
 end
