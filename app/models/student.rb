@@ -10,7 +10,7 @@ class Student < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :house, presence: true
-  
+
   def self.houses
     houses = {0 => "Select a House", 1 => "Aherne", 2 => "Frew", 3 => "Jenkin", 4 => "Jones", 5 => "Millward", 6 => "Riley"}
   end
@@ -22,17 +22,17 @@ class Student < ActiveRecord::Base
   def full_name
     [first_name, last_name].join(' ')
   end
-  
+
   def full_name=(name)
     split = name.split(' ', 2)
     self.first_name = split.first
     self.last_name = split.last
   end
-  
+
   def house_name
     Student.houses[house]
   end
-  
+
   def Student.new_remember_token
     SecureRandom.urlsafe_base64
   end
@@ -40,11 +40,11 @@ class Student < ActiveRecord::Base
   def Student.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
-  
+
   def to_param
     normalized_name = full_name.gsub(' ', '-')
   end
-  
+
   def subject_average(subject)
     self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
   end
@@ -57,13 +57,14 @@ class Student < ActiveRecord::Base
     self.results.each do |r|
       self.update_averages(r.assessment.subject_id, r.term, r.assessment.type.name == 'Exam')
     end
-  end 
+  end
 
 
   def update_averages(subject_id, term, exam)
+    $redis.zadd("scores:all", 75, self.first_name.downcase)
     subject_query = 'assessment_id IN(SELECT assessments.id FROM assessments WHERE assessments.subject_id = ?)'
 
-    exam_query = "assessment_id IN (SELECT assessments.id FROM assessments WHERE assessments.type_id IN 
+    exam_query = "assessment_id IN (SELECT assessments.id FROM assessments WHERE assessments.type_id IN
                                    (SELECT types.id FROM types WHERE types.name = 'Exam'))"
 
     subject_average = self.averages.where(:subject_id => subject_id).first
