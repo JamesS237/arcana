@@ -27,7 +27,7 @@ class Result < ActiveRecord::Base
     elsif(self.exam && self.term > 2)
       $redis.zadd("results:exam:s2", self.mark, self.first_name.downcase)
     else
-      $redis.zadd("results:assessment:t#{self.term.to_s}", self.mark, self.first_name.downcase)
+      $redis.zadd("results:assessment", self.mark, self.first_name.downcase)
     end
   end
 end
