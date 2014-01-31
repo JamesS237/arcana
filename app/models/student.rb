@@ -32,7 +32,7 @@ class Student < ActiveRecord::Base
   end
 
   def subject_average(subject)
-    #TODO
+    $redis.zscore("results:#{subject.redis_name}", self.id)[0].to_i / subject.results.count
   end
 
   def clear_averages!
