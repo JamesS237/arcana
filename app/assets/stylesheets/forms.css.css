@@ -1,0 +1,63 @@
+@import "variables";
+
+.btn:hover {
+  color: $accentLight !important;
+}
+
+.content-description {
+  margin-left: 18%;
+  color: white;
+}
+
+.review-bar {
+  margin-top: -4.5%;
+}
+
+input {
+  height: auto !important;
+}
+
+select
+{
+  padding: 0px !important;
+}
+
+fieldset {
+  input[type="text"], input[type="password"] {
+    width: 382px;
+  }
+
+  select {
+    width: 397px;
+  }
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
+    border-color: $linkLight !important;
+    box-shadow: 0 1px 1px $linkLight inset, 0 0 8px $linkLight !important;
+    outline: 0 none !important;
+}
+
+.btn-primary {@include buttonBackground($accentLight, $bgDark); }
+
+input#left-input {
+  border-bottom-left-radius: 3px !important;
+  border-top-left-radius: 3px !important;
+}
+
+input#right-input {
+  border-bottom-right-radius: 3px !important;
+  border-top-right-radius: 3px !important;
+}
+
+input.result-search {
+  border-radius: 0px !important;
+  width: 120.6px;
+  margin-top: 11px;
+}
+
+input.assess-search {
+  border-radius: 0px !important;
+  width: 174px;
+  margin-top: 11px;
+}

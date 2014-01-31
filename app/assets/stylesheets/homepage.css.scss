@@ -1,0 +1,137 @@
+@import "variables";
+
+hero-unit {
+  color: $grayMediumLight !important;
+  background-color: transparent;
+  float:left;
+  margin-top:5%;
+
+  h1 {
+    float:left;
+  }
+}
+
+.front-signup {
+  background: -webkit-linear-gradient(top,#fff 0,#ddd 100%);
+  background: -moz-linear-gradient(top,#fff 0,#ddd 100%);
+  background: -ms-linear-gradient(top,#fff 0,#ddd 100%);
+  background: -o-linear-gradient(top,#fff 0,#ddd 100%);
+  background: linear-gradient(top,#fff 0,#ddd 100%);
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  width: 300px;
+  border-radius: 4px;
+  margin-top: 10px;
+
+  .input-name {
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    width: 258px;
+  }
+
+  .input-email {
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 258px;
+  }
+
+  select {
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 273px;
+  }
+
+  .input-password {
+    margin-right: 12px;
+    margin-left: 12px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    width: 258px;
+  }
+
+  .input-submit {
+    margin-left: 215px;
+    margin-right: 12px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    text-align:left;
+    width: 277px;
+    font-family: "Helvetica Neue",Arial,sans-serif !important;
+    border-bottom: 1px solid #e2e2e2;
+    box-shadow: 0 1px 0 #fff;
+    color: #777;
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+
+    strong {
+      color: black !important;
+    }
+  }
+}
+
+.front-signin {
+  background: -webkit-linear-gradient(top,#fff 0,#ddd 100%);
+  background: -moz-linear-gradient(top,#fff 0,#ddd 100%);
+  background: -ms-linear-gradient(top,#fff 0,#ddd 100%);
+  background: -o-linear-gradient(top,#fff 0,#ddd 100%);
+  background: linear-gradient(top,#fff 0,#ddd 100%);
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  width: 300px;
+  border-radius: 4px;
+
+  input[type="text"] {
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    width: 258px;
+  }
+
+  input[type="password"] {
+    margin-left: 12px;
+    margin-right: 8px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    width: 175px;
+  }
+
+  input[type="submit"] {
+    margin-right: 12px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+  }
+}
+
+.home-form {
+  float: right;
+  width: 45%
+}
+
+.home-text {
+  float: left;
+  width: 45%;
+  margin-top: 10%;
+
+  strong {
+    color: white !important;
+  }
+}

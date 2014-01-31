@@ -1,0 +1,108 @@
+@import "variables";
+
+html {
+  overflow-y: scroll;
+  height: 100%;
+  margin-bottom: 1%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  &::selection {
+    background: white;
+  }
+}
+
+body {
+  color: white;
+  padding-top: 60px;
+  height: 100%;
+  margin-bottom: 1%;
+  background-image: url(texture.png);
+}
+
+hr {
+  margin: 5px 0;
+}
+
+/* Type */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+  color: $accentLight;
+  font-family: $serifFont !important;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+  color: white;
+}
+
+strong {
+  color: $accentLight;
+}
+
+a {
+  cursor: pointer;
+  color: white;
+
+  &:hover {
+    color: $linkLight !important;
+    text-decoration: none !important;
+  }
+}
+
+label {
+  color: $linkLight;
+}
+
+ul {
+  color: white;
+}
+
+/* Tables */
+table.table-striped {
+  th {
+    cursor: pointer;
+  }
+
+  td.mark-col {
+    text-align: right;
+    width: 10px;
+  }
+
+  thead {
+    a {
+        color: $accentLight !important;
+    }
+    color: $accentLight !important;
+  }
+
+  tbody {
+    color: white;
+
+    input {
+      width: 50px;
+    }
+
+    tr:nth-child(odd) > td, tr:nth-child(odd) > th {
+      background-color: $tableStripe;
+    }
+  }
+}

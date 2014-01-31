@@ -1,0 +1,27 @@
+@import "variables";
+
+footer {
+  position: relative;
+  height: 150px;
+  clear:both;
+  padding-top:20px;
+  margin-top: 45px;
+  border-top: 1px solid white;
+  color: white;
+
+  a {
+    color: white;
+    &:hover {
+      color: $linkLight;
+    }
+  }
+
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}

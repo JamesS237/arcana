@@ -1,0 +1,123 @@
+@import "variables";
+
+.navbar-inner {
+  background-image: url(texture.png) !important;
+  height: 50px;
+  border: none !important;
+}
+
+.center.navbar .nav,
+.center.navbar .nav > li {
+    display:inline-block;
+    vertical-align: top;
+}
+
+.center .navbar-inner {
+    text-align:center;
+}
+
+.navbar .nav > li > a {
+  color: white !important;
+  text-shadow: none !important;
+}
+
+.nav {
+  margin-left: 20px !important;
+}
+
+@media only screen //iPads
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+  #logo {
+    float: left;
+    font-size: 1.7em;
+    letter-spacing: -1px;
+    &:hover {
+      color: $linkLight;
+      text-decoration: none;
+    }
+
+  }
+  div.nav {
+    width: auto !important;
+  }
+}
+.navbar {
+  li {
+    line-height: 30px;
+  }
+   b {
+    margin-top: 14px !important;
+  }
+}
+
+#logo {
+  float: left;
+  margin-left: 70px;
+  font-size: 2.0em;
+  color: $accentLight;
+  text-transform: none;
+  font-family: $serifFont !important;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    color: $linkLight;
+    text-decoration: none;
+  }
+}
+
+.center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header form {
+  input {
+    margin-left: 200px;
+    float: left;
+    margin-top: 9px;
+    border-radius: 3px !important;
+    width: 200px;
+  }
+
+  button {
+    border: 0 !important;
+    top: 7px;
+    box-shadow: none !important;
+    background: none !important;
+    padding: 2px 5px !important;
+    position: relative;
+    left: -28px;
+    border-radius: 3px;
+  }
+}
+
+.dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a{
+    color: $accentLight !important;
+    background-image: none !important;
+    background-color: $bgDark !important;
+}
+
+.nav-selected {
+  background-color: $accentLight;
+
+  a {
+    color: $bgDark !important;
+
+    &:hover {
+      color: #555555 !important;
+    }
+  }
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: $accentLight;
+  color: $bgDark;
+  &:hover {
+    color: #555555 !important;
+  }
+}

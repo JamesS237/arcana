@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require bootstrap
+//= require placeholder-shim
 //= require angular/angular
 //= require angular/route
 //= require angular/resource
