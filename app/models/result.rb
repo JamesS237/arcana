@@ -2,13 +2,21 @@ class Result < ActiveRecord::Base
   belongs_to :assessment
   belongs_to :student
 
-  after_save :update_average
+  after_save :update_averages!
+  after_save :set_term!
 
   validates :student_id, presence: true
   validates :mark, presence: true
   validates :assessment_id, presence: true
 
-  def set_term
+  @term_data = {
+    "History"   => { "c" => 2, "d" => 2, "h" => 0, "m" => 0, "v" => 0, "w" => 2 },
+    "Geography" => { "c" => 0, "d" => 0, "h" => 2, "m" => 2, "v" => 0, "w" => 2 },
+    "REPD"      => { "c" => 0, "d" => 2, "h" => 0, "m" => 2, "v" => 0, "w" => 2 },
+    "Drama"     => { "c" => 2, "d" => 0, "h" => 2, "m" => 0, "v" => 2, "w" => 0 }
+  }
+
+  def set_term!
   	case self.assessment.subject.name
     when "History"
       case self.student.class_group
@@ -77,7 +85,7 @@ class Result < ActiveRecord::Base
     end
   end
 
-  def update_average
+  def update_averages!
     $redis.zadd("results:#{self.subject.redis_name}", self.mark, self.first_name.downcase)
     if(self.exam && self.term <= 2)
       $redis.zadd("results:exam:s1", self.mark, self.first_name.downcase)
