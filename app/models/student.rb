@@ -36,7 +36,7 @@ class Student < ActiveRecord::Base
   end
 
   def clear_averages!
-    $redis.zrem("results:exam:s1", self.first_name.downcase)
+    $redis.zrem("resulcts:exam:s1", self.first_name.downcase)
     $redis.zrem("results:exam:s2", self.first_name.downcase)
 
     $redis.zrem("results:assessment:t1", self.first_name.downcase)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213012202) do
+ActiveRecord::Schema.define(version: 20140131065216) do
 
   create_table "assessments", force: true do |t|
     t.integer  "subject_id"
@@ -20,20 +20,6 @@ ActiveRecord::Schema.define(version: 20131213012202) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "term"
-  end
-
-  create_table "averages", force: true do |t|
-    t.integer  "student_id"
-    t.integer  "subject_id"
-    t.float    "t1"
-    t.float    "t2"
-    t.float    "t3"
-    t.float    "t4"
-    t.float    "exams_s1"
-    t.float    "exams_s2"
-    t.boolean  "overall"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "results", force: true do |t|
