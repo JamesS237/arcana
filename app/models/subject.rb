@@ -9,6 +9,10 @@ class Subject < ActiveRecord::Base
     Student.find(leader_id);
   end
 
+  def results
+    Result.where('results.assessment_id IN(SELECT assessments.id FROM assessments WHERE subject_id = ?)', self.id)
+  end
+
   def to_param
     self.name.gsub(' ', '-')
   end
