@@ -29,7 +29,7 @@ body {
   padding-top: 60px;
   height: 100%;
   margin-bottom: 1%;
-  background-image: url(opaque-background-main-new.png);
+  background-image: url(texture.png);
 }
 
 hr {
@@ -347,7 +347,7 @@ footer {
 
 /* Header */
 .navbar-inner {
-  background-image: url(opaque-background-main-new.png);
+  background-image: url(texture.png);
 }
 
 .center.navbar .nav,
@@ -389,7 +389,7 @@ and (orientation : landscape) {
     width: auto !important;
   }
 }
-.navbar { 
+.navbar {
   li {
     line-height: 30px;
   }
