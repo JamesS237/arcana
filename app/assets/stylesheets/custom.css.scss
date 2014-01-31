@@ -428,14 +428,16 @@ and (orientation : landscape) {
 
 header form {
   input {
-    padding-right: 3px;
-    margin-top: 4px;
+    margin-left: 200px;
+    float: left;
+    margin-top: 9px;
     border-radius: 3px !important;
     width: 200px;
   }
 
   button {
     border: 0 !important;
+    top: 7px;
     box-shadow: none !important;
     background: none !important;
     padding: 2px 5px !important;
