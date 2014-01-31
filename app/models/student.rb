@@ -11,14 +11,8 @@ class Student < ActiveRecord::Base
   validates :last_name, presence: true
   validates :house, presence: true
 
-  def self.houses
-    houses = {0 => "Select a House", 1 => "Aherne", 2 => "Frew", 3 => "Jenkin", 4 => "Jones", 5 => "Millward", 6 => "Riley"}
-  end
 
-  def self.class_groups
-    class_groups = {0 => "Select Class", 1 => "9C", 2 => "9D", 3 => "9H", 4 => "9M", 5 => "9V", 6 => "9W"}
-  end
-
+  #ACCESSOR METHODS
   def full_name
     [first_name, last_name].join(' ')
   end
@@ -33,14 +27,6 @@ class Student < ActiveRecord::Base
     Student.houses[house]
   end
 
-  def Student.new_remember_token
-    SecureRandom.urlsafe_base64
-  end
-
-  def Student.encrypt(token)
-    Digest::SHA1.hexdigest(token.to_s)
-  end
-
   def to_param
     normalized_name = full_name.gsub(' ', '-')
   end
@@ -49,18 +35,36 @@ class Student < ActiveRecord::Base
     #TODO
   end
 
+  def clear_averages!
+  end
+
+  def recalculate_averages!
+    self.clear_averages!
+    self.results.each do |r|
+      r.update_average!
+    end
+  end
+
+
+
+  def Student.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def Student.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
   def self.search(search)
     Student.all.where("first_name LIKE ? OR last_name LIKE ? OR first_name + ' ' + last_name LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
-  def clear_average
+  def self.houses
+    houses = {0 => "Select a House", 1 => "Aherne", 2 => "Frew", 3 => "Jenkin", 4 => "Jones", 5 => "Millward", 6 => "Riley"}
   end
 
-  def recalculate_averages
-    self.clear_averages
-    self.results.each do |r|
-      r.update_average
-    end
+  def self.class_groups
+    class_groups = {0 => "Select Class", 1 => "9C", 2 => "9D", 3 => "9H", 4 => "9M", 5 => "9V", 6 => "9W"}
   end
 
   private
