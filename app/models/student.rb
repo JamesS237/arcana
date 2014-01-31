@@ -46,74 +46,21 @@ class Student < ActiveRecord::Base
   end
 
   def subject_average(subject)
-    self.results.where("assessment_id IN(SELECT id FROM assessments WHERE subject_id = ?)", subject.id).average("mark")
+    #TODO
   end
 
   def self.search(search)
     Student.all.where("first_name LIKE ? OR last_name LIKE ? OR first_name + ' ' + last_name LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
-  def reset_update
-    self.results.each do |r|
-      self.update_averages(r.assessment.subject_id, r.term, r.assessment.type.name == 'Exam')
-    end
+  def clear_average
   end
 
-
-  def update_averages(subject_id, term, exam)
-    $redis.zadd("scores:all", 75, self.first_name.downcase)
-    subject_query = 'assessment_id IN(SELECT assessments.id FROM assessments WHERE assessments.subject_id = ?)'
-
-    exam_query = "assessment_id IN (SELECT assessments.id FROM assessments WHERE assessments.type_id IN
-                                   (SELECT types.id FROM types WHERE types.name = 'Exam'))"
-
-    subject_average = self.averages.where(:subject_id => subject_id).first
-
-    if(subject_average == nil)
-      subject_average = Average.new
-      subject_average.student_id = self.id
-      subject_average.subject_id = subject_id
+  def recalculate_averages
+    self.clear_averages
+    self.results.each do |r|
+      r.update_average
     end
-
-    if(self.averages.where(:overall => true).empty?)
-      overall_average = Average.new
-      overall_average.student_id = self.id
-      overall_average.overall = true
-    else
-      overall_average = self.averages.where(:overall => true).first
-    end
-
-    if(exam)
-      subj_raw_avg = self.results.where(subject_query, subject_id).where(:term => term).where(exam_query).average("mark")
-      overall_raw_avg = self.results.where(:term => term).where(exam_query).average("mark")
-      if(term == 2)
-        overall_average.exams_s1 = overall_raw_avg
-        subject_average.exams_s1 = subj_raw_avg
-      else
-        overall_average.exams_s2 = overall_raw_avg
-        subject_average.exams_s2 = subj_raw_avg
-      end
-
-    else
-      subj_raw_avg = self.results.where(subject_query, subject_id).where(:term => term).average("mark")
-      overall_raw_avg = self.results.where(:term => term).average("mark")
-      case term
-      when 1
-        overall_average.t1 = overall_raw_avg
-        subject_average.t1 = subj_raw_avg
-      when 2
-        overall_average.t2 = overall_raw_avg
-        subject_average.t2 = subj_raw_avg
-      when 3
-        overall_average.t3 = overall_raw_avg
-        subject_average.t3 = subj_raw_avg
-      when 4
-        overall_average.t4 = overall_raw_avg
-        subject_average.t4 = subj_raw_avg
-      end
-    end
-    subject_average.save
-    overall_average.save
   end
 
   private
