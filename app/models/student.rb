@@ -68,16 +68,39 @@ class Student < ActiveRecord::Base
     return {
       :exams => {
         :s1 => {
-                :average => $redis.zscore("results:exams:s1", self.id) / self.exams.count,
-                :rank => 0
-               },
-        :s2 => {:average => 0, :rank => 0 },
-        :overall => {:average => 0, :rank => 0 }
+          :average => $redis.zscore("results:exams:s1", self.id) / self.exams('s2')count,
+          :rank => $redis.zrank("results:exams:s1", self.id)
+        }, :s2 => {
+          :average => $redis.zscore("results:exams:s1", self.id) / self.exams('s1').count,
+          :rank => $redis.zrank("results:exams:s1", self.id)
+        }, :overall => {
+          :average => $redis.zscore("results:exams", self.id) / self.exams('all').count,
+          :rank => $redis.zrank("results:exams", self.id)
+        }
       }, :assessment => {
-        :s1 => {:average => 0, :rank => 0 },
-        :s2 => {:average => 0, :rank => 0 },
-        :overall => {:average => 0, :rank => 0 }
-      }
+        :s1 => {
+          :average => $redis.zscore("results:assessment:s1", self.id) / self.assessments('s1').count,
+          :rank => $redis.zrank("results:assessment:s1", self.id)
+        }, :s2 => {
+          :average => $redis.zscore("results:assessment:s1", self.id) / self.assessments('s2').count,
+          :rank => $redis.zrank("results:assessment:s1", self.id)
+        }, :t1 => {
+          :average => $redis.zscore("results:assessment:t1", self.id) / self.assessments('t1').count,
+          :rank => $redis.zrank("results:assessment:t1", self.id)
+        }, :t2 => {
+          :average => $redis.zscore("results:assessment:t2", self.id) / self.assessments('t2').count,
+          :rank => $redis.zrank("results:assessment:t2", self.id)
+        }, :t3 => {
+          :average => $redis.zscore("results:assessment:t3", self.id) / self.assessments('t3').count,
+          :rank => $redis.zrank("results:assessment:t3", self.id)
+        }, :t4 => {
+          :average => $redis.zscore("results:assessment:t4", self.id) / self.assessments('t4').count,
+          :rank => $redis.zrank("results:assessment:t4", self.id)
+        },:overall => {
+          :average => $redis.zscore("results:assessment", self.id) / self.assessments('all').count,,
+          :rank => $redis.zrank("results:assessment", self.id)
+        }
+      },
     }
   end
 
