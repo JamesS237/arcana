@@ -36,6 +36,10 @@ class Student < ActiveRecord::Base
   end
 
   def clear_averages!
+    $redis.zrem("results:overall", self.id)
+    $redis.zrem("results:overall:s1", self.id)
+    $redis.zrem("results:overall:s2", self.id)
+
     $redis.zrem("results:exam:s1", self.id)
     $redis.zrem("results:exam:s2", self.id)
     $redis.zrem("results:exam", self.id)
@@ -142,7 +146,17 @@ class Student < ActiveRecord::Base
           :average => $redis.zscore("results:assessment", self.id) / self.assessments('all').count,,
           :rank => $redis.zrank("results:assessment", self.id)
         }
-      },
+      }, :overall => {
+        :s1 => {
+          :average => $redis.zscore("results:assessment:s1", self.id) / self.assessments('s1').count,
+          :rank => $redis.zrank("results:assessment:s1", self.id)
+        }, :s2 => {
+          :average => $redis.zscore("results:assessment:s1", self.id) / self.assessments('s2').count,
+          :rank => $redis.zrank("results:assessment:s1", self.id)
+        }, :overall => {
+          :average => $redis.zscore("results:assessment:s1", self.id) / self.assessments('s2').count,
+          :rank => $redis.zrank("results:assessment:s1", self.id)
+        }
     }
   end
 

@@ -29,6 +29,8 @@ class Result < ActiveRecord::Base
   end
 
   def update_averages!
+    $redis.zincrby("results:overall", self.mark, self.student.id)
+    $redis.zincrby("results:overall:s#{self.semester.to_s}", self.mark, self.student.id)
     $redis.zincrby("results:#{self.assessment.subject.redis_name}", self.mark, self.student.id)
     if(self.assessment.exam? && self.term <= 2)
       $redis.zincrby("results:exam:s1", self.mark, self.student.id)
@@ -38,8 +40,8 @@ class Result < ActiveRecord::Base
       $redis.zincrby("results:exam", self.mark, self.student.id)
     else
       $redis.zincrby("results:assessment", self.mark, self.student.id)
-      $redis.zincrby("results:assessment#{self.term.to_s}", self.mark, self.student.id)
-      $redis.zincrby("results:assessment#{self.semester.to_s}", self.mark, self.student.id)
+      $redis.zincrby("results:assessment:#{self.term.to_s}", self.mark, self.student.id)
+      $redis.zincrby("results:assessment:#{self.semester.to_s}", self.mark, self.student.id)
     end
   end
 end
