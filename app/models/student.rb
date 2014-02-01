@@ -64,6 +64,23 @@ class Student < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def overall_average
+    return {
+      :exams => {
+        :s1 => {
+                :average => $redis.zscore("results:exams:s1", self.id) / self.exams.count,
+                :rank => 0
+               },
+        :s2 => {:average => 0, :rank => 0 },
+        :overall => {:average => 0, :rank => 0 }
+      }, :assessment => {
+        :s1 => {:average => 0, :rank => 0 },
+        :s2 => {:average => 0, :rank => 0 },
+        :overall => {:average => 0, :rank => 0 }
+      }
+    }
+  end
+
   def self.search(search)
     Student.all.where("first_name LIKE ? OR last_name LIKE ? OR first_name + ' ' + last_name LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
   end

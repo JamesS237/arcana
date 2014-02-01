@@ -13,7 +13,17 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-    @overall_average = view_context.current_user.averages.where(:overall => true).take
+    @overall_average = {
+      :exams => {
+        :s1 => {:average => 0, :rank => 0 },
+        :s2 => {:average => 0, :rank => 0 },
+        :overall => {:average => 0, :rank => 0 }
+      }, :assessment => {
+        :s1 => {:average => 0, :rank => 0 },
+        :s2 => {:average => 0, :rank => 0 },
+        :overall => {:average => 0, :rank => 0 }
+      }
+    }
   end
 
   # GET /students/new
@@ -30,8 +40,8 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.password_confirmation = @student.password
-    @student.first_name = @student.first_name.strip unless @student.first_name == nil 
-    @student.last_name = @student.last_name.strip unless @student.last_name == nil 
+    @student.first_name = @student.first_name.strip unless @student.first_name == nil
+    @student.last_name = @student.last_name.strip unless @student.last_name == nil
     respond_to do |format|
       if @student.save
         view_context.sign_in @student
@@ -78,15 +88,15 @@ class StudentsController < ApplicationController
     def student_params
       params.require(:student).permit(:house, :class_group, :full_name, :email, :password)
     end
-    
+
     def is_admin
       redirect_to root_path unless view_context.current_user.admin
     end
-    
+
     def logged_in
       redirect_to root_path unless view_context.current_user
     end
-    
+
     def correct_user
       redirect_to root_path unless view_context.current_user.id = @student.id
     end
