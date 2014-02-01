@@ -18,6 +18,10 @@ class Assessment < ActiveRecord::Base
     Assessment.all.where('title LIKE(?)', '%' + query + '%')
   end
 
+  def exam?
+    self.type.name == "Exam"
+  end
+
   def self.uncomplete(student)
     complete = student.results
     return Assessment.all if complete == []
