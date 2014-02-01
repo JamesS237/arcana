@@ -201,6 +201,11 @@ class Student < ActiveRecord::Base
     houses = {0 => "Select a House", 1 => "Aherne", 2 => "Frew", 3 => "Jenkin", 4 => "Jones", 5 => "Millward", 6 => "Riley"}
   end
 
+  def class_group_letter
+    letters = { 1 => "c", 2 => "d", 3 => "h", 4 => "m", 5 => "v", 6 => "w"}
+    letters[self.class_group]
+  end
+
   def self.class_groups
     class_groups = {0 => "Select Class", 1 => "9C", 2 => "9D", 3 => "9H", 4 => "9M", 5 => "9V", 6 => "9W"}
   end
