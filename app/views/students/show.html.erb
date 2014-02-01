@@ -12,40 +12,24 @@
 	<tbody>
 		<tr>
 			<td>Overall Total</td>
-			<% if @overall_average != nil %>
-			<td><%= @overall_average.overall.to_s %></td>
-			<td><%= @overall_average.rank('overall') %></td>
-			<% else %>
-			<td>Unknown</td>
-			<td>N/A</td>
-			<% end %>
+			<td><%= current_user.overall_average[:overall][:average] %></td>
+			<td><%= current_user.overall_average[:overall][:rank] %></td>
 		</tr>
 		<tr>
 			<td>Overall Exams</td>
-			<% if @overall_average != nil %>
-			<td><%= @overall_average.overall_exam.to_s %></td>
-			<td><%= @overall_average.rank('exam') %></td>
-			<% else %>
-			<td>Unknown</td>
-			<td>N/A</td>
-			<% end %>
+			<td><%= current_user.overall_average[:exams][:average] %></td>
+			<td><%= current_user.overall_average[:exams][:rank] %></td>
 		</tr>
 		<tr>
 			<td>Overall Assessment</td>
-			<% if @overall_average != nil %>
-			<td><%= @overall_average.overall_assessment.to_s %></td>
-			<td><%= @overall_average.rank('assessment') %></td>
-			<% else %>
-			<td>Unknown</td>
-			<td>N/A</td>
-			<% end %>
+			<td><%= current_user.overall_average[:assessment][:average] %></td>
+			<td><%= current_user.overall_average[:assessment][:rank] %></td>
 		</tr>
 		<% Subject.all.each do |subj| %>
-			<% next unless current_user.averages.where(:subject_id => subj.id).take != nil %>
 			<tr>
 				<td><%= subj.name %></td>
-				<td><%= current_user.averages.where(:subject_id => subj.id).take.overall %></td>
-				<td><%= @overall_average.rank('subject') %></td>
+				<td><%= current_user.subject_average(subj) %></td>
+				<td><%= current_user.subject_rank(subj) %></td>
 			</tr>
 		<% end %>
 	</tbody>
