@@ -35,6 +35,10 @@ class Student < ActiveRecord::Base
     $redis.zscore("results:#{subject.redis_name}", self.id) / subject.results.count
   end
 
+  def subject_rank(subject)
+    $redis.zrank("results:#{subject.redis_name}", self.id)
+  end
+
   def clear_averages!
     $redis.zrem("results:overall", self.id)
     $redis.zrem("results:overall:s1", self.id)
