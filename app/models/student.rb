@@ -36,16 +36,16 @@ class Student < ActiveRecord::Base
   end
 
   def clear_averages!
-    $redis.zrem("resulcts:exam:s1", self.first_name.downcase)
-    $redis.zrem("results:exam:s2", self.first_name.downcase)
+    $redis.zrem("resulcts:exam:s1", self.id)
+    $redis.zrem("results:exam:s2", self.id)
 
-    $redis.zrem("results:assessment:t1", self.first_name.downcase)
-    $redis.zrem("results:assessment:t2", self.first_name.downcase)
-    $redis.zrem("results:assessment:t3", self.first_name.downcase)
-    $redis.zrem("results:assessment:t4", self.first_name.downcase)
+    $redis.zrem("results:assessment:t1", self.id)
+    $redis.zrem("results:assessment:t2", self.id)
+    $redis.zrem("results:assessment:t3", self.id)
+    $redis.zrem("results:assessment:t4", self.id)
 
     Subject.all.each do |subj|
-      $redis.zrem("results:#{subj.redis_name}", self.first_name.downcase)
+      $redis.zrem("results:#{subj.redis_name}", self.id)
     end
   end
 

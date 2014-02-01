@@ -21,13 +21,13 @@ class Result < ActiveRecord::Base
   end
 
   def update_averages!
-    $redis.zadd("results:#{self.subject.redis_name}:t#{self.term.to_s}", self.mark, self.first_name.downcase)
+    $redis.zadd("results:#{self.subject.redis_name}:t#{self.term.to_s}", self.mark, self.id)
     if(self.exam && self.term <= 2)
-      $redis.zadd("results:exam:s1", self.mark, self.first_name.downcase)
+      $redis.zadd("results:exam:s1", self.mark, self.id)
     elsif(self.exam && self.term > 2)
-      $redis.zadd("results:exam:s2", self.mark, self.first_name.downcase)
+      $redis.zadd("results:exam:s2", self.mark, self.id)
     else
-      $redis.zadd("results:assessment", self.mark, self.first_name.downcase)
+      $redis.zadd("results:assessment", self.mark, self.id)
     end
   end
 end
