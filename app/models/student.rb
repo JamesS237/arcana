@@ -38,11 +38,15 @@ class Student < ActiveRecord::Base
   def clear_averages!
     $redis.zrem("results:exam:s1", self.id)
     $redis.zrem("results:exam:s2", self.id)
+    $redis.zrem("results:exam", self.id)
 
     $redis.zrem("results:assessment:t1", self.id)
     $redis.zrem("results:assessment:t2", self.id)
     $redis.zrem("results:assessment:t3", self.id)
     $redis.zrem("results:assessment:t4", self.id)
+    $redis.zrem("results:assessment:s1", self.id)
+    $redis.zrem("results:assessment:s2", self.id)
+    $redis.zrem("results:assessment", self.id)
 
     Subject.all.each do |subj|
       $redis.zrem("results:#{subj.redis_name}", self.id)

@@ -13,17 +13,6 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-    @overall_average = {
-      :exams => {
-        :s1 => {:average => 0, :rank => 0 },
-        :s2 => {:average => 0, :rank => 0 },
-        :overall => {:average => 0, :rank => 0 }
-      }, :assessment => {
-        :s1 => {:average => 0, :rank => 0 },
-        :s2 => {:average => 0, :rank => 0 },
-        :overall => {:average => 0, :rank => 0 }
-      }
-    }
   end
 
   # GET /students/new
