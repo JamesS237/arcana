@@ -28,7 +28,7 @@ class Student < ActiveRecord::Base
   end
 
   def to_param
-    normalized_name = full_name.gsub(' ', '-')
+    id
   end
 
   def subject_average(subject)

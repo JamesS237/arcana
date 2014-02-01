@@ -2,13 +2,13 @@ class AssessmentsController < ApplicationController
   before_action :set_assessment, only: [:show, :edit, :update, :destroy]
   before_action :is_admin, only: [:create, :new, :edit, :update, :destroy]
   before_action :logged_in
-  
+
 
   # GET /assessments
   # GET /assessments.json
   def index
     if(params[:name])
-      @assessments = Assessment.where("subject_id IN(SELECT subjects.id FROM subjects WHERE subjects.name = ?)", 
+      @assessments = Assessment.where("subject_id IN(SELECT subjects.id FROM subjects WHERE subjects.name = ?)",
                                       params[:name].gsub('-', ' '))
     else
       @assessments = Assessment.all.order('subject_id')
@@ -70,20 +70,18 @@ class AssessmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_assessment
       @assessment = Assessment.find_by_title(params[:id].gsub('-', ' '))
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def assessment_params
       params.require(:assessment).permit(:subject_id, :type_id, :title, :exam, :term)
     end
-    
+
     def is_admin
       redirect_to root_path unless view_context.current_user.admin
     end
-    
+
     def logged_in
       redirect_to root_path unless view_context.current_user
     end
