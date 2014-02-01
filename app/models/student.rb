@@ -32,7 +32,12 @@ class Student < ActiveRecord::Base
   end
 
   def subject_average(subject)
-    $redis.zscore("results:#{subject.redis_name}", self.id) / subject.results.count
+    result = $redis.zscore("results:#{subject.redis_name}", self.id)
+    if result == nil
+      nil
+    else
+      result / subject.results.count
+    end
   end
 
   def subject_rank(subject)
