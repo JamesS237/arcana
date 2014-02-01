@@ -148,14 +148,14 @@ class Student < ActiveRecord::Base
         }
       }, :overall => {
         :s1 => {
-          :average => $redis.zscore("results:assessment:s1", self.id) / self.assessments('s1').count,
-          :rank => $redis.zrank("results:assessment:s1", self.id)
+          :average => $redis.zscore("results:overall:s1", self.id) / self.results.count,
+          :rank => $redis.zrank("results:overall:s1", self.id)
         }, :s2 => {
-          :average => $redis.zscore("results:assessment:s1", self.id) / self.assessments('s2').count,
-          :rank => $redis.zrank("results:assessment:s1", self.id)
+          :average => $redis.zscore("results:overall:s2", self.id) / self.results.count,
+          :rank => $redis.zrank("results:overall:s2", self.id)
         }, :overall => {
-          :average => $redis.zscore("results:assessment:s1", self.id) / self.assessments('s2').count,
-          :rank => $redis.zrank("results:assessment:s1", self.id)
+          :average => $redis.zscore("results:overall", self.id) / self.results.count,
+          :rank => $redis.zrank("results:overall", self.id)
         }
     }
   end
