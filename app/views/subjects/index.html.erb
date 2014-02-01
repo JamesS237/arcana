@@ -18,13 +18,13 @@
         <td><%= link_to subject.name, subject %></td>
         <% if subject.assessments.any? %>
           <td><%= link_to subject.leader.full_name, subject.leader %></td>
-          <td><%= subject.leader.averages.where(:subject_id => subject.id).take.overall %></td>
+          <td><%= subject.leader.subject_average(subject).round(2) %></td>
         <% else %>
           <td>None</td>
           <td>None</td>
         <% end %>
-        <% if current_user.averages.where(:subject_id => subject.id).take != nil %>
-        <td><%= current_user.averages.where(:subject_id => subject.id).take.overall %></td>
+        <% if current_user.subject_average(subject) != nil %>
+        <td><%= current_user.subject_average(subject).round(2) %></td>
         <% else %>
         <td>N/A</td>
         <% end %>
@@ -40,5 +40,5 @@
 	<%= link_to 'New Subject', new_subject_path %> |
 <% end %>
 
-  <%= link_to 'Back', request.referer %> 
+  <%= link_to 'Back', request.referer %>
 
