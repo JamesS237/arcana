@@ -64,11 +64,26 @@ class Student < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def exams(period)
+    results = self.results.where('assessment_id
+        IN(
+          SELECT assessments.id FROM assessments WHERE type_id
+          IN(
+            SELECT types.id FROM types WHERE name = "Exam"))')
+    if(period == 'all')
+      return results
+    elsif(period == 's1')
+      return results.where('term = 1 OR term = 2')
+    elsif(period == 's2')
+      return results.where('term = 3 OR term = 4')
+    end
+  end
+
   def overall_average
     return {
       :exams => {
         :s1 => {
-          :average => $redis.zscore("results:exams:s1", self.id) / self.exams('s2')count,
+          :average => $redis.zscore("results:exams:s1", self.id) / self.exams('s2').count,
           :rank => $redis.zrank("results:exams:s1", self.id)
         }, :s2 => {
           :average => $redis.zscore("results:exams:s1", self.id) / self.exams('s1').count,
