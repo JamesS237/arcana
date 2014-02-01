@@ -5,6 +5,8 @@
     <tr>
       <th>Name</th> 
       <th>House</th>
+      <th>Average</th>
+      <th>Overall Rank</th>
     </tr>
   </thead>
 
@@ -13,8 +15,12 @@
       <tr>
 		<td><%= link_to student.full_name, '/results#filter/' << student.full_name.gsub(' ', '-') %>
         <td><%= link_to student.house_name, '/results#filter/' << student.house_name.gsub(' ', '-')  %></td>
+        <td><%= student.overall_average[:overall][:overall][:average].round(2)  %></td>
+		<td><%= student.overall_average[:overall][:overall][:rank] + 1 %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+
 
