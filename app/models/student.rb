@@ -57,7 +57,7 @@ class Student < ActiveRecord::Base
     end
   end
 
-  def init_averages
+  def init_averages!
     $redis.zadd("results:overall", 0, self.id)
     $redis.zadd("results:overall:s1", 0, self.id)
     $redis.zadd("results:overall:s2", 0, self.id)
@@ -81,6 +81,7 @@ class Student < ActiveRecord::Base
 
   def recalculate_averages!
     self.clear_averages!
+    self.init_averages!
     self.results.each do |r|
       r.update_averages!
     end
@@ -136,14 +137,14 @@ class Student < ActiveRecord::Base
     return {
       :exams => {
         :s1 => {
-          :average => $redis.zscore("results:exams:s1", self.id) / self.exams('s2').count,
-          :rank => $redis.zrank("results:exams:s1", self.id)
+          :average => $redis.zscore("results:exam:s1", self.id) / self.exams('s2').count,
+          :rank => $redis.zrank("results:exam:s1", self.id)
         }, :s2 => {
-          :average => $redis.zscore("results:exams:s1", self.id) / self.exams('s1').count,
-          :rank => $redis.zrank("results:exams:s1", self.id)
+          :average => $redis.zscore("results:exam:s1", self.id) / self.exams('s1').count,
+          :rank => $redis.zrank("results:exam:s1", self.id)
         }, :overall => {
-          :average => $redis.zscore("results:exams", self.id) / self.exams('all').count,
-          :rank => $redis.zrank("results:exams", self.id)
+          :average => $redis.zscore("results:exam", self.id) / self.exams('all').count,
+          :rank => $redis.zrank("results:exam", self.id)
         }
       }, :assessment => {
         :s1 => {
