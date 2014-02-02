@@ -31,7 +31,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><%= f.collection_select :assessment_id, Assessment.uncomplete(current_user), :id, :title, {:prompt => true}, { :"ng-model" => 'result.assessment.id', :class => 'chosen-select' } %></td>
+                <td><%= f.collection_select :assessment_id, Assessment.uncomplete(current_user), :id, :title, {:prompt => true}, { :"ng-model" => 'result.assessment.id', :class => 'select2_assessment_chooser' } %></td>
                 <td class="mark-col"><%= f.text_field :mark, :placeholder => "Mark", :"ng-model" => 'result.mark' %></td>
                 <td><a class="btn result-submit" ng-click="addResult()">Add</a></td>
           </tr>
