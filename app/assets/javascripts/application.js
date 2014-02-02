@@ -13,6 +13,7 @@
 //= require jquery
 //= require bootstrap
 //= require jquery.placeholder
+//= require chosen/coffee/chosen.jquery
 //= require angular
 //= require angular-route
 //= require angular-resource
