@@ -24,6 +24,11 @@ $(document).ready(function () {
 		$('ul[data-type=' + $(this).data('view-type') + ']').show(); //display the correct search result type
 		$(this).addClass('link-highlight'); //add the active color to that the clicked link
 	});
-  alert('chosen');
-  $('.chosen-select').chosen();
 });
+
+$(window).load(function(){
+$('.chosen-select').chosen({
+  allow_single_deselect: true,
+  no_results_text: 'No results matched',
+  width: '200px'
+});});
