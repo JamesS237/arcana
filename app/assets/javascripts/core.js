@@ -1,5 +1,3 @@
-//prevent users from submitting by pressing enter!
-
 $(document).ready(function() {
   $(window).keydown(function(event){
     if(event.keyCode == 13) {
@@ -12,7 +10,7 @@ $(document).ready(function() {
 var arcana = angular.module('arcana', ['ngRoute', 'ngResource']);
 
 arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($scope, $resource, focus) {
-	var Result = $resource('/results/:resultId.json', {resultId:'@id'});
+	var Result = $resource('/results/:id.json', {id:'@id'});
 	var Assessment = $resource('/assessments/:assessmentId.json', {assessmentId:'@id'});
 	$scope.results = Result.query();
 	$scope.userId = CURRENT_USER_ID
@@ -38,20 +36,7 @@ arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($sco
 	};
 
   $scope.deleteResult = function(id) {
-    //$scope.result.authenticity_token = $scope.authenticity_token
-    var request = new XMLHttpRequest;
-    request.open('DELETE', '/results/' + id, true);
-    request.send({
-      authenticity_token: $scope.authenticity_token
-    });
-
-    request.onload = function() {
-      window.location.reload();
-    };
-
-    request.onerror = function(e) {
-      alert("Error: \"" + e.target.status + "\" occured when trying to delete the result!");
-    };
+    Result.delete({id: id});
   };
 
 	$scope.showEditor = function (clickedResult) {
