@@ -24,5 +24,6 @@ $(document).ready(function () {
 		$('ul[data-type=' + $(this).data('view-type') + ']').show(); //display the correct search result type
 		$(this).addClass('link-highlight'); //add the active color to that the clicked link
 	});
+  alert('chosen');
   $('.chosen-select').chosen();
 });
