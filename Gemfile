@@ -7,16 +7,15 @@ group :development, :test do
 end
 
 gem 'sass-rails', '4.0.0'
-gem 'coffee-rails'
 gem 'uglifier', '2.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'will_paginate', '~> 3.0.0'
 gem "non-stupid-digest-assets"
 gem "redis"
-gem "chosen-rails"
 gem 'bootstrap-sass'
-
+gem 'select2-rails'
+gem 'select2-sass-bootstrap-rails'
 
 group :production do
     gem 'pg', '0.15.1'
