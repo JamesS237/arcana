@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require bootstrap
-//= require jquery-placeholder
-//= require chosen
+//= require jquery.placeholder
 //= require angular
 //= require angular-route
 //= require angular-resource
