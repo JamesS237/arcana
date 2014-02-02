@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require chosen-jquery
 //= require sass-bootstrap/dist/js/bootstrap
 //= require jquery.placeholder
 //= require angular

@@ -14,6 +14,7 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'will_paginate', '~> 3.0.0'
 gem "non-stupid-digest-assets"
 gem "redis"
+gem "chosen-rails"
 
 group :production do
     gem 'bootstrap-sass'

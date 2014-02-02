@@ -1,13 +1,13 @@
-$(document).ready(function () {	
+$(document).ready(function () {
 	$(document).keyup(function (e) {
 		if(e.which === 191) {
 			$('#search-main').focus();
 		}
 	});
-	if ($('ul[data-type="assessments"]').children().length > $('ul[data-type="subjects"]').children().length 
+	if ($('ul[data-type="assessments"]').children().length > $('ul[data-type="subjects"]').children().length
 	 && $('ul[data-type="assessments"]').children().length > $('ul[data-type="students"]').children().length) {
-		var longest = 'assessments'; 
-	} else if ($('ul[data-type="subjects"]').children().length > $('ul[data-type="assessments"]').children().length && 
+		var longest = 'assessments';
+	} else if ($('ul[data-type="subjects"]').children().length > $('ul[data-type="assessments"]').children().length &&
 			   $('ul[data-type="subjects"]').children().length > $('ul[data-type="students"]').children().length) {
 		var longest = 'subjects'; //if guides is the longest search result, set it
 	} else {
@@ -24,4 +24,5 @@ $(document).ready(function () {
 		$('ul[data-type=' + $(this).data('view-type') + ']').show(); //display the correct search result type
 		$(this).addClass('link-highlight'); //add the active color to that the clicked link
 	});
+  $('.chosen-select').chosen();
 });
