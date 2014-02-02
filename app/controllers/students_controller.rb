@@ -34,6 +34,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.save
         view_context.sign_in @student
+        @student.init_averages!
         format.html { redirect_to results_path, notice: 'Student was successfully created.' }
         format.json { render action: 'show', status: :created, location: @student }
       else
