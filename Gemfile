@@ -16,6 +16,7 @@ gem "non-stupid-digest-assets"
 gem "redis"
 
 group :production do
+    gem 'bootstrap-sass'
     gem 'pg', '0.15.1'
     gem 'rails_12factor', '0.0.2'
 end
