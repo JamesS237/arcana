@@ -13,7 +13,6 @@
 //= require jquery
 //= require sass-bootstrap/dist/js/bootstrap
 //= require jquery.placeholder
-//= require chosen/coffee/chosen.jquery
 //= require angular
 //= require angular-route
 //= require angular-resource

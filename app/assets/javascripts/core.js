@@ -35,32 +35,24 @@ arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($sco
 		}, function(err) {
 		  alert("Error: \"" + e.message + "\" occured when trying to delete the result!")
 		});
-         /*
-		setTimeout(function() {
-			$scope.results = Result.query();
-			$scope.result.mark = '';
-			$scope.result.assessmentId = 0;
-		}, 1000);
-		*/
 	};
 
+  $scope.deleteResult = function(id) {
+    //$scope.result.authenticity_token = $scope.authenticity_token
+    var request = new XMLHttpRequest;
+    request.open('DELETE', '/results/' + id, true);
+    request.send({
+      authenticity_token: $scope.authenticity_token
+    });
 
-    $scope.deleteResult = function(id) {
-      //$scope.result.authenticity_token = $scope.authenticity_token
-      var request = new XMLHttpRequest;
-      request.open('DELETE', '/results/' + id, true);
-      request.send({
-        authenticity_token: $scope.authenticity_token
-      });
-
-      request.onload = function() {
-        window.location.reload();
-      };
-
-      request.onerror = function(e) {
-        alert("Error: \"" + e.target.status + "\" occured when trying to delete the result!");
-      };
+    request.onload = function() {
+      window.location.reload();
     };
+
+    request.onerror = function(e) {
+      alert("Error: \"" + e.target.status + "\" occured when trying to delete the result!");
+    };
+  };
 
 	$scope.showEditor = function (clickedResult) {
 		if(clickedResult.student.id === $scope.userId) {

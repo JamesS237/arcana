@@ -3,7 +3,7 @@
 <div id="angular-app-container" ng-app="arcana">
   <div id="angular-controller-container" ng-controller="ResultsCtrl">
     <div class="btn-group btn-group-justified">
-      <input type="text" id="left-input" class="result-search" ng-model="nameSearch" name="search" placeholder="Student" />
+      <input type="text" id="left-input" class="result-search" ng-model="student.fullName" name="search" placeholder="Student" />
       <input type="text" class="result-search" ng-model="houseSearch"name="low-mark-search" placeholder="House" />
       <input type="text" class="result-search" ng-model="subjectSearch" name="low-mark-search" placeholder="Subject" />
       <input type="text" class="result-search" ng-model="typeSearch" name="low-mark-search" placeholder="Type" />
@@ -36,12 +36,12 @@
                 <td><a class="btn result-submit" ng-click="addResult()">Add</a></td>
           </tr>
 <% end %>
-      <tr ng-repeat="result in results | filter:markBetween | filter:{assessment.name: taskSearch, assessment.subject.name: subjectSearch, assessment.type.name: typeSearch, student.house: houseSearch, student.fullName: nameSearch } | orderBy:predicate:reverse">
-        <td>{{result.student.fullName}}</td>
-        <td>{{result.student.house}}</td>
-        <td>{{result.assessment.subject.name}}</td>
-        <td>{{result.assessment.type.name}}</td>
-        <td>{{result.assessment.name}}</td>
+      <tr ng-repeat="result in results | filter:search | orderBy:predicate:reverse">
+        <td>{{result.studentName}}</td>
+        <td>{{result.studentHouse}}</td>
+        <td>{{result.subjectName}}</td>
+        <td>{{result.typeName}}</td>
+        <td>{{result.assessmentName}}</td>
         <td class="mark-col">
           <span ng-click="showEditor(result)" ng-hide="result.editMode">{{result.mark}}</span>
           <input type="text" placeholder="Mark" focus-on="focusMe" ng-blur="hideEditor(result)" ng-model="result.mark" ng-show="result.editMode" />
