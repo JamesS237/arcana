@@ -6,10 +6,10 @@ class ResultsController < ApplicationController
   # GET /results.json
   def index
     @results = Result.all
-    Result.find_all_by_assessment_id(nil).each do |res|
+    Result.where({:id => nil}).all.each do |res|
       res.destroy
     end
-    Result.find_all_by_mark(nil).each do |res|
+    Result.where({:mark => nil}).all.each do |res|
       res.destroy
     end
   end
