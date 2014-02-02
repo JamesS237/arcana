@@ -4,7 +4,7 @@
     "angular" : "~> 1.2.7",
     "angular-resource" : "~> 1.2.7",
     "angular-route" : "~> 1.2.7",
-    "chosen" : "1.0.0",
-    "jquery-placeholder" : "2.0.7"
+    "jquery-placeholder" : "2.0.7",
+    "jquery-icheck" : "latest"
   }
 }

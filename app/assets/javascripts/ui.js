@@ -25,10 +25,3 @@ $(document).ready(function () {
 		$(this).addClass('link-highlight'); //add the active color to that the clicked link
 	});
 });
-
-$(window).load(function(){
-$('.chosen-select').chosen({
-  allow_single_deselect: true,
-  no_results_text: 'No results matched',
-  width: '200px'
-});});
