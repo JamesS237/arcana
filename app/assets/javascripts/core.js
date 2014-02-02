@@ -35,8 +35,9 @@ arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($sco
 		});
 	};
 
-  $scope.deleteResult = function(id) {
-    Result.delete({id: id});
+  $scope.deleteResult = function(result) {
+    $scope.results.splice($scope.results.indexOf(result), 1);
+    Result.delete({id: result.id});
   };
 
 	$scope.showEditor = function (clickedResult) {

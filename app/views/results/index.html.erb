@@ -46,7 +46,7 @@
           <span ng-click="showEditor(result)" ng-hide="result.editMode">{{result.mark}}</span>
           <input type="text" placeholder="Mark" focus-on="focusMe" ng-blur="hideEditor(result)" ng-model="result.mark" ng-show="result.editMode" />
         </td>
-        <td><span ng-if="<%= current_user.id %> == result.student.id || <%= current_user.admin || false %>"><a href="javascript:void(null);" ng-click="deleteResult(result.id);">Delete</a></span></td>
+        <td><span ng-if="<%= current_user.id %> == result.student.id || <%= current_user.admin || false %>"><a href="javascript:void(null);" ng-click="deleteResult(result);">Delete</a></span></td>
       </tr>
       </tbody>
     </table>
