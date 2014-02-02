@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 gem 'will_paginate', '~> 3.0.0'
 gem "non-stupid-digest-assets"
 gem "redis"
+gem 'pg', '0.15.1'
 
 group :production do
     gem 'pg', '0.15.1'
