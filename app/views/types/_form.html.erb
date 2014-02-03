@@ -13,7 +13,7 @@
 
     <fieldset>
 	<%= f.text_field :name, :placeholder => "Type" %><br><br>
-	<%= f.number_field :weight, :placeholder => "Weight" %><br><br>
+	<%= f.number_field :weight, :placeholder => "Weight", :min => 1 %><br><br>
 
  	 <%= f.submit "Add Type", class: "btn" %>
   </fieldset>
