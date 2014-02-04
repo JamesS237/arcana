@@ -104,6 +104,14 @@ class Student < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def benchmark_recalculate_averages!
+    require "benchmark"
+    time = Benchmark.measure do
+      self.recalculate_averages!
+    end
+    return "Time elapsed #{time*1000} milliseconds"
+  end
+
   def exams(period)
     results = self.results.where('assessment_id
         IN(
