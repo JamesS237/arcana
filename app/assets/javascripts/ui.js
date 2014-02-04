@@ -32,3 +32,9 @@ $(window).load(function(){
       allowClear: true
   });
 });
+
+$(window).keydown(function(e) {
+  if(e.which == 191) {
+    $("#search").focus()
+  }
+});
