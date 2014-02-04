@@ -31,6 +31,22 @@ class Result < ActiveRecord::Base
     end
   end
 
+  def get_jsonable_hash
+    hash = {}
+    hash[:id] = self.id
+    hash[:mark] = self.mark.to_i
+    hash[:studentId] self.student_id
+    hash[:studentName] = (self.student.first_name + ' ' + self.student.last_name)
+    hash[:studentHouse] = self.student.house_name
+    hash[:assessmentId] = self.assessment_id
+    hash[:assessmentName] = self.assessment.title
+    hash[:typeId] = self.assessment.type.id
+    hash[:typeName] = self.assessment.type.name
+    hash[:subjectId] = self.assessment.subject.id
+    hash[:subjectName] = self.assessment.subject.name
+    hash
+  end
+
   def update_averages!
     $redis.zincrby("results:overall", self.mark, self.student.id)
     $redis.zincrby("results:overall:s#{self.semester.to_s}", self.mark, self.student.id)

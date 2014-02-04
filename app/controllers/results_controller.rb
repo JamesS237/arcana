@@ -5,13 +5,15 @@ class ResultsController < ApplicationController
   # GET /results
   # GET /results.json
   def index
-    @results = Result.all
-    Result.where({:id => nil}).all.each do |res|
-      res.destroy
+    @results = []
+    if($redis.keys("queries:results:all") == [])
+      @results = Result.all
+      Result.cache(@results)
+    else
+      @cached = true
+      @results = $redis.get("queries:results:all")
     end
-    Result.where({:mark => nil}).all.each do |res|
-      res.destroy
-    end
+
   end
 
   # GET /results/1
