@@ -8,6 +8,14 @@ class Result < ActiveRecord::Base
   validates :mark, presence: true
   validates :assessment_id, presence: true
 
+  self.cache(results)
+    array = []
+    results.each do |r|
+      array << = r.get_jsonable_hash.to_json
+    end
+    $redis.set("queries:results:all", array)
+  end
+
   def set_term!
     term_data = {
     "History"   => { "c" => 2, "d" => 2, "h" => 0, "m" => 0, "v" => 0, "w" => 2 },
