@@ -14,7 +14,7 @@
 //= require jquery-icheck/icheck
 //= require select2
 //= require bootstrap
-//= require jquery.placeholder
+//= require jquery-placeholder/jquery.placeholder
 //= require angular
 //= require angular-route
 //= require angular-resource
