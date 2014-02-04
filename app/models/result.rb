@@ -11,7 +11,7 @@ class Result < ActiveRecord::Base
   self.cache(results)
     array = []
     results.each do |r|
-      array << = r.get_jsonable_hash.to_json
+      array << r.get_jsonable_hash.to_json
     end
     $redis.set("queries:results:all", array)
   end
@@ -43,7 +43,7 @@ class Result < ActiveRecord::Base
     hash = {}
     hash[:id] = self.id
     hash[:mark] = self.mark.to_i
-    hash[:studentId] self.student_id
+    hash[:studentId] = self.student_id
     hash[:studentName] = (self.student.first_name + ' ' + self.student.last_name)
     hash[:studentHouse] = self.student.house_name
     hash[:assessmentId] = self.assessment_id
