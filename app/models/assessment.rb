@@ -1,4 +1,5 @@
 class Assessment < ActiveRecord::Base
+  searchkick
   has_many :results
   belongs_to :type
   belongs_to :subject
@@ -12,10 +13,6 @@ class Assessment < ActiveRecord::Base
 
   def average
     self.results.average("mark")
-  end
-
-  def self.search(query)
-    Assessment.all.where('title LIKE(?)', '%' + query + '%')
   end
 
   def exam?
