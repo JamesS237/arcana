@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
     @results = []
     if($redis.keys("queries:results:all") == [])
       @results = Result.all
-      Result.cache(@results)
+      #Result.cache(@results)
     else
       @cached = true
       @results = $redis.get("queries:results:all")
