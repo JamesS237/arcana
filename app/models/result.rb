@@ -32,11 +32,15 @@ class Result < ActiveRecord::Base
   end
 
   def self.cache(results)
-    array = Array.new
-    results.each do |r|
-      array << r.get_jsonable_hash.to_json
+    if(results == :all)
+      results = Result.all
     end
-    $redis.set("queries:results:all", array)
+
+    hash = {:results => []}
+    results.each do |r|
+      hash[:results] << r.get_jsonable_hash
+    end
+    $redis.set("queries:results:all", JSON.generate(hash))
   end
 
   def get_jsonable_hash
