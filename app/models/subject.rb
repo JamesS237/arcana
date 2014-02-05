@@ -1,4 +1,6 @@
 class Subject < ActiveRecord::Base
+  searchkick
+
   has_many :assessments
   has_many :averages
 
@@ -20,10 +22,6 @@ class Subject < ActiveRecord::Base
 
   def redis_name
     self.name.downcase.gsub(' ', '')
-  end
-
-  def self.search(query)
-    Subject.all.where('name LIKE(?)', '%' + query + '%')
   end
 end
 

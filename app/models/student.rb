@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+  searchkick
   has_many :results
   has_many :averages
 
@@ -199,10 +200,6 @@ class Student < ActiveRecord::Base
         }
       }
     }
-  end
-
-  def self.search(search)
-    Student.all.where("first_name LIKE ? OR last_name LIKE ? OR first_name + ' ' + last_name LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   def self.houses
