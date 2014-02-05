@@ -17,6 +17,7 @@ gem "redis"
 gem 'bootstrap-sass'
 gem 'select2-rails'
 gem 'select2-sass-bootstrap-rails'
+gem 'newrelic_rpm'
 
 group :production do
     gem 'pg', '0.15.1'

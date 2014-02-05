@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
   end
 
   def search
-  	@assessments = Assessment.search(params[:search])
+    @assessments = Assessment.search(params[:search], suggest: true)
   	@subjects = Subject.search(params[:search])
    	@students = Student.search(params[:search])
   end

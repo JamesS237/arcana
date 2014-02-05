@@ -1,5 +1,5 @@
 class Assessment < ActiveRecord::Base
-  searchkick
+  searchkick suggest: ["title"]
   has_many :results
   belongs_to :type
   belongs_to :subject

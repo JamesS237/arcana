@@ -1,8 +1,13 @@
 <% provide(:title, 'Arcana | Search') %>
+
 <a data-view-type="assessments">Assessments (<%= @assessments.length.to_s %>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 <a data-view-type="subjects">Subjects (<%= @subjects.length.to_s %>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 <a data-view-type="students">Students (<%= @students.length.to_s %>)</a>
-<br /><br />
+
+<br />
+Suggestions: <%= @assessments.suggestions.join(" ") %>
+<br />
+<br />
 
 <ul class="assessments" data-type="assessments">
   <% @assessments.each do |assessment| %>
