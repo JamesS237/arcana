@@ -7,11 +7,12 @@ Arcana makes use of Redis and PostgreSQL in production and is currently hosted o
 
 1. Install Ruby
 2. Install Rails
-3. ```brew install redis``` (If Redis is not installed)
-3. ```git clone https://github.com/Arvoreniad/arcana```
-4. ```cd arcana && bundle install``` (Bundle Installation may require ```sudo```)
-5. ```rake db:schema:load``` (App uses SQLite in development)
-6. ```rails s``` & ```redis-server```
+3. ```brew install redis``` 
+4. ```brew install elasticsearch``` 
+5. ```git clone https://github.com/Arvoreniad/arcana```
+6. ```cd arcana && make install``` 
+7. ```rake db:schema:load``` (App uses SQLite in development)
+8. ```rails s``` & ```redis-server``` & ```elasticsearch```
 
 
 ## License
