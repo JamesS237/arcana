@@ -43,6 +43,14 @@ class Assessment < ActiveRecord::Base
     self.type.name == "Exam"
   end
 
+  def semester
+    if(term > 2)
+      2
+    else
+      1
+    end
+  end
+
   def self.uncomplete(student)
     complete = student.results
     return Assessment.all if complete == []
