@@ -4,16 +4,17 @@ if ENV["REDISCLOUD_URL"]
 else
   $redis = Redis.new(:host => 'localhost', :port => 6379)
 end
-
-Assessment.all.each do |a|
-  $redis.lpush("info:subjects:list:#{a.subject_id}", a.id)
-  if(a.exam?)
-    $redis.lpush("info:exams:list:all", a.id)
-    $redis.lpush("info:exams:list:s#{a.semester}", a.id)
-  else
-    $redis.lpush("info:assessments:list:all", a.id)
-    $redis.lpush("info:assessments:list:s#{a.semester}", a.id)
-    $redis.lpush("info:assessments:list:t#{a.term}", a.id)
+Student.all.each do |s|
+  s.results.all.each do |r|
+    $redis.lpush("info:subjects:list:#{r.assessment.subject_id}:#{s.id}", r.assessment.id)
+    if(r.assessment.exam?)
+      $redis.lpush("info:exams:list:all:#{s.id}", r.assessment.id)
+      $redis.lpush("info:exams:list:s#{r.semester}:#{s.id}", r.assessment.id)
+    else
+      $redis.lpush("info:assessments:list:all:#{s.id}", r.id)
+      $redis.lpush("info:assessments:list:s#{r.semester}:#{s.id}", r.assessment.id)
+      $redis.lpush("info:assessments:list:t#{r.term}:#{s.id}", r.assessment.id)
+    end
   end
 end
 
