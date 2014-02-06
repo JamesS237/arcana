@@ -37,7 +37,7 @@ class ResultsController < ApplicationController
     @result.set_term!
     respond_to do |format|
       if @result.save
-        Result.cache(:all)
+        Thread.new { Result.cache(:all) }
         format.html { redirect_to results_path, notice: 'Result was successfully created.' }
         format.json { render action: 'show', status: :created, location: @result }
       else
@@ -54,7 +54,7 @@ class ResultsController < ApplicationController
       @result = Result.find(params[:result][:id])
       @result.set_term!
       if @result.update(result_params)
-        Result.cache(:all)
+        Thread.new { Result.cache(:all) }
         format.html { redirect_to results_path, notice: 'Result was successfully updated.' }
         format.json { head :no_content }
       else
@@ -68,7 +68,7 @@ class ResultsController < ApplicationController
   # DELETE /results/1.json
   def destroy
     @result.destroy
-    Result.cache(:all)
+    Thread.new { Result.cache(:all) }
     respond_to do |format|
       format.html { redirect_to results_url }
       format.json { head :no_content }

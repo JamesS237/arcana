@@ -31,7 +31,7 @@ class AssessmentsController < ApplicationController
 
     respond_to do |format|
       if @assessment.save
-        Assessment.cache(:all)
+        Thread.new { Assessment.cache(:all) }
         format.html { redirect_to assessments_path, notice: 'Assessment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @assessment }
       else
@@ -46,7 +46,7 @@ class AssessmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assessment.update(assessment_params)
-        Assessment.cache(:all)
+        Thread.new { Assessment.cache(:all) }
         format.html { redirect_to assessments_path, notice: 'Assessment was successfully updated.' }
         format.json { head :no_content }
       else
@@ -60,7 +60,7 @@ class AssessmentsController < ApplicationController
   # DELETE /assessments/1.json
   def destroy
     @assessment.destroy
-    Assessment.cache(:all)
+    Thread.new { Assessment.cache(:all) }
     respond_to do |format|
       format.html { redirect_to assessments_url }
       format.json { head :no_content }
