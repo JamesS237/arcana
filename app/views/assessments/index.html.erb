@@ -19,7 +19,7 @@
   </thead>
 
   <tbody>
-      <tr ng-repeat="assessment in assessments | filter:markBetween | filter:search | orderBy:predicate:reverse">
+      <tr ng-repeat="assessment in assessments | filter:averageBetween | filter:search | orderBy:predicate:reverse">
         <td>{{assessment.subjectName}}</td>
         <td>{{assessment.typeName}}</td>
         <td>{{assessment.title}}</td>
