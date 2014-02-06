@@ -6,6 +6,7 @@ else
 end
 
 Result.cache(:all)
+Assessment.cache(:all)
 Assessment.reindex
 Student.reindex
 Subject.reindex
