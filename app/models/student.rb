@@ -114,41 +114,11 @@ class Student < ActiveRecord::Base
   end
 
   def exams(period)
-    results = self.results.where('assessment_id
-        IN(
-          SELECT assessments.id FROM assessments WHERE type_id
-          IN(
-            SELECT types.id FROM types WHERE name = "Exam"))')
-    if(period == 'all')
-      return results
-    elsif(period == 's1')
-      return results.where('term = 1 OR term = 2')
-    elsif(period == 's2')
-      return results.where('term = 3 OR term = 4')
-    end
+    $redis.lrange("info:exams:list:#{period}"))
   end
 
   def assessments(period)
-    results = self.results.where('assessment_id
-        IN(
-          SELECT assessments.id FROM assessments WHERE type_id
-          IN(
-            SELECT types.id FROM types WHERE name != "Exam"))')
-    if(period == 'all')
-      return results
-    elsif(period == 's1')
-      return results.where('term = 1 OR term = 2')
-    elsif(period == 's2')
-      return results.where('term = 3 OR term = 4')
-    elsif(period == 't1')
-      return results.where('term = 1')
-    elsif(period == 't2')
-      return results.where('term = 2')
-    elsif(period == 't3')
-      return results.where('term = 3')
-    elsif(period == 't4')
-      return results.where('term = 4')
-    end
+    $redis.lrange("info:assessments:list:#{period}"))
   end
 
   def overall_average
