@@ -12,24 +12,24 @@
 	<tbody>
 		<tr>
 			<td>Overall Total</td>
-			<td><%= current_user.overall_average[:overall][:overall][:average].round(2)  %></td>
-			<td><%= current_user.overall_average[:overall][:overall][:rank] + 1 %></td>
+			<td><%= @student.overall_average[:overall][:overall][:average].round(2)  %></td>
+			<td><%= @student.overall_average[:overall][:overall][:rank] + 1 %></td>
 		</tr>
 		<tr>
 			<td>Overall Exams</td>
-			<td><%= current_user.overall_average[:exams][:overall][:average].round(2)  %></td>
-			<td><%= current_user.overall_average[:exams][:overall][:rank] + 1  %></td>
+			<td><%= @student.overall_average[:exams][:overall][:average].round(2)  %></td>
+			<td><%= @student.overall_average[:exams][:overall][:rank] + 1  %></td>
 		</tr>
 		<tr>
 			<td>Overall Assessment</td>
-			<td><%= current_user.overall_average[:assessment][:overall][:average].round(2) %></td>
-			<td><%= current_user.overall_average[:assessment][:overall][:rank] + 1  %></td>
+			<td><%= @student.overall_average[:assessment][:overall][:average].round(2) %></td>
+			<td><%= @student.overall_average[:assessment][:overall][:rank] + 1  %></td>
 		</tr>
 		<% Subject.all.each do |subj| %>
 			<tr>
 				<td><%= subj.name %></td>
-				<td><%= current_user.subject_average(subj).round(2)  %></td>
-				<td><%= current_user.subject_rank(subj) + 1  %></td>
+				<td><%= @student.subject_average(subj).round(2)  %></td>
+				<td><%= @student.subject_rank(subj) + 1  %></td>
 			</tr>
 		<% end %>
 	</tbody>
