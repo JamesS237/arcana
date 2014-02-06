@@ -2,9 +2,9 @@
 <div id="angular-app-container" ng-app="arcana">
   <div id="angular-controller-container" ng-controller="AssessmentsCtrl">
       <div class="btn-group btn-group-justified">
-      <input type="text" id="left-input" class="assess-search" ng-model="titleSearch" name="search" placeholder="Assessment" />
-      <input type="text" class="assess-search" ng-model="subjectSearch" name="low-mark-search" placeholder="Subject" />
-      <input type="text" class="assess-search" ng-model="typeSearch" name="low-mark-search" placeholder="Type" />
+      <input type="text" id="left-input" class="assess-search" ng-model="search.title" name="search" placeholder="Assessment" />
+      <input type="text" class="assess-search" ng-model="search.subjectName" name="low-mark-search" placeholder="Subject" />
+      <input type="text" class="assess-search" ng-model="search.typeName" name="low-mark-search" placeholder="Type" />
       <input type="text" class="assess-search" name="low-mark-search" ng-model="minAverage" placeholder="Lowest Average" />
       <input type="text" id="right-input" class="assess-search" name="high-mark-search" ng-model="maxAverage" placeholder="Highest Average" />
     </div>
@@ -19,9 +19,9 @@
   </thead>
 
   <tbody>
-      <tr ng-repeat="assessment in assessments | filter:markBetween | filter:{title: titleSearch, subject.name: subjectSearch, type.name: typeSearch} | orderBy:predicate:reverse">
-        <td>{{assessment.subject.name}}</td>
-        <td>{{assessment.type.name}}</td>
+      <tr ng-repeat="assessment in assessments | filter:markBetween | filter:search | orderBy:predicate:reverse">
+        <td>{{assessment.subjectName}}</td>
+        <td>{{assessment.typeName}}</td>
         <td>{{assessment.title}}</td>
         <td>{{assessment.average}}</td>
       </tr>
