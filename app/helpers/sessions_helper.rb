@@ -10,24 +10,24 @@ module SessionsHelper
     self.current_user = nil
     cookies.delete(:remember_token)
   end
-    def current_user=(user)
-    @current_user = user
+
+  def current_user=(user)
+    $redis.set("sessions:#{cookies[:remember_token]}", user.attributes.to_json)
   end
-  
+
   def current_user
-    remember_token = Student.encrypt(cookies[:remember_token])
-    @current_user ||= Student.find_by(remember_token: remember_token)
+    Student.new(JSON.parse($redis.get("sessions:#{cookies[:remember_token]}")))
   end
-  
-    def signed_in?
+
+  def signed_in?
     !current_user.nil?
   end
-  
-    def current_user?(user)
-    user == current_user
+
+  def current_user?(user)
+    user.id == current_user.id
   end
-  
-    def redirect_back_or(default)
+
+  def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)
   end

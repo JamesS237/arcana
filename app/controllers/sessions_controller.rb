@@ -39,12 +39,12 @@ class SessionsController < ApplicationController
       redirect_to(root_url) unless current_user.status == 3
     end
 
-      def sign_in(user)
-    remember_token = Student.new_remember_token
-    cookies.permanent[:remember_token] = remember_token
-    user.update_attribute(:remember_token, Student.encrypt(remember_token))
-    self.current_user = user
-  end
+    def sign_in(user)
+      remember_token = Student.new_remember_token
+      cookies.permanent[:remember_token] = remember_token
+      user.update_attribute(:remember_token, Student.encrypt(remember_token))
+      view_context.current_user = user
+    end
       def current_user=(user)
     @current_user = user
   end
