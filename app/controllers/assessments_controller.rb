@@ -7,12 +7,7 @@ class AssessmentsController < ApplicationController
   # GET /assessments
   # GET /assessments.json
   def index
-    if(params[:name])
-      @assessments = Assessment.where("subject_id IN(SELECT subjects.id FROM subjects WHERE subjects.name = ?)",
-                                      params[:name].gsub('-', ' '))
-    else
-      @assessments = Assessment.all.order('subject_id')
-    end
+    @assessments = $redis.get("queries:assessments:all")
   end
 
   # GET /assessments/1
@@ -36,6 +31,7 @@ class AssessmentsController < ApplicationController
 
     respond_to do |format|
       if @assessment.save
+        Assessment.cache(:all)
         format.html { redirect_to assessments_path, notice: 'Assessment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @assessment }
       else
@@ -50,6 +46,7 @@ class AssessmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assessment.update(assessment_params)
+        Assessment.cache(:all)
         format.html { redirect_to assessments_path, notice: 'Assessment was successfully updated.' }
         format.json { head :no_content }
       else
@@ -63,6 +60,7 @@ class AssessmentsController < ApplicationController
   # DELETE /assessments/1.json
   def destroy
     @assessment.destroy
+    Assessment.cache(:all)
     respond_to do |format|
       format.html { redirect_to assessments_url }
       format.json { head :no_content }
