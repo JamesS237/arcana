@@ -29,6 +29,7 @@ $(document).ready(function () {
 $(window).load(function(){
   $('.select2_assessment_chooser').select2({
       placeholder: "Select an assessment",
-      allowClear: true
+      allowClear: true,
+      width : 200
   });
 });

@@ -38,14 +38,20 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
 
 .btn-primary {@include buttonBackground($accentLight, $bgDark); }
 
-li.active-result {
-  color:black;
-}
-
-li.highlighted {
+li.select2-highlighted {
   background-color: $tableStripe !important;
   background-image: none !important;
 }
+
+div.select2-result-label {
+  color: black;
+}
+
+
+li.select2-highlighted div {
+  color: white !important;
+}
+
 
 input#left-input {
   border-bottom-left-radius: 3px !important;
@@ -68,5 +74,6 @@ input.assess-search {
   width: 174px;
   margin-top: 11px;
 }
+
 
 
