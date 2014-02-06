@@ -5,7 +5,7 @@ class Result < ActiveRecord::Base
   after_save :update_averages!
 
   validates :student_id, presence: true
-  validates :mark, presence: true
+  validates :mark, presence: true, :numericality => { :less_than_or_equal_to => 100 }
   validates :assessment_id, presence: true
 
   def set_term!

@@ -28,6 +28,9 @@ arcana.controller('ResultsCtrl', ['$scope', '$resource', 'focus', function ($sco
 	};
 	$scope.addResult = function() {
 		$scope.result.authenticity_token = $scope.authenticity_token
+    if($scope.result.mark > 100) {
+      return;
+    }
 		Result.save($scope.result, function(data) {
 		  window.location.reload();
 		}, function(err) {
