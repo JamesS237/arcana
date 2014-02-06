@@ -114,11 +114,11 @@ class Student < ActiveRecord::Base
   end
 
   def exams(period)
-    $redis.lrange("info:exams:list:#{period}"))
+    $redis.lrange("info:exams:list:#{period}")
   end
 
   def assessments(period)
-    $redis.lrange("info:assessments:list:#{period}"))
+    $redis.lrange("info:assessments:list:#{period}")
   end
 
   def overall_average
