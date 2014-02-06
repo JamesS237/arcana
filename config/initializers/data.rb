@@ -6,6 +6,7 @@ else
 end
 
 Assessment.all.each do |a|
+  $redis.lpush("info:subjects:list:#{a.subject_id}", a.id)
   if(a.exam?)
     $redis.lpush("info:exams:list:all", a.id)
     $redis.lpush("info:exams:list:s#{a.semester}", a.id)

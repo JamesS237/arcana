@@ -37,7 +37,7 @@ class Student < ActiveRecord::Base
     if result == nil
       nil
     else
-      result / subject.results.count
+      result / self.subject_results(subject.id).count
     end
   end
 
@@ -119,6 +119,10 @@ class Student < ActiveRecord::Base
 
   def assessments(period)
     $redis.lrange("info:assessments:list:#{period}", 0, 100)
+  end
+
+  def subject_results(id)
+    $redis.lrange("info:subjects:list:#{id}", 0, 100)
   end
 
   def overall_average
