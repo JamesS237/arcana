@@ -15,7 +15,7 @@ Arcana::Application.routes.draw do
 
   match '/assessments/subject/:name', to: 'assessments#index', via: 'get'
   match '/search', to: 'static_pages#search', via: 'get'
-  match '/autcomplete', to: 'assessments#autcomplete', via: 'get'
+  match '/autocomplete', to: 'assessments#autocomplete', via: 'get'
 
   resources :students
   resources :assessments

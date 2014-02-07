@@ -4,7 +4,7 @@ class AssessmentsController < ApplicationController
   before_action :logged_in
 
   def autocomplete
-    render json: Assessment.search(params[:query], fields: [{title: :text_start}], limit: 10).map(&:title)
+    render json: Assessment.search(params[:query], fields: [:title], limit: 10).map(&:title)
   end
 
   # GET /assessments
