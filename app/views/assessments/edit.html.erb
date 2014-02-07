@@ -1,7 +1,7 @@
 <%= provide(:title, 'Arcana | Edit Assessment')%>
 <h1>Edit Assessment</h1>
 
-<%= render 'form' %>
+<%= render 'form', cache: true %>
 
 <%= link_to 'Show', @assessment %> |
 <%= link_to 'Back', assessments_path %>

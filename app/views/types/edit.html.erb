@@ -1,7 +1,7 @@
 <%= provide(:title, 'Arcana | Edit Type')%>
 <h1>Editing Type</h1>
 
-<%= render 'form' %>
+<%= render 'form',  cache: true %>
 
 <%= link_to 'Show', @type %> |
 <%= link_to 'Back', types_path %>

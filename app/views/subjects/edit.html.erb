@@ -1,7 +1,7 @@
 <%= provide(:title, 'Arcana | Edit Subject')%>
 <h1>Editing Subject</h1>
 
-<%= render 'form' %>
+<%= render 'form',  cache: true %>
 
 <%= link_to 'Show', @subject %> |
 <%= link_to 'Back', subjects_path %>
