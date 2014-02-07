@@ -18,6 +18,7 @@ gem 'bootstrap-sass'
 gem 'select2-rails'
 gem 'select2-sass-bootstrap-rails'
 gem 'newrelic_rpm'
+gem 'multi_fetch_fragments'
 
 group :production do
     gem 'pg', '0.15.1'
