@@ -8,13 +8,14 @@ Arcana::Application.routes.draw do
 
   match '/about',     to: 'static_pages#about',            via: 'get'
   match '/legal',     to: 'static_pages#legal',            via: 'get'
-  
+
   match '/signup',     to: 'students#new',            via: 'get'
   match '/signin',    to: 'sessions#new',         via: 'get'
   match '/signout',    to: 'sessions#destroy',         via: 'get'
 
   match '/assessments/subject/:name', to: 'assessments#index', via: 'get'
   match '/search', to: 'static_pages#search', via: 'get'
+  match '/autcomplete', to: 'assessments#autcomplete', via: 'get'
 
   resources :students
   resources :assessments

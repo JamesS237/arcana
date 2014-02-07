@@ -10,7 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery/jquery
+//= require typeahead.js/dist/typeahead.jquery
 //= require jquery-icheck/icheck
 //= require select2
 //= require bootstrap

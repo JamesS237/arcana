@@ -3,6 +3,9 @@ class AssessmentsController < ApplicationController
   before_action :is_admin, only: [:create, :new, :edit, :update, :destroy]
   before_action :logged_in
 
+  def autocomplete
+    render json: Assessment.search(params[:query], fields: [{title: :text_start}], limit: 10).map(&:title)
+  end
 
   # GET /assessments
   # GET /assessments.json

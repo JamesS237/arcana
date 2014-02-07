@@ -24,6 +24,11 @@ $(document).ready(function () {
 		$('ul[data-type=' + $(this).data('view-type') + ']').show(); //display the correct search result type
 		$(this).addClass('link-highlight'); //add the active color to that the clicked link
 	});
+
+  $("#search-main").typeahead({
+    name: "search",
+    remote: "/autocomplete?query=%QUERY"
+  });
 });
 
 $(window).load(function(){

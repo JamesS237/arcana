@@ -26,7 +26,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     ansi (1.4.3)
-    arel (4.0.1)
+    arel (4.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.3.2.2)
@@ -44,8 +44,9 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (4.7.5)
+    multi_fetch_fragments (0.0.17)
     multi_json (1.8.4)
-    newrelic_rpm (3.7.1.188)
+    newrelic_rpm (3.7.2.192)
     non-stupid-digest-assets (1.0.3)
     pg (0.15.1)
     polyglot (0.3.3)
@@ -128,6 +129,7 @@ DEPENDENCIES
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass
   jbuilder (= 1.0.2)
+  multi_fetch_fragments
   newrelic_rpm
   non-stupid-digest-assets
   pg (= 0.15.1)
